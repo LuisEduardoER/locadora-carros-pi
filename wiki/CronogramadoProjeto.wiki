@@ -1,0 +1,7 @@
+#labels Featured
+30/09 - Definir metas (Todos em grupo)
+07/10 - Construção de telas (Kelly)
+14/10 - Modelagem do Banco de dados (Guilherme)
+21/10 - Programação do projeto CRUD (Rafael Baraldi)
+28/10 - Programação do projeto CRUD (Rafael Cardoso)
+04/11 - Testes Finais (João Castanheira)
