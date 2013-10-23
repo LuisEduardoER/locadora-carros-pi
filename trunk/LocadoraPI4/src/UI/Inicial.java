@@ -5,7 +5,10 @@
  */
 package UI;
 
+import Classes.Usuario;
 import Globais.Geral;
+import Controles.Conexao;
+import javax.swing.JOptionPane;
 
 /**
  * 
@@ -94,10 +97,23 @@ public class Inicial extends javax.swing.JFrame {
 
     private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
         // TODO add your handling code here:
-        Menu tela = new Menu();
-        tela.setVisible(true);
+        Usuario user = new Usuario();
+        user = Conexao.buscar_usuario(txtEmail.getText());
+        if(user != null){
+            if(user.getSenha().equals(txtSenha.getText()))
+            {
+                Menu tela = new Menu();
+                tela.setVisible(true);
         
-        this.setVisible(false);
+                this.setVisible(false);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Senha incorreta!");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Email invalido!");
+        }
     }//GEN-LAST:event_btnLogarActionPerformed
 
     /**
@@ -133,6 +149,8 @@ public class Inicial extends javax.swing.JFrame {
                 new Inicial().setVisible(true);
             }
         });
+        
+        Conexao.Conectar();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
