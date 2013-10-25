@@ -39,7 +39,7 @@ public class Inicial extends javax.swing.JFrame {
         lblSenha = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         txtSenha = new javax.swing.JTextField();
-        btnLogar = new javax.swing.JToggleButton();
+        btnLogar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,8 +72,8 @@ public class Inicial extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(btnLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(64, 64, 64)
+                        .addComponent(btnLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -87,9 +87,9 @@ public class Inicial extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSenha)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnLogar)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
@@ -97,23 +97,23 @@ public class Inicial extends javax.swing.JFrame {
 
     private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
         // TODO add your handling code here:
-        Usuario user = new Usuario();
-        user = Conexao.buscar_usuario(txtEmail.getText());
-        if(user != null){
-            if(user.getSenha().equals(txtSenha.getText()))
-            {
+//        Usuario user = new Usuario();
+//        user = Conexao.buscar_usuario(txtEmail.getText());
+//        if(user != null){
+//            if(user.getSenha().equals(txtSenha.getText()))
+//            {
                 Menu tela = new Menu();
                 tela.setVisible(true);
         
                 this.setVisible(false);
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Senha incorreta!");
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Email invalido!");
-        }
+//            }
+//            else{
+//                JOptionPane.showMessageDialog(null, "Senha incorreta!");
+//            }
+//        }
+//        else{
+//            JOptionPane.showMessageDialog(null, "Email invalido!");
+//        }
     }//GEN-LAST:event_btnLogarActionPerformed
 
     /**
@@ -154,7 +154,7 @@ public class Inicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btnLogar;
+    private javax.swing.JButton btnLogar;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JTextField txtEmail;
