@@ -52,6 +52,11 @@ public class Cadastros extends javax.swing.JFrame {
         jButton1.setText("Fabricante");
 
         btnMotor.setText("Motor");
+        btnMotor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMotorActionPerformed(evt);
+            }
+        });
 
         btnOutros.setText("Outros");
         btnOutros.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +118,15 @@ public class Cadastros extends javax.swing.JFrame {
         tela.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnOutrosActionPerformed
+
+    private void btnMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotorActionPerformed
+        // TODO add your handling code here:
+        
+        Motor tela = new Motor();
+        
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnMotorActionPerformed
 
     /**
      * @param args the command line arguments
