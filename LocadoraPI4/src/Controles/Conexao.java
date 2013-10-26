@@ -60,8 +60,8 @@ public static Connection connect = null;
 
     }
     
-    public static void inserir(String nome, String tel){
-        String query = "INSERT INTO agenda (nome, tel) VALUES ('" + nome + "', '" + tel + "')";
+    public static void inserir(String tabela, String coluna, String registro){
+        String query = "INSERT INTO " + tabela + " (" + coluna + ") VALUES ('" + registro + "')";
             Statement statement = null;
         try {
             statement = connect.createStatement();

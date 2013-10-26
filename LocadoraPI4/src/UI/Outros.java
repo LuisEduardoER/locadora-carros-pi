@@ -5,6 +5,7 @@
  */
 package UI;
 
+import Controles.Conexao;
 import Globais.Geral;
 
 /**
@@ -65,16 +66,46 @@ public class Outros extends javax.swing.JFrame {
         lblDirecao.setText("Direção");
 
         btnCombustivel.setText("Inserir");
+        btnCombustivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCombustivelActionPerformed(evt);
+            }
+        });
 
         btnCarroceria.setText("Inserir");
+        btnCarroceria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarroceriaActionPerformed(evt);
+            }
+        });
 
         btnLugares.setText("Inserir");
+        btnLugares.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLugaresActionPerformed(evt);
+            }
+        });
 
         btnPortas.setText("Inserir");
+        btnPortas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPortasActionPerformed(evt);
+            }
+        });
 
         btnCambio.setText("Inserir");
+        btnCambio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambioActionPerformed(evt);
+            }
+        });
 
         btnDirecao.setText("Inserir");
+        btnDirecao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDirecaoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,6 +176,36 @@ public class Outros extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCombustivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCombustivelActionPerformed
+        // TODO add your handling code here:
+        Conexao.inserir("combustivel", "nome", txtCombustivel.getText());
+    }//GEN-LAST:event_btnCombustivelActionPerformed
+
+    private void btnCarroceriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarroceriaActionPerformed
+        // TODO add your handling code here:
+        Conexao.inserir("carroceria", "nome", txtCarroceria.getText());
+    }//GEN-LAST:event_btnCarroceriaActionPerformed
+
+    private void btnLugaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLugaresActionPerformed
+        // TODO add your handling code here:
+        Conexao.inserir("lugares", "quantidade", txtLugares.getText());
+    }//GEN-LAST:event_btnLugaresActionPerformed
+
+    private void btnCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambioActionPerformed
+        // TODO add your handling code here:
+        Conexao.inserir("cambio", "nome", txtCambio.getText());
+    }//GEN-LAST:event_btnCambioActionPerformed
+
+    private void btnPortasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPortasActionPerformed
+        // TODO add your handling code here:
+        Conexao.inserir("portas", "quantidade", txtPortas.getText());
+    }//GEN-LAST:event_btnPortasActionPerformed
+
+    private void btnDirecaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirecaoActionPerformed
+        // TODO add your handling code here:
+        Conexao.inserir("direcao", "nome", txtDirecao.getText());
+    }//GEN-LAST:event_btnDirecaoActionPerformed
 
     /**
      * @param args the command line arguments
