@@ -15,12 +15,12 @@ import javax.swing.JOptionPane;
  *
  * @author rafael.baraldi
  */
-public class Inicial extends javax.swing.JFrame {
+public class TelaInicial extends javax.swing.JFrame {
     
     /**
      * Creates new form Inicial
      */
-    public Inicial() {
+    public TelaInicial() {
         initComponents();
         
         this.setTitle(Geral.getEmpresa()+" - LOGIN");
@@ -102,7 +102,7 @@ public class Inicial extends javax.swing.JFrame {
 //        if(user != null){
 //            if(user.getSenha().equals(txtSenha.getText()))
 //            {
-                Menu tela = new Menu();
+                TelaMenu tela = new TelaMenu();
                 tela.setVisible(true);
         
                 this.setVisible(false);
@@ -133,20 +133,20 @@ public class Inicial extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inicial().setVisible(true);
+                new TelaInicial().setVisible(true);
             }
         });
         

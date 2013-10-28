@@ -32,6 +32,8 @@ CREATE TABLE `cambio` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `cambio` (`id`, `nome`) VALUES
+(1,	'manual');
 
 DROP TABLE IF EXISTS `carro`;
 CREATE TABLE `carro` (
@@ -73,6 +75,8 @@ CREATE TABLE `carroceria` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `carroceria` (`id`, `nome`) VALUES
+(1,	'hatch');
 
 DROP TABLE IF EXISTS `combustivel`;
 CREATE TABLE `combustivel` (
@@ -81,6 +85,8 @@ CREATE TABLE `combustivel` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `combustivel` (`id`, `nome`) VALUES
+(1,	'etanol');
 
 DROP TABLE IF EXISTS `direcao`;
 CREATE TABLE `direcao` (
@@ -89,21 +95,26 @@ CREATE TABLE `direcao` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `direcao` (`id`, `nome`) VALUES
+(1,	'hidraulica');
 
 DROP TABLE IF EXISTS `endereco`;
 CREATE TABLE `endereco` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cep` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
-  `endereco` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `logradouro` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `numero` int(11) DEFAULT NULL,
   `complemento` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `bairro` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `cidade` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `estado` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `pais` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `endereco` (`id`, `cep`, `logradouro`, `numero`, `complemento`, `bairro`, `cidade`, `estado`) VALUES
+(1,	'04673948',	'rua avenida endereco',	189,	NULL,	'jd bairro',	'sp',	'sp'),
+(2,	'9484746',	'rua vw',	108,	'ccs',	'bai',	'sp',	'sp'),
+(3,	'98376476',	'rua vw cs',	198,	'concess',	'oic',	'rj',	'rj');
 
 DROP TABLE IF EXISTS `fabricante`;
 CREATE TABLE `fabricante` (
@@ -120,6 +131,8 @@ CREATE TABLE `fabricante` (
   CONSTRAINT `fabricante_ibfk_1` FOREIGN KEY (`id_endereco`) REFERENCES `endereco` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `fabricante` (`id`, `nome`, `email`, `origem`, `id_telefone`, `id_endereco`) VALUES
+(2,	'vw',	'vw@vw.vw',	'Alemanha',	1,	3);
 
 DROP TABLE IF EXISTS `lugares`;
 CREATE TABLE `lugares` (
@@ -128,6 +141,8 @@ CREATE TABLE `lugares` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `lugares` (`id`, `quantidade`) VALUES
+(1,	5);
 
 DROP TABLE IF EXISTS `permissao`;
 CREATE TABLE `permissao` (
@@ -136,6 +151,8 @@ CREATE TABLE `permissao` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `permissao` (`id`, `descricao`) VALUES
+(1,	'administrador');
 
 DROP TABLE IF EXISTS `portas`;
 CREATE TABLE `portas` (
@@ -144,6 +161,8 @@ CREATE TABLE `portas` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `portas` (`id`, `quantidade`) VALUES
+(1,	3);
 
 DROP TABLE IF EXISTS `status_aluguel`;
 CREATE TABLE `status_aluguel` (
@@ -156,13 +175,17 @@ CREATE TABLE `status_aluguel` (
 DROP TABLE IF EXISTS `telefone`;
 CREATE TABLE `telefone` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `dd1` int(11) NOT NULL,
+  `ddi` int(11) NOT NULL,
   `ddd` int(11) NOT NULL,
   `numero` int(20) NOT NULL,
   `tipo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `telefone` (`id`, `ddi`, `ddd`, `numero`, `tipo`) VALUES
+(1,	55,	11,	55555555,	'residencial'),
+(2,	55,	11,	66666666,	'comercial'),
+(3,	55,	11,	88888888,	'comercial');
 
 DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
@@ -187,5 +210,7 @@ CREATE TABLE `usuario` (
   CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`id_endereco`) REFERENCES `endereco` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `cpf`, `rg`, `data_nascimento`, `permissao_id`, `cnh`, `categoria_carta`, `id_endereco`, `id_telefone`) VALUES
+(3,	'Rafael Baraldi',	'adm',	'123',	'11111111111',	'498785987',	'0000-00-00',	1,	'1111111111111',	'b',	1,	1);
 
--- 2013-10-23 13:31:33
+-- 2013-10-27 23:45:16

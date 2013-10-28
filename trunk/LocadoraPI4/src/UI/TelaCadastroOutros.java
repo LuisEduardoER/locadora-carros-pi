@@ -12,12 +12,12 @@ import Globais.Geral;
  *
  * @author rafael.csilva
  */
-public class Outros extends javax.swing.JFrame {
+public class TelaCadastroOutros extends javax.swing.JFrame {
 
     /**
      * Creates new form Outros
      */
-    public Outros() {
+    public TelaCadastroOutros() {
         initComponents();
         
         this.setTitle(Geral.getEmpresa() + " - OUTROS");
@@ -50,6 +50,7 @@ public class Outros extends javax.swing.JFrame {
         btnPortas = new javax.swing.JButton();
         btnCambio = new javax.swing.JButton();
         btnDirecao = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,6 +108,13 @@ public class Outros extends javax.swing.JFrame {
             }
         });
 
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,34 +122,39 @@ public class Outros extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCombustivel)
-                    .addComponent(lblCarroceria)
-                    .addComponent(jLabel1)
-                    .addComponent(lblCambio)
-                    .addComponent(lblPortas)
-                    .addComponent(lblDirecao))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtCombustivel)
-                    .addComponent(txtCarroceria)
-                    .addComponent(txtLugares)
-                    .addComponent(txtCambio)
-                    .addComponent(txtPortas)
-                    .addComponent(txtDirecao, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCombustivel)
-                    .addComponent(btnCarroceria)
-                    .addComponent(btnLugares)
-                    .addComponent(btnPortas)
-                    .addComponent(btnCambio)
-                    .addComponent(btnDirecao))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCombustivel)
+                            .addComponent(lblCarroceria)
+                            .addComponent(jLabel1)
+                            .addComponent(lblCambio)
+                            .addComponent(lblPortas)
+                            .addComponent(lblDirecao))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCombustivel)
+                            .addComponent(txtCarroceria)
+                            .addComponent(txtLugares)
+                            .addComponent(txtCambio)
+                            .addComponent(txtPortas)
+                            .addComponent(txtDirecao, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCombustivel)
+                            .addComponent(btnCarroceria)
+                            .addComponent(btnLugares)
+                            .addComponent(btnPortas)
+                            .addComponent(btnCambio)
+                            .addComponent(btnDirecao)))
+                    .addComponent(btnVoltar))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(10, 10, 10)
+                .addComponent(btnVoltar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCombustivel)
                     .addComponent(txtCombustivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,33 +192,40 @@ public class Outros extends javax.swing.JFrame {
 
     private void btnCombustivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCombustivelActionPerformed
         // TODO add your handling code here:
-        Conexao.inserir("combustivel", "nome", txtCombustivel.getText());
+        Conexao.inserirOutros("combustivel", "nome", txtCombustivel.getText());
     }//GEN-LAST:event_btnCombustivelActionPerformed
 
     private void btnCarroceriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarroceriaActionPerformed
         // TODO add your handling code here:
-        Conexao.inserir("carroceria", "nome", txtCarroceria.getText());
+        Conexao.inserirOutros("carroceria", "nome", txtCarroceria.getText());
     }//GEN-LAST:event_btnCarroceriaActionPerformed
 
     private void btnLugaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLugaresActionPerformed
         // TODO add your handling code here:
-        Conexao.inserir("lugares", "quantidade", txtLugares.getText());
+        Conexao.inserirOutros("lugares", "quantidade", txtLugares.getText());
     }//GEN-LAST:event_btnLugaresActionPerformed
 
     private void btnCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambioActionPerformed
         // TODO add your handling code here:
-        Conexao.inserir("cambio", "nome", txtCambio.getText());
+        Conexao.inserirOutros("cambio", "nome", txtCambio.getText());
     }//GEN-LAST:event_btnCambioActionPerformed
 
     private void btnPortasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPortasActionPerformed
         // TODO add your handling code here:
-        Conexao.inserir("portas", "quantidade", txtPortas.getText());
+        Conexao.inserirOutros("portas", "quantidade", txtPortas.getText());
     }//GEN-LAST:event_btnPortasActionPerformed
 
     private void btnDirecaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirecaoActionPerformed
         // TODO add your handling code here:
-        Conexao.inserir("direcao", "nome", txtDirecao.getText());
+        Conexao.inserirOutros("direcao", "nome", txtDirecao.getText());
     }//GEN-LAST:event_btnDirecaoActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        TelaCadastros tela = new TelaCadastros();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,20 +244,20 @@ public class Outros extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Outros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroOutros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Outros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroOutros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Outros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroOutros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Outros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroOutros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Outros().setVisible(true);
+                new TelaCadastroOutros().setVisible(true);
             }
         });
     }
@@ -249,6 +269,7 @@ public class Outros extends javax.swing.JFrame {
     private javax.swing.JButton btnDirecao;
     private javax.swing.JButton btnLugares;
     private javax.swing.JButton btnPortas;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblCambio;
     private javax.swing.JLabel lblCarroceria;
