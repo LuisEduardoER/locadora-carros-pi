@@ -9,12 +9,12 @@ import Globais.Geral;
  *
  * @author rafael.baraldi
  */
-public class Cadastros extends javax.swing.JFrame {
+public class TelaCadastros extends javax.swing.JFrame {
 
     /**
      * Creates new form Cadastros
      */
-    public Cadastros() {
+    public TelaCadastros() {
         initComponents();
         
         this.setTitle(Geral.getEmpresa() + " - CADASTROS");
@@ -35,6 +35,7 @@ public class Cadastros extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         btnMotor = new javax.swing.JButton();
         btnOutros = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,6 +51,11 @@ public class Cadastros extends javax.swing.JFrame {
         btnCarron.setText("Carro");
 
         jButton1.setText("Fabricante");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnMotor.setText("Motor");
         btnMotor.addActionListener(new java.awt.event.ActionListener() {
@@ -62,6 +68,13 @@ public class Cadastros extends javax.swing.JFrame {
         btnOutros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOutrosActionPerformed(evt);
+            }
+        });
+
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -85,6 +98,10 @@ public class Cadastros extends javax.swing.JFrame {
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
                             .addComponent(btnOutros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVoltar)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,7 +118,9 @@ public class Cadastros extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMotor)
                     .addComponent(btnOutros))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(btnVoltar)
+                .addContainerGap())
         );
 
         pack();
@@ -114,7 +133,7 @@ public class Cadastros extends javax.swing.JFrame {
     private void btnOutrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutrosActionPerformed
         // TODO add your handling code here:
         
-        Outros tela = new Outros();
+        TelaCadastroOutros tela = new TelaCadastroOutros();
         tela.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnOutrosActionPerformed
@@ -122,11 +141,25 @@ public class Cadastros extends javax.swing.JFrame {
     private void btnMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotorActionPerformed
         // TODO add your handling code here:
         
-        Motor tela = new Motor();
+        TelaCadastroMotor tela = new TelaCadastroMotor();
         
         tela.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnMotorActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        TelaMenu tela = new TelaMenu();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        TelaCadastroFabricante tela = new TelaCadastroFabricante();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,20 +178,20 @@ public class Cadastros extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cadastros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cadastros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cadastros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cadastros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cadastros().setVisible(true);
+                new TelaCadastros().setVisible(true);
             }
         });
     }
@@ -169,6 +202,7 @@ public class Cadastros extends javax.swing.JFrame {
     private javax.swing.JButton btnMotor;
     private javax.swing.JButton btnOutros;
     private javax.swing.JButton btnUsuario;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

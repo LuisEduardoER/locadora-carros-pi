@@ -5,6 +5,9 @@
 package Controles;
 
 
+import Classes.Endereco;
+import Classes.Fabricante;
+import Classes.Telefone;
 import Classes.Usuario;
 import java.sql.Connection;
 import java.sql.Date;
@@ -60,7 +63,7 @@ public static Connection connect = null;
 
     }
     
-    public static void inserir(String tabela, String coluna, String registro){
+    public static void inserirOutros(String tabela, String coluna, String registro){
         String query = "INSERT INTO " + tabela + " (" + coluna + ") VALUES ('" + registro + "')";
             Statement statement = null;
         try {
@@ -115,5 +118,110 @@ public static Connection connect = null;
         
         return user;
         
+    }
+    
+    public static void inserirTelefone(Telefone tel){
+        String query = "INSERT INTO telefone (ddi, ddd, numero, tipo) VALUES (" + tel.getDdi() + ", " + tel.getDdd() + ", " + tel.getNumero() + ", '" + tel.getTipo() + "')";
+            Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            statement.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void inserirEndereco(Endereco end){
+        String query = "INSERT INTO endereco (cep, logradouro, numero, complemento, bairro, cidade, estado) VALUES ('" + end.getCep() + "', '" + end.getLogradouro() + "', " + end.getNumero() + ", '" + end.getComplemento() + "', '" + end.getBairro() + "', '" + end.getCidade() + "', '" + end.getEstado() + "')";
+            Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            statement.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static int buscaIdTel(int ddi, int ddd, int numero){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT * FROM telefone WHERE (ddi = '" + ddi + "AND ddd = " + ddd + " AND numero = " + numero + "')");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        int id = 0;
+        try {
+//            user.setId(Integer.parseInt(resultado.getString("id")));
+            if(!resultado.next()){
+                return 0;
+            }
+            else{
+                id = resultado.getInt("id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return id;
+    }
+    
+    public static int buscaIdEnd(String logradouro, int numero){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT * FROM endereco WHERE (logradouro = '" + logradouro + "' AND numero = " + numero + ")");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        int id = 0;
+        try {
+//            user.setId(Integer.parseInt(resultado.getString("id")));
+            if(!resultado.next()){
+                return 0;
+            }
+            else{
+                id = resultado.getInt("id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return id;
+    }
+    
+    public static void inserirFabricante(Fabricante fab){
+        String query = "INSERT INTO fabricante (nome, email, origem, id_telefone, id_endereco) VALUES ('" + fab.getNome() + "', '" + fab.getEmail() + "', '" + fab.getOrigem() + "', " + fab.getId_telefone() + ", " + fab.getId_endereco() + ")";
+            Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            statement.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
