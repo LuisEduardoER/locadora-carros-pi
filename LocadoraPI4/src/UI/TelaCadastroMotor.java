@@ -5,7 +5,14 @@
  */
 package UI;
 
+import Classes.Fabricante;
+import Controles.Conexao;
 import Globais.Geral;
+import java.awt.Component;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,8 +24,23 @@ public class TelaCadastroMotor extends javax.swing.JFrame {
      * Creates new form Motor
      */
     public TelaCadastroMotor() {
-        initComponents();
-        this.setTitle(Geral.getEmpresa()+" - MOTOR");
+        try {
+            initComponents();
+            this.setTitle(Geral.getEmpresa()+" - MOTOR");
+            
+            cboxFabricante.removeAllItems();
+            
+            ResultSet resultado = Conexao.buscaTodosFabriantes();
+            
+            while(resultado.next()){
+                Fabricante f = new Fabricante();
+                f.setNome(resultado.getString("nome"));
+                f.setId(resultado.getInt("id"));
+                cboxFabricante.addItem(f);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCadastroMotor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

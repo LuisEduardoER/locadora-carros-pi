@@ -16,6 +16,15 @@ public class Fabricante {
     private int id_telefone;
     private int id_endereco;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    private int id;
+
     public String getNome() {
         return nome;
     }
@@ -56,5 +65,8 @@ public class Fabricante {
         this.id_endereco = id_endereco;
     }
         
-    
+    @Override
+    public String toString(){
+        return this.getNome();
+    }
 }
