@@ -7,6 +7,7 @@ CAMBIO<br />
 id (Chave Primária), nome
 
 CARRO<br />
+id (Chave Primária), modelo, ano, preco, categoria, fabricante_id (Chave Estrangeira), portas_id (Chave Estrangeira), lugares_id (Chave Estrangeira), motor_id (Chave Estrangeira), carroceria_id (Chave Estrangeira), combustivel_id (Chave Estrangeira), cambio_id (Chave Estrangeira), direcao_id (Chave Estrangeira)
 
 CARROCERIA<br />
 id (Chave Primária), nome
@@ -18,6 +19,7 @@ DIRECAO<br />
 id (Chave Primária), nome
 
 ENDERECO<br />
+id (Chave Primária), cep, logradouro, numero, complemento, bairro, cidade, estado
 
 FABRICANTE<br />
 id (Chave Primária), nome, email, origem, id_telefone (Chave Estrangeira), id_endereco (Chave Estrangeira)
