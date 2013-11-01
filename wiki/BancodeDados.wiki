@@ -1,5 +1,4 @@
 Entidades e suas propriedades: <br />
-<br />
 ALUGUEL <br />
 id - Chave Primária <br />
 data_retirada <br />
