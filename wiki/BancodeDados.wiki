@@ -24,8 +24,6 @@ id (Chave Primária), cep, logradouro, numero, complemento, bairro, cidade, esta
 FABRICANTE<br />
 id (Chave Primária), nome, email, origem, id_telefone (Chave Estrangeira), id_endereco (Chave Estrangeira)
 
-LUGARES<br />
-
 PERMISSAO<br />
 id (Chave Primária), descricao
 
@@ -36,5 +34,10 @@ PORTAS<br />
 id (Chave Primária), quantidade
 
 STAUS_ALUGUEL<br />
+id (Chave Primária), descricao
+
 TELEFONE<br />
+id (Chave Primária), ddi, ddd, numero, tipo
+
 USUARIO<br />
+id (Chave Primária), nome, email, senha, cpf, rg, data_nascimento, cnh, categoria_carta, permissao_id (Chave Estrangeira), id_enredeco (Chave Estrangeira), id_telefone (Chave Estrangeira)
