@@ -1,28 +1,28 @@
-Entidades e suas propriedades:
-
-ALUGUEL
-id - Chave Primária
-data_retirada
-data_entrega
-prazo
-atraso
-valor_parcial
-valor_atraso
-status_id - Chave Estrangeira
-carro_id - Chave Estrangeira
-assegurado
-
-CAMBIO
-CARRO
-CARROCERIA
-COMBUSTIVEL
-DIRECAO
-ENDERECO
-FABRICANTE
-LUGARES
-PERMISSAO
-LUGARES
-PORTAS
-STAUS_ALUGUEL
-TELEFONE
-USUARIO
+Entidades e suas propriedades: <br />
+<br />
+ALUGUEL <br />
+id - Chave Primária <br />
+data_retirada <br />
+data_entrega <br />
+prazo <br />
+atraso <br />
+valor_parcial <br />
+valor_atraso <br />
+status_id - Chave Estrangeira <br />
+carro_id - Chave Estrangeira <br />
+assegurado <br />
+<br />
+CAMBIO<br />
+CARRO<br />
+CARROCERIA<br />
+COMBUSTIVEL<br />
+DIRECAO<br />
+ENDERECO<br />
+FABRICANTE<br />
+LUGARES<br />
+PERMISSAO<br />
+LUGARES<br />
+PORTAS<br />
+STAUS_ALUGUEL<br />
+TELEFONE<br />
+USUARIO<br />
