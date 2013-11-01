@@ -1,0 +1,28 @@
+Entidades e suas propriedades:
+
+ALUGUEL
+id - Chave Primária
+data_retirada
+data_entrega
+prazo
+atraso
+valor_parcial
+valor_atraso
+status_id - Chave Estrangeira
+carro_id - Chave Estrangeira
+assegurado
+
+CAMBIO
+CARRO
+CARROCERIA
+COMBUSTIVEL
+DIRECAO
+ENDERECO
+FABRICANTE
+LUGARES
+PERMISSAO
+LUGARES
+PORTAS
+STAUS_ALUGUEL
+TELEFONE
+USUARIO
