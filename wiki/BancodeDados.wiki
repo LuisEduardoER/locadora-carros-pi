@@ -1,15 +1,6 @@
 Entidades e suas propriedades: <br />
 ALUGUEL <br />
-id - Chave Primária <br />
-data_retirada <br />
-data_entrega <br />
-prazo <br />
-atraso <br />
-valor_parcial <br />
-valor_atraso <br />
-status_id - Chave Estrangeira <br />
-carro_id - Chave Estrangeira <br />
-assegurado <br />
+id (Chave Primária), data_retirada, data_entrega, prazo, atraso, valor_parcial, valor_atraso, assegurado, status_id (Chave Estrangeira), carro_id (Chave Estrangeira)
 <br />
 CAMBIO<br />
 CARRO<br />
