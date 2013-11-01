@@ -2,17 +2,37 @@ Entidades e suas propriedades: <br />
 ALUGUEL <br />
 id (Chave Primária), data_retirada, data_entrega, prazo, atraso, valor_parcial, valor_atraso, assegurado, status_id (Chave Estrangeira), carro_id (Chave Estrangeira)
 <br />
+
 CAMBIO<br />
+id (Chave Primária), nome
+
 CARRO<br />
+
 CARROCERIA<br />
+id (Chave Primária), nome
+
 COMBUSTIVEL<br />
+id (Chave Primária), nome
+
 DIRECAO<br />
+id (Chave Primária), nome
+
 ENDERECO<br />
+
 FABRICANTE<br />
+id (Chave Primária), nome, email, origem, id_telefone (Chave Estrangeira), id_endereco (Chave Estrangeira)
+
 LUGARES<br />
+
 PERMISSAO<br />
+id (Chave Primária), descricao
+
 LUGARES<br />
+id (Chave Primária), quantidade
+
 PORTAS<br />
+id (Chave Primária), quantidade
+
 STAUS_ALUGUEL<br />
 TELEFONE<br />
 USUARIO<br />
