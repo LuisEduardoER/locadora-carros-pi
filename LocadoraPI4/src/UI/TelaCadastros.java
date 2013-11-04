@@ -194,6 +194,11 @@ public class TelaCadastros extends javax.swing.JFrame {
         });
 
         btnCarron.setText("Carro");
+        btnCarron.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarronActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Fabricante");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -265,6 +270,13 @@ public class TelaCadastros extends javax.swing.JFrame {
         tela.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnCarronActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarronActionPerformed
+        // TODO add your handling code here:
+        TelaCadastroCarro tela = new TelaCadastroCarro();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCarronActionPerformed
 
     /**
      * @param args the command line arguments

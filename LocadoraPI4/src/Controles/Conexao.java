@@ -105,7 +105,7 @@ public static Connection connect = null;
                 user.setSenha(resultado.getString("senha"));
                 user.setCpf(resultado.getString("cpf"));
                 user.setRg(resultado.getString("rg"));
-                //user.setData_nascimento(Date.parse(resultado.getString("data_nascimento")));
+//                user.setData_nascimento(resultado.getDate("data_nascimento"));
                 user.setPermissao(Integer.parseInt(resultado.getString("permissao_id")));
                 user.setCnh(resultado.getString("cnh"));
                 user.setCategoria_carta(resultado.getString("categoria_carta"));
@@ -235,6 +235,108 @@ public static Connection connect = null;
             ResultSet resultado = null;
         try {
             resultado = statement.executeQuery("SELECT * FROM fabricante");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado;
+    }
+    
+    public static ResultSet buscaTodosCombustivel(){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT * FROM combustivel");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado;
+    }
+    
+    public static ResultSet buscaTodosCarroceria(){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT * FROM carroceria");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado;
+    }
+    
+    public static ResultSet buscaTodosLugares(){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT * FROM lugares");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado;
+    }
+    
+    public static ResultSet buscaTodosPortas(){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT * FROM portas");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado;
+    }
+    
+    public static ResultSet buscaTodosCambio(){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT * FROM cambio");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado;
+    }
+    
+    public static ResultSet buscaTodosDirecao(){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT * FROM direcao");
         } catch (SQLException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
