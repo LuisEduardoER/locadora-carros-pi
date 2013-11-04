@@ -94,23 +94,23 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
         // TODO add your handling code here:
-//        Usuario user = new Usuario();
-//        user = Conexao.buscar_usuario(txtEmail.getText());
-//        if(user != null){
-//            if(user.getSenha().equals(txtSenha.getText()))
-//            {
+        Usuario user = new Usuario();
+        user = Conexao.buscar_usuario(txtEmail.getText());
+        if(user != null){
+            if(user.getSenha().equals(txtSenha.getText()))
+            {
                 TelaMenu tela = new TelaMenu();
                 tela.setVisible(true);
         
                 this.setVisible(false);
-//            }
-//            else{
-//                JOptionPane.showMessageDialog(null, "Senha incorreta!");
-//            }
-//        }
-//        else{
-//            JOptionPane.showMessageDialog(null, "Email invalido!");
-//        }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Senha incorreta!");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Email invalido!");
+        }
     }//GEN-LAST:event_btnLogarActionPerformed
 
     /**
