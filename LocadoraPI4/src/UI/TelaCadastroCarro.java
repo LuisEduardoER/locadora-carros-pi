@@ -6,6 +6,7 @@
 package UI;
 
 import Classes.Cambio;
+import Classes.Carro;
 import Classes.Carroceria;
 import Classes.Combustivel;
 import Classes.Direcao;
@@ -43,7 +44,7 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
         cboxPortas.removeAllItems();
         
         try {         
-            ResultSet resultado = Conexao.buscaTodosFabriantes();
+            ResultSet resultado = Conexao.buscaTodoConteudo("fabricante");
             
             while(resultado.next()){
                 Fabricante f = new Fabricante();
@@ -52,7 +53,7 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
                 cboxFabricante.addItem(f);
             }
             
-            resultado = Conexao.buscaTodosCambio();
+            resultado = Conexao.buscaTodoConteudo("cambio");
             
             while(resultado.next()){
                 Cambio f = new Cambio();
@@ -61,7 +62,7 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
                 cboxCambio.addItem(f);
             }
             
-            resultado = Conexao.buscaTodosCarroceria();
+            resultado = Conexao.buscaTodoConteudo("carroceria");
             
             while(resultado.next()){
                 Carroceria f = new Carroceria();
@@ -70,7 +71,7 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
                 cboxCarroceria.addItem(f);
             }
             
-            resultado = Conexao.buscaTodosCombustivel();
+            resultado = Conexao.buscaTodoConteudo("combustivel");
             
             while(resultado.next()){
                 Combustivel f = new Combustivel();
@@ -79,7 +80,7 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
                 cboxCombustivel.addItem(f);
             }
             
-            resultado = Conexao.buscaTodosDirecao();
+            resultado = Conexao.buscaTodoConteudo("direcao");
             
             while(resultado.next()){
                 Direcao f = new Direcao();
@@ -88,7 +89,7 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
                 cboxDirecao.addItem(f);
             }
             
-            resultado = Conexao.buscaTodosLugares();
+            resultado = Conexao.buscaTodoConteudo("lugares");
             
             while(resultado.next()){
                 Lugares f = new Lugares();
@@ -97,7 +98,7 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
                 cboxLugares.addItem(f);
             }
             
-            resultado = Conexao.buscaTodosPortas();
+            resultado = Conexao.buscaTodoConteudo("portas");
             
             while(resultado.next()){
                 Portas f = new Portas();
@@ -149,6 +150,12 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
         cboxPortas = new javax.swing.JComboBox();
         cboxCambio = new javax.swing.JComboBox();
         cboxDirecao = new javax.swing.JComboBox();
+        lblCategoria = new javax.swing.JLabel();
+        txtCategoria = new javax.swing.JTextField();
+        lblAno = new javax.swing.JLabel();
+        txtAno = new javax.swing.JTextField();
+        lblPreco = new javax.swing.JLabel();
+        txtPreco = new javax.swing.JTextField();
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -213,6 +220,12 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
 
         cboxDirecao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        lblCategoria.setText("Categoria:");
+
+        lblAno.setText("Ano:");
+
+        lblPreco.setText("Preço:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -221,43 +234,44 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblFabricante)
-                        .addGap(21, 21, 21)
-                        .addComponent(cboxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(lblValvulas)
-                                    .addGap(33, 33, 33))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblAlinhamento)
-                                    .addGap(13, 13, 13)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblFabricante)
+                                .addGap(21, 21, 21)
+                                .addComponent(cboxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCilindros)
-                                    .addComponent(lblCilindradas)
-                                    .addComponent(lblModelo)
-                                    .addComponent(lblPotencia))
-                                .addGap(20, 20, 20)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(lblValvulas)
+                                            .addGap(33, 33, 33))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblAlinhamento)
+                                            .addGap(13, 13, 13)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblCilindros)
+                                            .addComponent(lblCilindradas)
+                                            .addComponent(lblModelo)
+                                            .addComponent(lblPotencia))
+                                        .addGap(20, 20, 20)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCilindradas)
+                                    .addComponent(txtCilindros, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtAlinhamento, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                                    .addComponent(txtValvulas)
+                                    .addComponent(txtPotencia, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                                    .addComponent(txtAno))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtCilindradas)
-                                .addComponent(txtCilindros, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtAlinhamento, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                                .addComponent(txtValvulas))
-                            .addComponent(txtPotencia, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnVoltar)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnInserir)
                             .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnInserir)
+                                .addGap(237, 237, 237)
+                                .addComponent(btnVoltar)
+                                .addContainerGap())
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,7 +282,9 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(lblDirecao)
                                             .addGap(23, 23, 23)))
-                                    .addComponent(lblCambio))
+                                    .addComponent(lblCambio)
+                                    .addComponent(lblCategoria)
+                                    .addComponent(lblPreco))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(cboxDirecao, 0, 156, Short.MAX_VALUE)
@@ -276,13 +292,18 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
                                     .addComponent(cboxPortas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cboxLugares, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cboxCarroceria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cboxCombustivel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap(98, Short.MAX_VALUE))))
+                                    .addComponent(cboxCombustivel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtCategoria)
+                                    .addComponent(txtPreco))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblAno)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboxFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblFabricante)
@@ -321,13 +342,22 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
                         .addComponent(txtCilindros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblDirecao)
                         .addComponent(cboxDirecao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCilindradas)
                     .addComponent(txtCilindradas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCategoria)
+                    .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAno)
+                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPreco)
+                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVoltar)
                     .addComponent(btnInserir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(btnVoltar)
                 .addContainerGap())
         );
 
@@ -350,6 +380,24 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
         novoMotor.setCilindros(Integer.parseInt(txtCilindros.getText()));
         novoMotor.setValvulas(Integer.parseInt(txtValvulas.getText()));
         novoMotor.setPotencia(Integer.parseInt(txtPotencia.getText()));
+        
+        Conexao.inserirMotor(novoMotor);
+        
+        Carro novoCarro = new Carro();
+        novoCarro.setModelo(txtModelo.getText());
+        novoCarro.setFabricante_id(((Fabricante)cboxFabricante.getSelectedItem()).getId());
+        novoCarro.setAno(Integer.parseInt(txtAno.getText()));
+        novoCarro.setPreco(Double.parseDouble(txtPreco.getText()));
+        novoCarro.setPortas_id(((Portas)cboxPortas.getSelectedItem()).getId());
+        novoCarro.setLugares_id(((Lugares)cboxLugares.getSelectedItem()).getId());
+        novoCarro.setMotor_id(Conexao.buscaIdMotor(novoMotor));
+        novoCarro.setCarroceria_id(((Carroceria)cboxCarroceria.getSelectedItem()).getId());
+        novoCarro.setCombustivel_id(((Combustivel)cboxCombustivel.getSelectedItem()).getId());
+        novoCarro.setCambio_id(((Cambio)cboxCambio.getSelectedItem()).getId());
+        novoCarro.setDirecao_id(((Direcao)cboxDirecao.getSelectedItem()).getId());
+        novoCarro.setCategoria(txtCategoria.getText());
+        
+        Conexao.inserirCarro(novoCarro);
     }//GEN-LAST:event_btnInserirActionPerformed
 
     /**
@@ -401,8 +449,10 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAlinhamento;
+    private javax.swing.JLabel lblAno;
     private javax.swing.JLabel lblCambio;
     private javax.swing.JLabel lblCarroceria;
+    private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblCilindradas;
     private javax.swing.JLabel lblCilindros;
     private javax.swing.JLabel lblCombustivel;
@@ -411,12 +461,16 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
     private javax.swing.JLabel lblModelo;
     private javax.swing.JLabel lblPortas;
     private javax.swing.JLabel lblPotencia;
+    private javax.swing.JLabel lblPreco;
     private javax.swing.JLabel lblValvulas;
     private javax.swing.JTextField txtAlinhamento;
+    private javax.swing.JTextField txtAno;
+    private javax.swing.JTextField txtCategoria;
     private javax.swing.JTextField txtCilindradas;
     private javax.swing.JTextField txtCilindros;
     private javax.swing.JTextField txtModelo;
     private javax.swing.JTextField txtPotencia;
+    private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtValvulas;
     // End of variables declaration//GEN-END:variables
 }
