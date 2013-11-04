@@ -11,7 +11,7 @@ package Globais;
  */
 public class Geral {
     
-    private static String empresa = "LOCADORA";
+    private static String empresa = "LOCADORA S.I.";
 
     public static String getEmpresa() {
         return empresa;
