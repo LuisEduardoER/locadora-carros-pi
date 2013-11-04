@@ -24,48 +24,41 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblCombustivel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCarroceria" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCambio" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblPortas" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblDirecao" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtCombustivel" max="32767" attributes="0"/>
-                          <Component id="txtCarroceria" max="32767" attributes="0"/>
-                          <Component id="txtLugares" max="32767" attributes="0"/>
-                          <Component id="txtCambio" max="32767" attributes="0"/>
-                          <Component id="txtPortas" max="32767" attributes="0"/>
-                          <Component id="txtDirecao" pref="155" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnCombustivel" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnCarroceria" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnLugares" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnPortas" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnCambio" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnDirecao" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="btnVoltar" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCombustivel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCarroceria" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCambio" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPortas" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDirecao" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="81" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="txtCombustivel" max="32767" attributes="0"/>
+                  <Component id="txtCarroceria" max="32767" attributes="0"/>
+                  <Component id="txtLugares" max="32767" attributes="0"/>
+                  <Component id="txtCambio" max="32767" attributes="0"/>
+                  <Component id="txtPortas" max="32767" attributes="0"/>
+                  <Component id="txtDirecao" pref="155" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnCombustivel" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCarroceria" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLugares" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPortas" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCambio" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnDirecao" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-              <Component id="btnVoltar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblCombustivel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtCombustivel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -195,14 +188,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDirecaoActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnVoltar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Voltar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVoltarActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

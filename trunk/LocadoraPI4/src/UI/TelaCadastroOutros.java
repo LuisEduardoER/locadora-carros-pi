@@ -19,9 +19,153 @@ public class TelaCadastroOutros extends javax.swing.JFrame {
      */
     public TelaCadastroOutros() {
         initComponents();
+        myInitComponents();
         
-        this.setTitle(Geral.getEmpresa() + " - OUTROS");
+        this.setTitle(Geral.getEmpresa() + " - CADASTRO OUTROS");
+        this.setSize(Geral.getWidth(), Geral.getHeight());
+        this.setLocationRelativeTo(null);
     }
+    
+    public void myInitComponents(){
+        
+        btnAluguel = new javax.swing.JButton();
+        btnRelatorio = new javax.swing.JButton();
+        btnCadastros = new javax.swing.JButton();
+        btnLogoff = new javax.swing.JButton();
+        lblBemVindo = new javax.swing.JLabel();
+        lblCopyright = new javax.swing.JLabel();
+        lblTelefone = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        lblEndereco = new javax.swing.JLabel();
+        jProgressBar3 = new javax.swing.JProgressBar();
+        //imgCapa = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnAluguel.setText("Aluguel");
+        btnRelatorio.setText("Relatórios");
+        btnCadastros.setText("Cadastros");
+        btnCadastros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrosActionPerformed(evt);
+            }
+        });
+
+        btnLogoff.setText("Sair");
+        btnLogoff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoffActionPerformed(evt);
+            }
+        });
+
+        lblBemVindo.setText("Bem Vindo, Sr.(a) José Pereira");
+
+        lblCopyright.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        lblCopyright.setText("Copyright © Locadora S.I 2013");
+
+        lblTelefone.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        lblTelefone.setText("Telefone: (11) 5510-7070");
+
+        lblEndereco.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        lblEndereco.setText("Endereço: Rua Franciso Soares, 1200 - Santo Amarto - São Paulo /SP");
+
+        //imgCapa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/capa-carro.png"))); // NOI18N
+
+        btnVoltar.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblBemVindo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLogoff, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8))
+            .addComponent(jProgressBar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblEndereco)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblCopyright)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTelefone)
+                            //.addComponent(imgCapa, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCadastros, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(btnVoltar))))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBemVindo)
+                    .addComponent(btnLogoff))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAluguel)
+                    .addComponent(btnCadastros)
+                    .addComponent(btnRelatorio)
+                    .addComponent(btnVoltar))
+                .addGap(42, 42, 42)
+                //.addComponent(imgCapa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTelefone)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEndereco)
+                    .addComponent(lblCopyright))
+                .addGap(6, 6, 6))
+        );
+
+        pack();
+    }
+    
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        
+        TelaCadastros tela = new TelaCadastros();
+        tela.setVisible(true);
+        this.setVisible(false);
+    } 
+    
+    private void btnCadastrosActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+        TelaMenuCadastros tela = new TelaMenuCadastros();
+        
+        tela.setVisible(true);
+        this.setVisible(false);
+    }                                            
+
+    private void btnLogoffActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+        TelaInicial tela = new TelaInicial();
+        tela.setVisible(true);
+        this.setVisible(false);
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,7 +194,6 @@ public class TelaCadastroOutros extends javax.swing.JFrame {
         btnPortas = new javax.swing.JButton();
         btnCambio = new javax.swing.JButton();
         btnDirecao = new javax.swing.JButton();
-        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,53 +251,41 @@ public class TelaCadastroOutros extends javax.swing.JFrame {
             }
         });
 
-        btnVoltar.setText("Voltar");
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(89, 89, 89)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCombustivel)
-                            .addComponent(lblCarroceria)
-                            .addComponent(jLabel1)
-                            .addComponent(lblCambio)
-                            .addComponent(lblPortas)
-                            .addComponent(lblDirecao))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCombustivel)
-                            .addComponent(txtCarroceria)
-                            .addComponent(txtLugares)
-                            .addComponent(txtCambio)
-                            .addComponent(txtPortas)
-                            .addComponent(txtDirecao, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCombustivel)
-                            .addComponent(btnCarroceria)
-                            .addComponent(btnLugares)
-                            .addComponent(btnPortas)
-                            .addComponent(btnCambio)
-                            .addComponent(btnDirecao)))
-                    .addComponent(btnVoltar))
-                .addContainerGap(81, Short.MAX_VALUE))
+                    .addComponent(lblCombustivel)
+                    .addComponent(lblCarroceria)
+                    .addComponent(jLabel1)
+                    .addComponent(lblCambio)
+                    .addComponent(lblPortas)
+                    .addComponent(lblDirecao))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtCombustivel)
+                    .addComponent(txtCarroceria)
+                    .addComponent(txtLugares)
+                    .addComponent(txtCambio)
+                    .addComponent(txtPortas)
+                    .addComponent(txtDirecao, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCombustivel)
+                    .addComponent(btnCarroceria)
+                    .addComponent(btnLugares)
+                    .addComponent(btnPortas)
+                    .addComponent(btnCambio)
+                    .addComponent(btnDirecao))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(btnVoltar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(135, 135, 135)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCombustivel)
                     .addComponent(txtCombustivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,13 +351,6 @@ public class TelaCadastroOutros extends javax.swing.JFrame {
         Conexao.inserirOutros("direcao", "nome", txtDirecao.getText());
     }//GEN-LAST:event_btnDirecaoActionPerformed
 
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
-        TelaCadastros tela = new TelaCadastros();
-        tela.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnVoltarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -261,6 +385,26 @@ public class TelaCadastroOutros extends javax.swing.JFrame {
             }
         });
     }
+    
+        // Variables declaration - do not modify                     
+    private javax.swing.JButton btnAluguel;
+    private javax.swing.JButton btnCadastros;
+    private javax.swing.JButton btnLogoff;
+    private javax.swing.JButton btnRelatorio;
+    private javax.swing.JButton btnVoltar;
+    //private javax.swing.JLabel jLabel5;
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JProgressBar jProgressBar3;
+    private javax.swing.JLabel lblBemVindo;
+    private javax.swing.JLabel lblCopyright;
+    private javax.swing.JLabel lblEndereco;
+    private javax.swing.JLabel lblTelefone;
+    // End of variables declaration        
+    
+    // Variables declaration - do not modify                     
+//    private javax.swing.JButton btnInserir;
+//    private javax.swing.JButton btnVisualizar;
+    // End of variables declaration     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCambio;
@@ -269,7 +413,6 @@ public class TelaCadastroOutros extends javax.swing.JFrame {
     private javax.swing.JButton btnDirecao;
     private javax.swing.JButton btnLugares;
     private javax.swing.JButton btnPortas;
-    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblCambio;
     private javax.swing.JLabel lblCarroceria;

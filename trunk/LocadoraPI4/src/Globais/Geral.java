@@ -12,12 +12,20 @@ package Globais;
 public class Geral {
     
     private static String empresa = "LOCADORA S.I.";
+    private static final int width = 520;  
+    private static final int height = 500;  
 
     public static String getEmpresa() {
         return empresa;
     }
-    public static void setEmpresa(String empresa) {
-        Geral.empresa = empresa;
+    
+    public static int getWidth() {
+        return width;
+    }    
+    public static int getHeight() {
+        return height;
     }
+
+    
     
 }
