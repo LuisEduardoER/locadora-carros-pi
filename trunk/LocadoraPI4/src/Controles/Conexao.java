@@ -254,7 +254,8 @@ public static Connection connect = null;
         }
             ResultSet resultado = null;
         try {
-            resultado = statement.executeQuery("SELECT * FROM motor WHERE (potencia = " + engine.getPotencia() + " AND valvulas = " + engine.getValvulas() + " AND cilindros = " + engine.getCilindros() + "AND cilindradas = " + engine.getCilindradas() + " AND alinhamento = '" + engine.getAlinhamento() + "')");
+            String query = "SELECT * FROM motor WHERE (potencia = " + engine.getPotencia() + " AND valvulas = " + engine.getValvulas() + " AND cilindros = " + engine.getCilindros() + " AND cilindradas = " + engine.getCilindradas() + " AND alinhamento = '" + engine.getAlinhamento() + "')";
+            resultado = statement.executeQuery(query);
         } catch (SQLException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }

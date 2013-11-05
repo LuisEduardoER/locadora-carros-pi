@@ -19,9 +19,16 @@ public class TelaMenu extends javax.swing.JFrame {
     public TelaMenu() {
         initComponents();
         
+        //Titulo
         this.setTitle(Geral.getEmpresa()+" - MENU");
+        
+        //Redimenciona Tela
         this.setSize(Geral.getWidth(), Geral.getHeight());
+        
+        //Centraliza Tela
         this.setLocationRelativeTo(null);
+        
+        lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
     }
 
     /**
