@@ -99,6 +99,8 @@ public class TelaInicial extends javax.swing.JFrame {
         if(user != null){
             if(user.getSenha().equals(txtSenha.getText()))
             {
+                Geral.setUser(user);
+                
                 TelaMenu tela = new TelaMenu();
                 tela.setVisible(true);
         
