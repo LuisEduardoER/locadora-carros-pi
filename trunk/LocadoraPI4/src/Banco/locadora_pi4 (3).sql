@@ -20,8 +20,8 @@ CREATE TABLE `aluguel` (
   PRIMARY KEY (`id`),
   KEY `carro_id` (`carro_id`),
   KEY `status_id` (`status_id`),
-  CONSTRAINT `aluguel_ibfk_3` FOREIGN KEY (`status_id`) REFERENCES `status_aluguel` (`id`),
-  CONSTRAINT `aluguel_ibfk_1` FOREIGN KEY (`carro_id`) REFERENCES `carro` (`id`)
+  CONSTRAINT `aluguel_ibfk_1` FOREIGN KEY (`carro_id`) REFERENCES `carro` (`id`),
+  CONSTRAINT `aluguel_ibfk_3` FOREIGN KEY (`status_id`) REFERENCES `status_aluguel` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
@@ -58,15 +58,19 @@ CREATE TABLE `carro` (
   KEY `direcao_id` (`direcao_id`),
   KEY `lugares_id` (`lugares_id`),
   KEY `portas_id` (`portas_id`),
-  CONSTRAINT `carro_ibfk_7` FOREIGN KEY (`portas_id`) REFERENCES `portas` (`id`),
+  KEY `motor_id` (`motor_id`),
+  CONSTRAINT `carro_ibfk_8` FOREIGN KEY (`motor_id`) REFERENCES `motor` (`id`),
   CONSTRAINT `carro_ibfk_1` FOREIGN KEY (`fabricante_id`) REFERENCES `fabricante` (`id`),
   CONSTRAINT `carro_ibfk_2` FOREIGN KEY (`cambio_id`) REFERENCES `cambio` (`id`),
   CONSTRAINT `carro_ibfk_3` FOREIGN KEY (`carroceria_id`) REFERENCES `carroceria` (`id`),
   CONSTRAINT `carro_ibfk_4` FOREIGN KEY (`combustivel_id`) REFERENCES `combustivel` (`id`),
   CONSTRAINT `carro_ibfk_5` FOREIGN KEY (`direcao_id`) REFERENCES `direcao` (`id`),
-  CONSTRAINT `carro_ibfk_6` FOREIGN KEY (`lugares_id`) REFERENCES `lugares` (`id`)
+  CONSTRAINT `carro_ibfk_6` FOREIGN KEY (`lugares_id`) REFERENCES `lugares` (`id`),
+  CONSTRAINT `carro_ibfk_7` FOREIGN KEY (`portas_id`) REFERENCES `portas` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `carro` (`id`, `modelo`, `fabricante_id`, `ano`, `preco`, `portas_id`, `lugares_id`, `motor_id`, `carroceria_id`, `combustivel_id`, `cambio_id`, `direcao_id`, `categoria`) VALUES
+(1,	'gol 1.8',	2,	1994,	100,	1,	1,	2,	1,	1,	1,	1,	'B');
 
 DROP TABLE IF EXISTS `carroceria`;
 CREATE TABLE `carroceria` (
@@ -86,7 +90,8 @@ CREATE TABLE `combustivel` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `combustivel` (`id`, `nome`) VALUES
-(1,	'etanol');
+(1,	'etanol'),
+(2,	'gasolina');
 
 DROP TABLE IF EXISTS `direcao`;
 CREATE TABLE `direcao` (
@@ -114,7 +119,8 @@ CREATE TABLE `endereco` (
 INSERT INTO `endereco` (`id`, `cep`, `logradouro`, `numero`, `complemento`, `bairro`, `cidade`, `estado`) VALUES
 (1,	'04673948',	'rua avenida endereco',	189,	NULL,	'jd bairro',	'sp',	'sp'),
 (2,	'9484746',	'rua vw',	108,	'ccs',	'bai',	'sp',	'sp'),
-(3,	'98376476',	'rua vw cs',	198,	'concess',	'oic',	'rj',	'rj');
+(3,	'98376476',	'rua vw cs',	198,	'concess',	'oic',	'rj',	'rj'),
+(4,	'9734739',	'rua fiat',	139,	'ccs',	'bai',	'it',	'it');
 
 DROP TABLE IF EXISTS `fabricante`;
 CREATE TABLE `fabricante` (
@@ -127,12 +133,13 @@ CREATE TABLE `fabricante` (
   PRIMARY KEY (`id`),
   KEY `id_endereco` (`id_endereco`),
   KEY `id_telefone` (`id_telefone`),
-  CONSTRAINT `fabricante_ibfk_2` FOREIGN KEY (`id_telefone`) REFERENCES `telefone` (`id`),
-  CONSTRAINT `fabricante_ibfk_1` FOREIGN KEY (`id_endereco`) REFERENCES `endereco` (`id`)
+  CONSTRAINT `fabricante_ibfk_1` FOREIGN KEY (`id_endereco`) REFERENCES `endereco` (`id`),
+  CONSTRAINT `fabricante_ibfk_2` FOREIGN KEY (`id_telefone`) REFERENCES `telefone` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `fabricante` (`id`, `nome`, `email`, `origem`, `id_telefone`, `id_endereco`) VALUES
-(2,	'vw',	'vw@vw.vw',	'Alemanha',	1,	3);
+(2,	'vw',	'vw@vw.vw',	'Alemanha',	1,	3),
+(3,	'fiat',	'fiat',	'italia',	1,	4);
 
 DROP TABLE IF EXISTS `lugares`;
 CREATE TABLE `lugares` (
@@ -143,6 +150,20 @@ CREATE TABLE `lugares` (
 
 INSERT INTO `lugares` (`id`, `quantidade`) VALUES
 (1,	5);
+
+DROP TABLE IF EXISTS `motor`;
+CREATE TABLE `motor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `potencia` int(11) DEFAULT NULL,
+  `valvulas` int(11) DEFAULT NULL,
+  `cilindros` int(11) DEFAULT NULL,
+  `cilindradas` int(11) DEFAULT NULL,
+  `alinhamento` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `motor` (`id`, `potencia`, `valvulas`, `cilindros`, `cilindradas`, `alinhamento`) VALUES
+(2,	90,	16,	4,	1800,	'em linha');
 
 DROP TABLE IF EXISTS `permissao`;
 CREATE TABLE `permissao` (
@@ -185,7 +206,8 @@ CREATE TABLE `telefone` (
 INSERT INTO `telefone` (`id`, `ddi`, `ddd`, `numero`, `tipo`) VALUES
 (1,	55,	11,	55555555,	'residencial'),
 (2,	55,	11,	66666666,	'comercial'),
-(3,	55,	11,	88888888,	'comercial');
+(3,	55,	11,	88888888,	'comercial'),
+(4,	55,	11,	88888888,	'come');
 
 DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
@@ -205,12 +227,12 @@ CREATE TABLE `usuario` (
   KEY `id_telefone` (`id_telefone`),
   KEY `id_endereco` (`id_endereco`),
   KEY `permissao_id` (`permissao_id`),
-  CONSTRAINT `usuario_ibfk_3` FOREIGN KEY (`permissao_id`) REFERENCES `permissao` (`id`),
   CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_telefone`) REFERENCES `telefone` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`id_endereco`) REFERENCES `endereco` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`id_endereco`) REFERENCES `endereco` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `usuario_ibfk_3` FOREIGN KEY (`permissao_id`) REFERENCES `permissao` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `cpf`, `rg`, `data_nascimento`, `permissao_id`, `cnh`, `categoria_carta`, `id_endereco`, `id_telefone`) VALUES
 (3,	'Rafael Baraldi',	'adm',	'123',	'11111111111',	'498785987',	'0000-00-00',	1,	'1111111111111',	'b',	1,	1);
 
--- 2013-10-27 23:45:16
+-- 2013-11-05 11:30:14

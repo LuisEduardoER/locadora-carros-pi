@@ -6,6 +6,7 @@
 package UI;
 
 import Globais.Geral;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -160,11 +161,21 @@ public class TelaMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrosActionPerformed
-        // TODO add your handling code here:
-        TelaMenuCadastros tela = new TelaMenuCadastros();
         
-        tela.setVisible(true);
-        this.setVisible(false);
+        String[] options = new String[] { "Sim", "Cancelar" };
+
+        Object ret = JOptionPane.showOptionDialog(null, "Deseja sair dessa tela ?", "Confirmação",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                options, options[0]);
+
+        System.out.println(options[Integer.valueOf(ret.toString())]);
+        
+        if(ret == JOptionPane.YES_NO_OPTION){
+            TelaMenuCadastros tela = new TelaMenuCadastros();
+            tela.setVisible(true);
+            this.setVisible(false);
+        }
+
     }//GEN-LAST:event_btnCadastrosActionPerformed
 
     private void btnLogoffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoffActionPerformed
@@ -223,4 +234,5 @@ public class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblEndereco;
     private javax.swing.JLabel lblTelefone;
     // End of variables declaration//GEN-END:variables
+
 }
