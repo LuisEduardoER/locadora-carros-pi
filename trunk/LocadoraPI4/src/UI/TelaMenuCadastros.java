@@ -214,6 +214,8 @@ public class TelaMenuCadastros extends javax.swing.JFrame {
 
     private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
         // TODO add your handling code here:
+        TelaConsultaFabricante tela = new TelaConsultaFabricante();
+        tela.setVisible(true);
     }//GEN-LAST:event_btnVisualizarActionPerformed
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed

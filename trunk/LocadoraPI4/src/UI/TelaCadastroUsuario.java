@@ -278,7 +278,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
 
         lblCategoria.setText("Categoria:");
 
-        cboxCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "A e B", "C" }));
+        cboxCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C", "D", "E", "AB", "AC", "AD", "AE" }));
 
         btnInserir.setText("Inserir");
 
