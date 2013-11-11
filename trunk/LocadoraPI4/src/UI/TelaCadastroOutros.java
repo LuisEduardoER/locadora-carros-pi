@@ -7,6 +7,7 @@ package UI;
 
 import Controles.Conexao;
 import Globais.Geral;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,10 +43,18 @@ public class TelaCadastroOutros extends javax.swing.JFrame {
     
     private void btnCadastrosActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-        TelaMenuCadastros tela = new TelaMenuCadastros();
         
-        tela.setVisible(true);
-        this.setVisible(false);
+        String[] options = new String[] { "Sim", "Cancelar" };
+
+        Object ret = JOptionPane.showOptionDialog(null, "Deseja sair dessa tela ?", "Confirmação",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                options, options[0]);
+        
+        if(ret == JOptionPane.YES_NO_OPTION){
+            TelaMenuCadastros tela = new TelaMenuCadastros();
+            tela.setVisible(true);
+            this.setVisible(false);
+        }
     }                                            
 
     private void btnLogoffActionPerformed(java.awt.event.ActionEvent evt) {                                          

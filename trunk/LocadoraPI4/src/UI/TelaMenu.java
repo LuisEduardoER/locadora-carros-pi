@@ -162,27 +162,24 @@ public class TelaMenu extends javax.swing.JFrame {
 
     private void btnCadastrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrosActionPerformed
         
-        String[] options = new String[] { "Sim", "Cancelar" };
-
-        Object ret = JOptionPane.showOptionDialog(null, "Deseja sair dessa tela ?", "Confirmação",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                options, options[0]);
-
-        System.out.println(options[Integer.valueOf(ret.toString())]);
-        
-        if(ret == JOptionPane.YES_NO_OPTION){
-            TelaMenuCadastros tela = new TelaMenuCadastros();
-            tela.setVisible(true);
-            this.setVisible(false);
-        }
-
+        TelaMenuCadastros tela = new TelaMenuCadastros();
+        tela.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCadastrosActionPerformed
 
     private void btnLogoffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoffActionPerformed
-        // TODO add your handling code here:
-        TelaInicial tela = new TelaInicial();
-        tela.setVisible(true);
-        this.setVisible(false);
+        
+        String[] options = new String[] { "Sim", "Cancelar" };
+
+        Object ret = JOptionPane.showOptionDialog(null, "Deseja fechar a sessão ?", "Confirmação",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                options, options[0]);
+        
+        if(ret == JOptionPane.YES_NO_OPTION){
+            TelaInicial tela = new TelaInicial();
+            tela.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnLogoffActionPerformed
 
     /**
