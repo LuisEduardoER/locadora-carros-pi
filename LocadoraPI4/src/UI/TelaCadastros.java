@@ -5,6 +5,9 @@
  */
 package UI;
 import Globais.Geral;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 /**
  *
  * @author rafael.baraldi
@@ -25,11 +28,15 @@ public class TelaCadastros extends javax.swing.JFrame {
         //Não deixa maximizar
         this.setResizable(false);
         
+        //Não deixa Fechar
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
         //Nome do usuario
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
         
     }
     
+    @SuppressWarnings("unchecked")
     public void myInitComponents(){
         
         btnAluguel = new javax.swing.JButton();
@@ -214,7 +221,6 @@ public class TelaCadastros extends javax.swing.JFrame {
     }
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
         
         TelaMenuCadastros tela = new TelaMenuCadastros();
         tela.setVisible(true);
@@ -230,10 +236,17 @@ public class TelaCadastros extends javax.swing.JFrame {
     }                                            
 
     private void btnLogoffActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-        TelaInicial tela = new TelaInicial();
-        tela.setVisible(true);
-        this.setVisible(false);
+        String[] options = new String[] { "Sim", "Cancelar" };
+
+        Object ret = JOptionPane.showOptionDialog(null, "Deseja fechar a sessão ?", "Confirmação",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                options, options[0]);
+        
+        if(ret == JOptionPane.YES_NO_OPTION){
+            TelaInicial tela = new TelaInicial();
+            tela.setVisible(true);
+            this.setVisible(false);
+        }
     } 
     
     /**
@@ -254,6 +267,11 @@ public class TelaCadastros extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnCliente.setText("Cliente");
+        btnCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClienteActionPerformed(evt);
+            }
+        });
 
         btnUsuario.setText("Usuário");
         btnUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -350,6 +368,13 @@ public class TelaCadastros extends javax.swing.JFrame {
         tela.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCarronActionPerformed
+
+    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
+        // TODO add your handling code here:
+        TelaCadastroCliente tela = new TelaCadastroCliente();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnClienteActionPerformed
 
     /**
      * @param args the command line arguments

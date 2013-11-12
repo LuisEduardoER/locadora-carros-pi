@@ -21,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -44,6 +45,9 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
         
         //Não deixa maximizar
         this.setResizable(false);
+        
+        //Não deixa Fechar
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         cboxFabricante.removeAllItems();
         cboxCambio.removeAllItems();
@@ -348,6 +352,8 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
         txtAno = new javax.swing.JTextField();
         lblPreco = new javax.swing.JLabel();
         txtPreco = new javax.swing.JTextField();
+        lblPlaca = new javax.swing.JLabel();
+        txtPlaca = new javax.swing.JTextField();
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -411,6 +417,8 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
 
         lblPreco.setText("Preço:");
 
+        lblPlaca.setText("Placa:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -422,8 +430,11 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
                         .addComponent(lblAno)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnInserir)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblPlaca)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnInserir))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -450,10 +461,11 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
                                             .addComponent(txtCilindradas)
                                             .addComponent(txtCilindros, javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(txtAlinhamento, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(txtModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                                            .addComponent(txtModelo)
                                             .addComponent(txtValvulas)
-                                            .addComponent(txtPotencia, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                                            .addComponent(txtAno))))
+                                            .addComponent(txtPotencia)
+                                            .addComponent(txtAno)
+                                            .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(38, 38, 38)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -534,8 +546,15 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
                     .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPreco)
                     .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnInserir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnInserir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPlaca)
+                            .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -544,10 +563,17 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
+        String[] options = new String[] { "Sim", "Cancelar" };
+
+        Object ret = JOptionPane.showOptionDialog(null, "Deseja voltar ?", "Confirmação",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                options, options[0]);
         
-        TelaCadastros tela = new TelaCadastros();
-        tela.setVisible(true);
-        this.setVisible(false);
+        if(ret == JOptionPane.YES_NO_OPTION){
+            TelaCadastros tela = new TelaCadastros();
+            tela.setVisible(true);
+            this.setVisible(false);
+        }
     } 
     
     private void btnCadastrosActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -567,10 +593,17 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
     }                                            
 
     private void btnLogoffActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-        TelaInicial tela = new TelaInicial();
-        tela.setVisible(true);
-        this.setVisible(false);
+        String[] options = new String[] { "Sim", "Cancelar" };
+
+        Object ret = JOptionPane.showOptionDialog(null, "Deseja fechar a sessão ?", "Confirmação",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                options, options[0]);
+        
+        if(ret == JOptionPane.YES_NO_OPTION){
+            TelaInicial tela = new TelaInicial();
+            tela.setVisible(true);
+            this.setVisible(false);
+        }
     } 
     
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
@@ -635,8 +668,7 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
                 new TelaCadastroCarro().setVisible(true);
             }
         });
-    }
-    
+    }   
     
     // Variables declaration - do not modify     
     private javax.swing.JProgressBar bar2;
@@ -677,6 +709,7 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
     private javax.swing.JLabel lblDirecao;
     private javax.swing.JLabel lblFabricante;
     private javax.swing.JLabel lblModelo;
+    private javax.swing.JLabel lblPlaca;
     private javax.swing.JLabel lblPortas;
     private javax.swing.JLabel lblPotencia;
     private javax.swing.JLabel lblPreco;
@@ -687,6 +720,7 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
     private javax.swing.JTextField txtCilindradas;
     private javax.swing.JTextField txtCilindros;
     private javax.swing.JTextField txtModelo;
+    private javax.swing.JTextField txtPlaca;
     private javax.swing.JTextField txtPotencia;
     private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtValvulas;

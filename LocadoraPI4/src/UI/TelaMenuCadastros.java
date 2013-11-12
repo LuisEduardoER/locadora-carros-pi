@@ -5,6 +5,7 @@
 package UI;
 
 import Globais.Geral;
+import javax.swing.JFrame;
 
 /**
  *
@@ -25,6 +26,9 @@ public class TelaMenuCadastros extends javax.swing.JFrame {
         
         //Não deixa maximizar
         this.setResizable(false);
+        
+        //Não deixa Fechar
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         
         //Nome do usuario
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
@@ -230,8 +234,7 @@ public class TelaMenuCadastros extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         TelaMenu tela = new TelaMenu();
-        tela.setVisible(true);
-        this.setVisible(false);
+        Geral.voltaActionPerformed(this, tela);
     } 
     
     /**
@@ -280,8 +283,7 @@ public class TelaMenuCadastros extends javax.swing.JFrame {
     private void btnLogoffActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
         TelaInicial tela = new TelaInicial();
-        tela.setVisible(true);
-        this.setVisible(false);
+        Geral.logoffActionPerformed(this, tela);
     } 
     
     // Variables declaration - do not modify   

@@ -8,6 +8,8 @@ package UI;
 import Classes.Usuario;
 import Globais.Geral;
 import Controles.Conexao;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,6 +30,19 @@ public class TelaInicial extends javax.swing.JFrame {
         
         //Não deixa maximizar
         this.setResizable(false);
+        
+        //Pergunta se deseja fechar a janela
+        this.addWindowListener(new WindowAdapter(){  
+            public void windowClosing (WindowEvent e){  
+                //caixa de dialogo retorna um inteiro  
+                int resposta = JOptionPane.showConfirmDialog(null,"Deseja fechar o programa?","Finalizar",JOptionPane.YES_NO_OPTION);  
+                  
+                //sim = 0, nao = 1  
+                if (resposta == 0){  
+                    System.exit(0);  
+                }  
+            }  
+        }); 
     }
 
     /**
