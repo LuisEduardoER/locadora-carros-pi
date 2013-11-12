@@ -9,6 +9,7 @@ import Classes.Fabricante;
 import Classes.Telefone;
 import Controles.Conexao;
 import Globais.Geral;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,6 +31,9 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
         
         //Não deixa maximizar
         this.setResizable(false);
+        
+        //Não deixa Fechar
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         
         //Nome do usuario
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
@@ -420,10 +424,17 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
+        String[] options = new String[] { "Sim", "Cancelar" };
+
+        Object ret = JOptionPane.showOptionDialog(null, "Deseja voltar ?", "Confirmação",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                options, options[0]);
         
-        TelaCadastros tela = new TelaCadastros();
-        tela.setVisible(true);
-        this.setVisible(false);
+        if(ret == JOptionPane.YES_NO_OPTION){
+            TelaCadastros tela = new TelaCadastros();
+            tela.setVisible(true);
+            this.setVisible(false);
+        }
     } 
     
     private void btnCadastrosActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -443,10 +454,17 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
     }                                            
 
     private void btnLogoffActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-        TelaInicial tela = new TelaInicial();
-        tela.setVisible(true);
-        this.setVisible(false);
+        String[] options = new String[] { "Sim", "Cancelar" };
+
+        Object ret = JOptionPane.showOptionDialog(null, "Deseja fechar a sessão ?", "Confirmação",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                options, options[0]);
+        
+        if(ret == JOptionPane.YES_NO_OPTION){
+            TelaInicial tela = new TelaInicial();
+            tela.setVisible(true);
+            this.setVisible(false);
+        }
     } 
     
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed

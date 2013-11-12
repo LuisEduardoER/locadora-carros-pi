@@ -6,6 +6,7 @@
 package UI;
 
 import Globais.Geral;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,6 +32,9 @@ public class TelaMenu extends javax.swing.JFrame {
         
         //Não deixa maximizar
         this.setResizable(false);
+        
+        //Não deixa Fechar
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         
         //Nome do usuario
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());

@@ -83,7 +83,7 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
 
         btnExcluir.setText("Excluir");
 
-        btnEditar.setText("Editar");
+        btnEditar.setText("Visualizar/ Editar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

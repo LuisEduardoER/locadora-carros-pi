@@ -55,8 +55,12 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btnInserir" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="lblPlaca" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnInserir" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
@@ -90,10 +94,11 @@
                                           <Component id="txtCilindradas" max="32767" attributes="0"/>
                                           <Component id="txtCilindros" alignment="1" max="32767" attributes="0"/>
                                           <Component id="txtAlinhamento" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="txtModelo" alignment="0" pref="155" max="32767" attributes="0"/>
+                                          <Component id="txtModelo" alignment="0" max="32767" attributes="0"/>
                                           <Component id="txtValvulas" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="txtPotencia" pref="155" max="32767" attributes="0"/>
+                                          <Component id="txtPotencia" max="32767" attributes="0"/>
                                           <Component id="txtAno" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtPlaca" alignment="0" min="-2" pref="155" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -199,8 +204,19 @@
                   <Component id="lblPreco" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtPreco" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnInserir" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnInserir" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblPlaca" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPlaca" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -396,6 +412,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPreco">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPlaca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Placa:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPlaca">
     </Component>
   </SubComponents>
 </Form>
