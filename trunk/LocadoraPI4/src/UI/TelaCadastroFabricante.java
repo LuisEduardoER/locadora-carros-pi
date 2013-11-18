@@ -496,7 +496,7 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
         fab.setEmail(txtEmail.getText());
         fab.setOrigem(txtOrigem.getText());
         int idTel = Conexao.buscaIdTel(tel.getDdi(), tel.getDdd(), tel.getNumero());
-        int idEnd = Conexao.buscaIdEnd(end.getLogradouro(), end.getNumero());
+        int idEnd = Conexao.buscaIdEnd(end.getLogradouro(), end.getNumero(), end.getComplemento());
         fab.setId_endereco(idEnd);
         fab.setId_telefone(idTel);
         

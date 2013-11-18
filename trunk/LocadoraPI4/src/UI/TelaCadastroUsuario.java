@@ -4,6 +4,10 @@
  */
 package UI;
 
+import Classes.Endereco;
+import Classes.Telefone;
+import Classes.Usuario;
+import Controles.Conexao;
 import Globais.Geral;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -285,6 +289,11 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         cboxCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C", "D", "E", "AB", "AC", "AD", "AE" }));
 
         btnInserir.setText("Inserir");
+        btnInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInserirActionPerformed(evt);
+            }
+        });
 
         lblTelefone.setText("Telefone:");
 
@@ -395,7 +404,6 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
                                             .addComponent(txtNumerores, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -535,6 +543,54 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
     private void cboxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxTipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboxTipoActionPerformed
+
+    private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
+        // TODO add your handling code here:
+        Usuario novo = new Usuario();
+        
+        novo.setNome(txtNome.getText());
+        novo.setEmail(txtEmail.getText());
+        novo.setRg(txtRg.getText());
+        novo.setCpf(txtCpf.getText());
+        novo.setCnh(txtCnh.getText());
+        //novo.setData_nascimento(Date.parse(txtDataNasc.getText()));
+        novo.setCategoria_carta(cboxCategoria.getSelectedItem().toString());
+        
+        Telefone tel = new Telefone();
+        
+        tel.setDdi(Integer.parseInt(txtDDI.getText()));
+        tel.setDdd(Integer.parseInt(txtDDD.getText()));
+        tel.setNumero(Integer.parseInt(txtNumero.getText()));
+        tel.setTipo(txtTipo.getText());
+        
+        Conexao.inserirTelefone(tel);
+        
+        Endereco end = new Endereco();
+        
+        end.setLogradouro(txtLogradouro.getText());
+        end.setNumero(Integer.parseInt(txtNumerores.getText()));
+        end.setComplemento(txtComplemento.getText());
+        end.setCep(txtCEP.getText());
+        end.setBairro(txtBairro.getText());
+        end.setBairro(txtBairro.getText());
+        end.setCidade(txtCidade.getText());
+        end.setEstado(txtEstado.getText());
+        
+        Conexao.inserirEndereco(end);
+        
+        novo.setId_telefone(Conexao.buscaIdTel(tel.getDdi(), tel.getDdd(), tel.getNumero()));
+        novo.setId_endereco(Conexao.buscaIdEnd(end.getLogradouro(), end.getNumero(), end.getComplemento()));
+        
+        novo.setSenha(new String(txtSenha.getPassword()));
+        if(cboxTipo.getSelectedItem().toString().equalsIgnoreCase("administrador")){
+            novo.setPermissao(1);
+        }
+        if(cboxTipo.getSelectedItem().toString().equalsIgnoreCase("vendedor")){
+            novo.setPermissao(2);
+        }
+                
+        Conexao.inserirUsuario(novo);
+    }//GEN-LAST:event_btnInserirActionPerformed
 
     /**
      * @param args the command line arguments

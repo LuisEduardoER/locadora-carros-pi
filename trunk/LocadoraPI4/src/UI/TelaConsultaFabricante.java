@@ -4,8 +4,12 @@
  */
 package UI;
 
+import Controles.Conexao;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -19,7 +23,11 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
     public TelaConsultaFabricante() {
         initComponents();
         
-        String[] colunasTabela = new String[]{"Código", "Nome", "Descrição", "asas", "agdaga", "adgadga", "asas", "agdaga", "adgadga", "asas", "agdaga", "adgadga", "asas", "agdaga", "adgadga", "asas", "agdaga", "adgadga" };  
+        carregaTabela();
+    }
+    
+    void carregaTabela(){
+        String[] colunasTabela = new String[]{"Código", "Nome", "Origem" };  
         DefaultTableModel modeloTabela = new DefaultTableModel(null,colunasTabela){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -28,13 +36,19 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
             }
         };
         
-        for(int i = 0; i < 100; i++){
-        modeloTabela.addRow(new String[] {  
-                "dvsda", "dvsda", "dvsda", "dvsda", "dvsda", "dvsda", "dvsda"
-            });      
+        ResultSet resultado = Conexao.buscaFabricante(txtNome.getText(), txtOrigem.getText());
+        try {
+            while(resultado.next()){
+                modeloTabela.addRow(new String[] {
+                    resultado.getString("id"),
+                    resultado.getString("nome"),
+                    resultado.getString("origem")
+                });
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaConsultaFabricante.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        modeloTabela.isCellEditable(WIDTH, WIDTH);
         tbFabricantes.setModel(modeloTabela);
     }
 
@@ -64,6 +78,11 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
         lblOrigem.setText("Origem:");
 
         btnFiltrar.setText("Filtrar");
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
 
         tbFabricantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -82,6 +101,11 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
         tbFabricantes.getAccessibleContext().setAccessibleName("");
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("Visualizar/ Editar");
 
@@ -137,6 +161,21 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        // TODO add your handling code here:
+        carregaTabela();
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        int row = tbFabricantes.getSelectedRow();
+        int id = Integer.parseInt(tbFabricantes.getValueAt(row, 0).toString());
+        
+        Conexao.excluirRegistro("fabricante", id);
+        
+        carregaTabela();
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments

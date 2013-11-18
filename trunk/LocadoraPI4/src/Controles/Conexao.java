@@ -168,7 +168,7 @@ public static Connection connect = null;
         return id;
     }
     
-    public static int buscaIdEnd(String logradouro, int numero){
+    public static int buscaIdEnd(String logradouro, int numero, String complemento){
         Statement statement = null;
         try {
             statement = connect.createStatement();
@@ -177,7 +177,7 @@ public static Connection connect = null;
         }
             ResultSet resultado = null;
         try {
-            resultado = statement.executeQuery("SELECT * FROM endereco WHERE (logradouro = '" + logradouro + "' AND numero = " + numero + ")");
+            resultado = statement.executeQuery("SELECT * FROM endereco WHERE (logradouro = '" + logradouro + "' AND numero = " + numero + " AND complemento = '" + complemento + "')");
         } catch (SQLException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -277,7 +277,54 @@ public static Connection connect = null;
     }
 
     public static void inserirCarro(Carro car){
-        String query = "INSERT INTO carro (modelo, fabricante_id, ano, preco, portas_id, lugares_id, motor_id, carroceria_id, combustivel_id, cambio_id, direcao_id, categoria) VALUES ('" + car.getModelo() + "', " + car.getFabricante_id() + ", " + car.getAno() + ", " + car.getPreco() + ", " + car.getPortas_id() + ", " + car.getLugares_id() + ", " + car.getMotor_id() + ", " + car.getCarroceria_id() + ", " + car.getCombustivel_id() + ", " + car.getCambio_id() + ", " + car.getDirecao_id() + ", '" + car.getCategoria() + "')";
+        String query = "INSERT INTO carro (modelo, fabricante_id, ano, preco, portas_id, lugares_id, motor_id, carroceria_id, combustivel_id, cambio_id, direcao_id, categoria, placa) VALUES ('" + car.getModelo() + "', " + car.getFabricante_id() + ", " + car.getAno() + ", " + car.getPreco() + ", " + car.getPortas_id() + ", " + car.getLugares_id() + ", " + car.getMotor_id() + ", " + car.getCarroceria_id() + ", " + car.getCombustivel_id() + ", " + car.getCambio_id() + ", " + car.getDirecao_id() + ", '" + car.getCategoria() + "', '" + car.getPlaca() + "')";
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            statement.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void inserirUsuario(Usuario user){
+        String query = "INSERT INTO usuario (nome, email, senha, cpf, rg, permissao_id, cnh, categoria_carta, id_endereco, id_telefone) VALUES ('" + user.getNome() + "', '" + user.getEmail() + "', '" + user.getSenha() + "', '" + user.getCpf() + "', '" + user.getRg() + "', " + user.getPermissao() + ", '" + user.getCnh() + "', '" + user.getCategoria_carta() + "', " + user.getId_endereco() + ", " + user.getId_telefone() + ")";
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            statement.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static ResultSet buscaFabricante(String nome, String origem){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT * FROM fabricante WHERE (nome LIKE '%" + nome + "%' AND origem LIKE '%" + origem + "%')");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado;
+    }
+    
+    public static void excluirRegistro(String tabela, int id){
+        String query = "DELETE FROM " + tabela + " WHERE (id = " + id + ")";
         Statement statement = null;
         try {
             statement = connect.createStatement();
