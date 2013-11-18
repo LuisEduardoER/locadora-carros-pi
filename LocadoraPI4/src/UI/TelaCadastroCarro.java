@@ -631,6 +631,7 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
         novoCarro.setCambio_id(((Cambio)cboxCambio.getSelectedItem()).getId());
         novoCarro.setDirecao_id(((Direcao)cboxDirecao.getSelectedItem()).getId());
         novoCarro.setCategoria(txtCategoria.getText());
+        novoCarro.setPlaca(txtPlaca.getText());
         
         Conexao.inserirCarro(novoCarro);
     }//GEN-LAST:event_btnInserirActionPerformed

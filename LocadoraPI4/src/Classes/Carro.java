@@ -22,7 +22,8 @@ public class Carro {
     private int combustivel_id;
     private int cambio_id;
     private int direcao_id;
-    private String categoria;    
+    private String categoria;   
+    private String placa;
 
     public int getId() {
         return id;
@@ -126,6 +127,14 @@ public class Carro {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
     }
     
     

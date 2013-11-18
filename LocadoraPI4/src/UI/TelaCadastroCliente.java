@@ -4,7 +4,12 @@
  */
 package UI;
 
+import Classes.Endereco;
+import Classes.Telefone;
+import Classes.Usuario;
+import Controles.Conexao;
 import Globais.Geral;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 /**
@@ -213,7 +218,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         lblCPF = new javax.swing.JLabel();
         txtCPF = new javax.swing.JTextField();
         lblRG = new javax.swing.JLabel();
@@ -307,6 +312,11 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         lblEstado.setText("Estado:");
 
         btnInserir.setText("Inserir");
+        btnInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInserirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -358,7 +368,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                                         .addComponent(lblRG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextField1)
+                                        .addComponent(txtEmail)
                                         .addComponent(txtRG, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel2)
@@ -395,7 +405,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                     .addComponent(lblNome)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCPF)
@@ -465,6 +475,49 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroActionPerformed
 
+    private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
+        // TODO add your handling code here:
+        Usuario novo = new Usuario();
+        
+        novo.setNome(txtNome.getText());
+        novo.setEmail(txtEmail.getText());
+        novo.setRg(txtRG.getText());
+        novo.setCpf(txtCPF.getText());
+        novo.setCnh(txtCNH.getText());
+        //novo.setData_nascimento(Date.parse(txtDataNasc.getText()));
+        novo.setCategoria_carta(cboxCategoria.getSelectedItem().toString());
+        
+        Telefone tel = new Telefone();
+        
+        tel.setDdi(Integer.parseInt(txtDDI.getText()));
+        tel.setDdd(Integer.parseInt(txtDDD.getText()));
+        tel.setNumero(Integer.parseInt(txtNumero.getText()));
+        tel.setTipo(txtTipo.getText());
+        
+        Conexao.inserirTelefone(tel);
+        
+        Endereco end = new Endereco();
+        
+        end.setLogradouro(txtLogradouro.getText());
+        end.setNumero(Integer.parseInt(txtNumeroRes.getText()));
+        end.setComplemento(txtComplemento.getText());
+        end.setCep(txtCep.getText());
+        end.setBairro(txtBairro.getText());
+        end.setBairro(txtBairro.getText());
+        end.setCidade(txtCidade.getText());
+        end.setEstado(txtEstado.getText());
+        
+        Conexao.inserirEndereco(end);
+        
+        novo.setId_telefone(Conexao.buscaIdTel(tel.getDdi(), tel.getDdd(), tel.getNumero()));
+        novo.setId_endereco(Conexao.buscaIdEnd(end.getLogradouro(), end.getNumero(), end.getComplemento()));
+        
+        novo.setSenha("cliente");
+        novo.setPermissao(3);
+                
+        Conexao.inserirUsuario(novo);
+    }//GEN-LAST:event_btnInserirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -519,7 +572,6 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCNH;
     private javax.swing.JLabel lblCPF;
@@ -545,6 +597,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtDDD;
     private javax.swing.JTextField txtDDI;
     private javax.swing.JTextField txtDataNasc;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtLogradouro;
     private javax.swing.JTextField txtNome;
