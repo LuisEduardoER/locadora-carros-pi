@@ -4,33 +4,24 @@
  */
 package UI;
 
-import Controles.Conexao;
 import Globais.Geral;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Rafael
  */
-public class TelaConsultaFabricante extends javax.swing.JFrame {
+public class TelaConsultas extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaConsultaFabricante
+     * Creates new form TelaConsultas
      */
-    public TelaConsultaFabricante() {
+    public TelaConsultas() {
         initComponents();
-        
-        carregaTabela();
-        
         myInitComponents();
-        
-        this.setTitle(Geral.getEmpresa() + " - FRABRICANTE");
+                
+        this.setTitle(Geral.getEmpresa() + " - VISUALIZAR CADASTROS");
         this.setSize(Geral.width, Geral.height);
         this.setLocationRelativeTo(null);
         
@@ -43,7 +34,7 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
         //Nome do usuario
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
     }
-    
+
     public void myInitComponents(){
         
         btnAluguel = new javax.swing.JButton();
@@ -227,35 +218,9 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
         pack();
     }
     
-    void carregaTabela(){
-        String[] colunasTabela = new String[]{"Código", "Nome", "Origem" };  
-        DefaultTableModel modeloTabela = new DefaultTableModel(null,colunasTabela){
-            @Override
-            public boolean isCellEditable(int row, int column) {
-            //all cells false
-                return false;
-            }
-        };
-        
-        ResultSet resultado = Conexao.buscaFabricante(txtNome.getText(), txtOrigem.getText());
-        try {
-            while(resultado.next()){
-                modeloTabela.addRow(new String[] {
-                    resultado.getString("id"),
-                    resultado.getString("nome"),
-                    resultado.getString("origem")
-                });
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaConsultaFabricante.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        tbFabricantes.setModel(modeloTabela);
-    }
-
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         
-        TelaConsultas tela = new TelaConsultas();
+        TelaMenuCadastros tela = new TelaMenuCadastros();
         tela.setVisible(true);
         this.setVisible(false);
     } 
@@ -268,7 +233,7 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
         this.setVisible(false);
     }                                            
 
-    private void btnLogoffActionPerformed(java.awt.event.ActionEvent evt){                                          
+    private void btnLogoffActionPerformed(java.awt.event.ActionEvent evt) {                                          
         String[] options = new String[] { "Sim", "Cancelar" };
 
         Object ret = JOptionPane.showOptionDialog(null, "Deseja fechar a sessão ?", "Confirmação",
@@ -280,7 +245,7 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
             tela.setVisible(true);
             this.setVisible(false);
         }
-    }     
+    } 
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -291,117 +256,200 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblNome = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
-        lblOrigem = new javax.swing.JLabel();
-        txtOrigem = new javax.swing.JTextField();
-        btnFiltrar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbFabricantes = new javax.swing.JTable();
-        btnExcluir = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
+        btnUsuario = new javax.swing.JButton();
+        btnCliente = new javax.swing.JButton();
+        btnCarro = new javax.swing.JButton();
+        btnFabricante = new javax.swing.JButton();
+        btnCombustivel = new javax.swing.JButton();
+        btnCambio = new javax.swing.JButton();
+        btnCarroceria = new javax.swing.JButton();
+        btnDirecao = new javax.swing.JButton();
+        btnLugares = new javax.swing.JButton();
+        btnPortas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblNome.setText("Nome:");
+        btnUsuario.setText("Usuário");
 
-        lblOrigem.setText("Origem:");
-
-        btnFiltrar.setText("Filtrar");
-        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+        btnCliente.setText("Cliente");
+        btnCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFiltrarActionPerformed(evt);
+                btnClienteActionPerformed(evt);
             }
         });
 
-        tbFabricantes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"skd", "lknlkn", "nb", "ln"},
-                {"ada", "adfa", "adfa", "afd"},
-                {"afa", "afs", "afa", "fsa"},
-                {"as", "fa", "ssfa", "as"}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tbFabricantes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tbFabricantes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(tbFabricantes);
-        tbFabricantes.getAccessibleContext().setAccessibleName("");
-
-        btnExcluir.setText("Excluir");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+        btnCarro.setText("Carro");
+        btnCarro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
+                btnCarroActionPerformed(evt);
             }
         });
 
-        btnEditar.setText("Visualizar/ Editar");
+        btnFabricante.setText("Fabricante");
+        btnFabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFabricanteActionPerformed(evt);
+            }
+        });
+
+        btnCombustivel.setText("Combustível");
+        btnCombustivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCombustivelActionPerformed(evt);
+            }
+        });
+
+        btnCambio.setText("Câmbio");
+        btnCambio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambioActionPerformed(evt);
+            }
+        });
+
+        btnCarroceria.setText("Carroceria");
+        btnCarroceria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarroceriaActionPerformed(evt);
+            }
+        });
+
+        btnDirecao.setText("Direção");
+        btnDirecao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDirecaoActionPerformed(evt);
+            }
+        });
+
+        btnLugares.setText("Lugares");
+        btnLugares.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLugaresActionPerformed(evt);
+            }
+        });
+
+        btnPortas.setText("Portas");
+        btnPortas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPortasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
+                .addGap(136, 136, 136)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPortas, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNome)
-                        .addGap(84, 84, 84)
-                        .addComponent(lblOrigem))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNome))
+                        .addComponent(btnDirecao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFiltrar))
-                            .addComponent(btnExcluir))))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addComponent(btnLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnCombustivel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCarroceria, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnCarro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
+                .addGap(143, 143, 143)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNome)
-                    .addComponent(lblOrigem))
+                    .addComponent(btnUsuario)
+                    .addComponent(btnCliente))
+                .addGap(18, 18, 18)
+                .addComponent(btnCarro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFiltrar))
-                .addGap(18, 18, Short.MAX_VALUE)
+                    .addComponent(btnFabricante)
+                    .addComponent(btnCambio))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
-                    .addComponent(btnExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
+                    .addComponent(btnCombustivel)
+                    .addComponent(btnCarroceria))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLugares)
+                    .addComponent(btnDirecao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPortas)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+    private void btnFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFabricanteActionPerformed
         // TODO add your handling code here:
-        carregaTabela();
-    }//GEN-LAST:event_btnFiltrarActionPerformed
+        TelaConsultaFabricante tela = new TelaConsultaFabricante();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnFabricanteActionPerformed
 
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
         // TODO add your handling code here:
-        int row = tbFabricantes.getSelectedRow();
-        int id = Integer.parseInt(tbFabricantes.getValueAt(row, 0).toString());
-        
-        Conexao.excluirRegistro("fabricante", id);
-        
-        carregaTabela();
-    }//GEN-LAST:event_btnExcluirActionPerformed
+    }//GEN-LAST:event_btnClienteActionPerformed
+
+    private void btnDirecaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirecaoActionPerformed
+        // TODO add your handling code here:
+        TelaConsultaDirecao tela = new TelaConsultaDirecao();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnDirecaoActionPerformed
+
+    private void btnCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambioActionPerformed
+        // TODO add your handling code here:
+        TelaConsultaCambio tela = new TelaConsultaCambio();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCambioActionPerformed
+
+    private void btnCombustivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCombustivelActionPerformed
+        // TODO add your handling code here:
+        TelaConsultaCombustivel tela = new TelaConsultaCombustivel();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCombustivelActionPerformed
+
+    private void btnCarroceriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarroceriaActionPerformed
+        // TODO add your handling code here:
+        TelaConsultaCarroceria tela = new TelaConsultaCarroceria();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCarroceriaActionPerformed
+
+    private void btnLugaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLugaresActionPerformed
+        // TODO add your handling code here:
+        TelaConsultaLugares tela = new TelaConsultaLugares();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnLugaresActionPerformed
+
+    private void btnPortasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPortasActionPerformed
+        // TODO add your handling code here:
+        TelaConsultaPortas tela = new TelaConsultaPortas();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnPortasActionPerformed
+
+    private void btnCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarroActionPerformed
+        // TODO add your handling code here:
+        TelaConsultaCarro tela = new TelaConsultaCarro();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCarroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -420,20 +468,20 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaConsultaFabricante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaConsultaFabricante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaConsultaFabricante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaConsultaFabricante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaConsultaFabricante().setVisible(true);
+                new TelaConsultas().setVisible(true);
             }
         });
     }
@@ -457,18 +505,19 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
     // Variables declaration - do not modify                     
     private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnVisualizar;
-    // End of variables declaration      
+    // End of variables declaration  
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnFiltrar;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblOrigem;
-    private javax.swing.JTable tbFabricantes;
-    private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtOrigem;
+    private javax.swing.JButton btnCambio;
+    private javax.swing.JButton btnCarro;
+    private javax.swing.JButton btnCarroceria;
+    private javax.swing.JButton btnCliente;
+    private javax.swing.JButton btnCombustivel;
+    private javax.swing.JButton btnDirecao;
+    private javax.swing.JButton btnFabricante;
+    private javax.swing.JButton btnLugares;
+    private javax.swing.JButton btnPortas;
+    private javax.swing.JButton btnUsuario;
     // End of variables declaration//GEN-END:variables
 }

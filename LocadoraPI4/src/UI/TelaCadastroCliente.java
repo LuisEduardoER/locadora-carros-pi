@@ -9,7 +9,6 @@ import Classes.Telefone;
 import Classes.Usuario;
 import Controles.Conexao;
 import Globais.Geral;
-import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 /**

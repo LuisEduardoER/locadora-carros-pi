@@ -16,7 +16,6 @@ import Classes.Motor;
 import Classes.Portas;
 import Controles.Conexao;
 import Globais.Geral;
-import java.awt.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
