@@ -6,21 +6,23 @@ package UI;
 
 import Globais.Geral;
 import javax.swing.JFrame;
-        
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Rafael
  */
-public class TelaMenuCadastros extends javax.swing.JFrame {
+public class TelaConsultaDirecao extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaMenuCadastros
+     * Creates new form TelaConsultaDirecao
      */
-    public TelaMenuCadastros() {
+    public TelaConsultaDirecao() {
         initComponents();
+        
         myInitComponents();
         
-        this.setTitle(Geral.getEmpresa()+" - MENU CADASTROS");
+        this.setTitle(Geral.getEmpresa() + " - DIREÇÃO");
         this.setSize(Geral.width, Geral.height);
         this.setLocationRelativeTo(null);
         
@@ -33,6 +35,36 @@ public class TelaMenuCadastros extends javax.swing.JFrame {
         //Nome do usuario
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
     }
+    
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        
+        TelaConsultas tela = new TelaConsultas();
+        tela.setVisible(true);
+        this.setVisible(false);
+    } 
+    
+    private void btnCadastrosActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+        TelaMenuCadastros tela = new TelaMenuCadastros();
+        
+        tela.setVisible(true);
+        this.setVisible(false);
+    }                                            
+
+    private void btnLogoffActionPerformed(java.awt.event.ActionEvent evt){                                          
+        String[] options = new String[] { "Sim", "Cancelar" };
+
+        Object ret = JOptionPane.showOptionDialog(null, "Deseja fechar a sessão ?", "Confirmação",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                options, options[0]);
+        
+        if(ret == JOptionPane.YES_NO_OPTION){
+            TelaInicial tela = new TelaInicial();
+            tela.setVisible(true);
+            this.setVisible(false);
+        }
+    }  
+    
     
     public void myInitComponents(){
         
@@ -90,6 +122,62 @@ public class TelaMenuCadastros extends javax.swing.JFrame {
                 btnVoltarActionPerformed(evt);
             }
         });
+
+        btnAluguel = new javax.swing.JButton();
+        btnRelatorio = new javax.swing.JButton();
+        btnCadastros = new javax.swing.JButton();
+        btnLogoff = new javax.swing.JButton();
+        lblBemVindo = new javax.swing.JLabel();
+        lblCopyright = new javax.swing.JLabel();
+        lblTelefone = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        lblEndereco = new javax.swing.JLabel();
+        jProgressBar3 = new javax.swing.JProgressBar();
+        //imgCapa = new javax.swing.JLabel();
+        bar2 = new javax.swing.JProgressBar();
+        btnVoltar = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnAluguel.setText("Aluguel");
+
+        btnRelatorio.setText("Relatórios");
+
+        btnCadastros.setText("Cadastros");
+        btnCadastros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrosActionPerformed(evt);
+            }
+        });
+
+        btnLogoff.setText("Sair");
+        btnLogoff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoffActionPerformed(evt);
+            }
+        });
+
+        lblBemVindo.setText("Bem Vindo, Sr.(a) José Pereira");
+
+        lblCopyright.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        lblCopyright.setText("Copyright © Locadora S.I 2013");
+
+        lblTelefone.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        lblTelefone.setText("Telefone: (11) 5510-7070");
+
+        lblEndereco.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        lblEndereco.setText("Endereço: Rua Franciso Soares, 1200 - Santo Amarto - São Paulo /SP");
+
+        //imgCapa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/capa-carro.png"))); // NOI18N
+
+        btnVoltar.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,78 +254,96 @@ public class TelaMenuCadastros extends javax.swing.JFrame {
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
-    //@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnInserir = new javax.swing.JButton();
-        btnVisualizar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        lblNome = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        btnFiltrar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbDirecao = new javax.swing.JTable();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnInserir.setText("Inserir");
-        btnInserir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInserirActionPerformed(evt);
-            }
-        });
+        lblNome.setText("Nome:");
 
-        btnVisualizar.setText("Visualizar");
-        btnVisualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVisualizarActionPerformed(evt);
+        btnFiltrar.setText("Filtrar");
+
+        btnEditar.setText("Visualiza / Editar");
+
+        btnExcluir.setText("Excluir");
+
+        tbDirecao.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
+        ));
+        jScrollPane2.setViewportView(tbDirecao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(181, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(88, 88, 88)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnVisualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56))))
+                        .addComponent(btnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExcluir))
+                    .addComponent(lblNome)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnFiltrar))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(183, Short.MAX_VALUE)
-                .addComponent(btnInserir)
-                .addGap(18, 18, 18)
-                .addComponent(btnVisualizar)
-                .addGap(52, 52, 52))
+                .addGap(136, 136, 136)
+                .addComponent(lblNome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFiltrar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditar)
+                    .addComponent(btnExcluir))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
-        // TODO add your handling code here:
-        TelaConsultas tela = new TelaConsultas();
-        tela.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnVisualizarActionPerformed
-
-    private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
-        // TODO add your handling code here:
-        
-        TelaCadastros tela = new TelaCadastros();
-        tela.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnInserirActionPerformed
-
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-        
-        TelaMenu tela = new TelaMenu();
-        Geral.voltaActionPerformed(this, tela);
-    } 
-    
     /**
      * @param args the command line arguments
      */
@@ -255,39 +361,25 @@ public class TelaMenuCadastros extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaMenuCadastros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaConsultaDirecao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaMenuCadastros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaConsultaDirecao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaMenuCadastros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaConsultaDirecao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaMenuCadastros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaConsultaDirecao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaMenuCadastros().setVisible(true);
+                new TelaConsultaDirecao().setVisible(true);
             }
         });
     }
     
-    private void btnCadastrosActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
-        TelaMenuCadastros tela = new TelaMenuCadastros();
-        
-        tela.setVisible(true);
-        this.setVisible(false);
-    }                                            
-
-    private void btnLogoffActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-        TelaInicial tela = new TelaInicial();
-        Geral.logoffActionPerformed(this, tela);
-    } 
-    
-    // Variables declaration - do not modify   
+    // Variables declaration - do not modify     
     private javax.swing.JProgressBar bar2;
     private javax.swing.JButton btnAluguel;
     private javax.swing.JButton btnCadastros;
@@ -301,10 +393,18 @@ public class TelaMenuCadastros extends javax.swing.JFrame {
     private javax.swing.JLabel lblCopyright;
     private javax.swing.JLabel lblEndereco;
     private javax.swing.JLabel lblTelefone;
-    // End of variables declaration        
+    // End of variables declaration      
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnInserir;
-    private javax.swing.JButton btnVisualizar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnFiltrar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JTable tbDirecao;
+    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }
