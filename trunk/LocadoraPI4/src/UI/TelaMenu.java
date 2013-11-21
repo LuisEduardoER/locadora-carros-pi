@@ -66,8 +66,18 @@ public class TelaMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnAluguel.setText("Aluguel");
+        btnAluguel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAluguelActionPerformed(evt);
+            }
+        });
 
         btnRelatorio.setText("Relatórios");
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioActionPerformed(evt);
+            }
+        });
 
         btnCadastros.setText("Cadastros");
         btnCadastros.addActionListener(new java.awt.event.ActionListener() {
@@ -186,6 +196,20 @@ public class TelaMenu extends javax.swing.JFrame {
             this.setVisible(false);
         }
     }//GEN-LAST:event_btnLogoffActionPerformed
+
+    private void btnAluguelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAluguelActionPerformed
+        // TODO add your handling code here:
+        TelaMenuAluguel tela = new TelaMenuAluguel();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAluguelActionPerformed
+
+    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
+        // TODO add your handling code here:
+        TelaMenuRelatorios tela = new TelaMenuRelatorios();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnRelatorioActionPerformed
 
     /**
      * @param args the command line arguments

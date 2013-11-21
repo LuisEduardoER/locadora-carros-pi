@@ -7,6 +7,7 @@ package Globais;
 
 import Classes.Usuario;
 import UI.TelaInicial;
+import UI.TelaMenuAluguel;
 import UI.TelaMenuCadastros;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -38,6 +39,36 @@ public class Geral extends javax.swing.JFrame {
         
         telaAtual.setVisible(false);
         telaVoltar.setVisible(true);
+    }
+    
+    public static void telaAluguelActionPerformed(JFrame telaAtual) {                                          
+        
+        String[] options = new String[] { "Sim", "Cancelar" };
+
+        Object ret = JOptionPane.showOptionDialog(null, "Deseja sair dessa tela ?", "Confirmação",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                options, options[0]);
+        
+        if(ret == JOptionPane.YES_NO_OPTION){
+            TelaMenuAluguel tela = new TelaMenuAluguel();
+            tela.setVisible(true);
+            telaAtual.setVisible(false);
+        }
+    }
+    
+    public static void telaRelatoriosActionPerformed(JFrame telaAtual) {                                          
+        
+        String[] options = new String[] { "Sim", "Cancelar" };
+
+        Object ret = JOptionPane.showOptionDialog(null, "Deseja sair dessa tela ?", "Confirmação",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                options, options[0]);
+        
+        if(ret == JOptionPane.YES_NO_OPTION){
+            TelaMenuAluguel tela = new TelaMenuAluguel();
+            tela.setVisible(true);
+            telaAtual.setVisible(false);
+        }
     }
     
     public static void logoffActionPerformed(JFrame telaAtual, JFrame telaLogin) {                                          
