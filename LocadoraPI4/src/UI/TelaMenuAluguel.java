@@ -4,33 +4,24 @@
  */
 package UI;
 
-import Controles.Conexao;
 import Globais.Geral;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Rafael
  */
-public class TelaConsultaFabricante extends javax.swing.JFrame {
+public class TelaMenuAluguel extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaConsultaFabricante
+     * Creates new form TelaMenuAluguel
      */
-    public TelaConsultaFabricante() {
+    public TelaMenuAluguel() {
         initComponents();
-        
-        carregaTabela();
-        
         myInitComponents();
         
-        this.setTitle(Geral.getEmpresa() + " - FRABRICANTE");
+        this.setTitle(Geral.getEmpresa() + " - CADASTROS");
         this.setSize(Geral.width, Geral.height);
         this.setLocationRelativeTo(null);
         
@@ -242,36 +233,10 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
 
         pack();
     }
-    
-    void carregaTabela(){
-        String[] colunasTabela = new String[]{"Código", "Nome", "Origem" };  
-        DefaultTableModel modeloTabela = new DefaultTableModel(null,colunasTabela){
-            @Override
-            public boolean isCellEditable(int row, int column) {
-            //all cells false
-                return false;
-            }
-        };
-        
-        ResultSet resultado = Conexao.buscaFabricante(txtNome.getText(), txtOrigem.getText());
-        try {
-            while(resultado.next()){
-                modeloTabela.addRow(new String[] {
-                    resultado.getString("id"),
-                    resultado.getString("nome"),
-                    resultado.getString("origem")
-                });
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaConsultaFabricante.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        tbFabricantes.setModel(modeloTabela);
-    }
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         
-        TelaConsultas tela = new TelaConsultas();
+        TelaMenuCadastros tela = new TelaMenuCadastros();
         tela.setVisible(true);
         this.setVisible(false);
     } 
@@ -298,7 +263,7 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
         this.setVisible(false);
     }                                            
 
-    private void btnLogoffActionPerformed(java.awt.event.ActionEvent evt){                                          
+    private void btnLogoffActionPerformed(java.awt.event.ActionEvent evt) {                                          
         String[] options = new String[] { "Sim", "Cancelar" };
 
         Object ret = JOptionPane.showOptionDialog(null, "Deseja fechar a sessão ?", "Confirmação",
@@ -310,8 +275,8 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
             tela.setVisible(true);
             this.setVisible(false);
         }
-    }     
-    
+    } 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -321,117 +286,44 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblNome = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
-        lblOrigem = new javax.swing.JLabel();
-        txtOrigem = new javax.swing.JTextField();
-        btnFiltrar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbFabricantes = new javax.swing.JTable();
-        btnExcluir = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
+        btnNovo = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblNome.setText("Nome:");
+        btnNovo.setText("Novo");
 
-        lblOrigem.setText("Origem:");
+        jButton1.setText("Consultar");
 
-        btnFiltrar.setText("Filtrar");
-        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFiltrarActionPerformed(evt);
-            }
-        });
-
-        tbFabricantes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"skd", "lknlkn", "nb", "ln"},
-                {"ada", "adfa", "adfa", "afd"},
-                {"afa", "afs", "afa", "fsa"},
-                {"as", "fa", "ssfa", "as"}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tbFabricantes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tbFabricantes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(tbFabricantes);
-        tbFabricantes.getAccessibleContext().setAccessibleName("");
-
-        btnExcluir.setText("Excluir");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
-            }
-        });
-
-        btnEditar.setText("Visualizar/ Editar");
+        jButton2.setText("Finalizar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNome)
-                        .addGap(84, 84, 84)
-                        .addComponent(lblOrigem))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNome))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFiltrar))
-                            .addComponent(btnExcluir))))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGap(186, 186, 186)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNome)
-                    .addComponent(lblOrigem))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFiltrar))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
-                    .addComponent(btnExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
+                .addGap(168, 168, 168)
+                .addComponent(btnNovo)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
-        // TODO add your handling code here:
-        carregaTabela();
-    }//GEN-LAST:event_btnFiltrarActionPerformed
-
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
-        int row = tbFabricantes.getSelectedRow();
-        int id = Integer.parseInt(tbFabricantes.getValueAt(row, 0).toString());
-        
-        Conexao.excluirRegistro("fabricante", id);
-        
-        carregaTabela();
-    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -450,20 +342,20 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaConsultaFabricante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaMenuAluguel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaConsultaFabricante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaMenuAluguel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaConsultaFabricante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaMenuAluguel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaConsultaFabricante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaMenuAluguel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaConsultaFabricante().setVisible(true);
+                new TelaMenuAluguel().setVisible(true);
             }
         });
     }
@@ -475,30 +367,17 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
     private javax.swing.JButton btnLogoff;
     private javax.swing.JButton btnRelatorio;
     private javax.swing.JButton btnVoltar;
-    //private javax.swing.JLabel jLabel5;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JProgressBar jProgressBar3;
     private javax.swing.JLabel lblBemVindo;
     private javax.swing.JLabel lblCopyright;
     private javax.swing.JLabel lblEndereco;
     private javax.swing.JLabel lblTelefone;
-    // End of variables declaration        
-    
-    // Variables declaration - do not modify                     
-    private javax.swing.JButton btnInserir;
-    private javax.swing.JButton btnVisualizar;
-    // End of variables declaration      
-    
+    // End of variables declaration    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnFiltrar;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblOrigem;
-    private javax.swing.JTable tbFabricantes;
-    private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtOrigem;
+    private javax.swing.JButton btnNovo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }

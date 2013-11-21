@@ -105,11 +105,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Aluguel"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAluguelActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnRelatorio">
       <Properties>
         <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRelatorioActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCadastros">
       <Properties>

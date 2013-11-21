@@ -36,8 +36,7 @@ public class TelaCadastros extends javax.swing.JFrame {
         //Nome do usuario
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
     }
-    
-    
+      
     public void myInitComponents(){
         
         btnAluguel = new javax.swing.JButton();
@@ -112,9 +111,17 @@ public class TelaCadastros extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnAluguel.setText("Aluguel");
-
+        btnAluguel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAluguelActionPerformed(evt);
+            }
+        });
         btnRelatorio.setText("Relatórios");
-
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioActionPerformed(evt);
+            }
+        });
         btnCadastros.setText("Cadastros");
         btnCadastros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,7 +156,6 @@ public class TelaCadastros extends javax.swing.JFrame {
                 btnVoltarActionPerformed(evt);
             }
         });
-
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -221,6 +227,20 @@ public class TelaCadastros extends javax.swing.JFrame {
         pack();
     }
 
+    private void btnAluguelActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        TelaMenuAluguel tela = new TelaMenuAluguel();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }                                          
+
+    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+        TelaMenuRelatorios tela = new TelaMenuRelatorios();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }  
+    
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         
         TelaMenuCadastros tela = new TelaMenuCadastros();

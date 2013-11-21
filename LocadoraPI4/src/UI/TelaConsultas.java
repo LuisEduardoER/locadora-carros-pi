@@ -54,9 +54,17 @@ public class TelaConsultas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnAluguel.setText("Aluguel");
-
+        btnAluguel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAluguelActionPerformed(evt);
+            }
+        });
         btnRelatorio.setText("Relatórios");
-
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioActionPerformed(evt);
+            }
+        });
         btnCadastros.setText("Cadastros");
         btnCadastros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,15 +117,24 @@ public class TelaConsultas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnAluguel.setText("Aluguel");
-
+        btnAluguel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAluguelActionPerformed(evt);
+            }
+        });
         btnRelatorio.setText("Relatórios");
-
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioActionPerformed(evt);
+            }
+        });
         btnCadastros.setText("Cadastros");
         btnCadastros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrosActionPerformed(evt);
             }
         });
+
 
         btnLogoff.setText("Sair");
         btnLogoff.addActionListener(new java.awt.event.ActionListener() {
@@ -224,6 +241,21 @@ public class TelaConsultas extends javax.swing.JFrame {
         tela.setVisible(true);
         this.setVisible(false);
     } 
+    
+    private void btnAluguelActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        TelaMenuAluguel tela = new TelaMenuAluguel();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }                                          
+
+    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+        TelaMenuRelatorios tela = new TelaMenuRelatorios();
+        tela.setVisible(true);
+        this.setVisible(false);
+    } 
+
     
     private void btnCadastrosActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:

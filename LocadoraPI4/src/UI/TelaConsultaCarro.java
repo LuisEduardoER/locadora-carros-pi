@@ -292,9 +292,23 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCategoriaActionPerformed
 
-        private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         
         TelaConsultas tela = new TelaConsultas();
+        tela.setVisible(true);
+        this.setVisible(false);
+    } 
+        
+    private void btnAluguelActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        TelaMenuAluguel tela = new TelaMenuAluguel();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }                                          
+
+    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+        TelaMenuRelatorios tela = new TelaMenuRelatorios();
         tela.setVisible(true);
         this.setVisible(false);
     } 
@@ -340,9 +354,17 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnAluguel.setText("Aluguel");
-
+        btnAluguel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAluguelActionPerformed(evt);
+            }
+        });
         btnRelatorio.setText("Relatórios");
-
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioActionPerformed(evt);
+            }
+        });
         btnCadastros.setText("Cadastros");
         btnCadastros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -395,9 +417,17 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnAluguel.setText("Aluguel");
-
+        btnAluguel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAluguelActionPerformed(evt);
+            }
+        });
         btnRelatorio.setText("Relatórios");
-
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioActionPerformed(evt);
+            }
+        });
         btnCadastros.setText("Cadastros");
         btnCadastros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
