@@ -4,9 +4,15 @@
  */
 package UI;
 
+import Controles.Conexao;
 import Globais.Geral;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,6 +25,8 @@ public class TelaConsultaLugares extends javax.swing.JFrame {
      */
     public TelaConsultaLugares() {
         initComponents();
+        
+        carregaTabela();
         
         myInitComponents();
         
@@ -58,10 +66,20 @@ public class TelaConsultaLugares extends javax.swing.JFrame {
         lblQtd.setText("Quantidade:");
 
         btnFiltrar.setText("Filtrar");
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("Visualizar / Editar");
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         tbLugares.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -116,6 +134,21 @@ public class TelaConsultaLugares extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        // TODO add your handling code here:
+        carregaTabela();
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        int row = tbLugares.getSelectedRow();
+        int id = Integer.parseInt(tbLugares.getValueAt(row, 0).toString());
+        
+        Conexao.excluirRegistro("lugares", id);
+        
+        carregaTabela();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -149,6 +182,31 @@ public class TelaConsultaLugares extends javax.swing.JFrame {
                 new TelaConsultaLugares().setVisible(true);
             }
         });
+    }
+    
+    void carregaTabela(){
+        String[] colunasTabela = new String[]{"Código", "Quantidade"};  
+        DefaultTableModel modeloTabela = new DefaultTableModel(null,colunasTabela){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            //all cells false
+                return false;
+            }
+        };
+        
+        ResultSet resultado = Conexao.buscaOutros(txtQtd.getText(), "lugares", "quantidade");
+        try {
+            while(resultado.next()){
+                modeloTabela.addRow(new String[] {
+                    resultado.getString("id"),
+                    resultado.getString("quantidade")
+                });
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaConsultaFabricante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        tbLugares.setModel(modeloTabela);
     }
     
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           

@@ -337,4 +337,72 @@ public static Connection connect = null;
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public static ResultSet buscaOutros(String nome, String tabela, String coluna){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT * FROM " + tabela + " WHERE (" + coluna + " LIKE '%" + nome + "%')");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado;
+    }
+    
+    public static ResultSet buscaCarro(String modelo, String ano, String cambio, String portas, String lugares, String carroceria, String direcao, String combustivel, String motor, String fabricante, String categoria, String placa){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT car.id, car.modelo, car.placa, f.nome AS fabricante, car.ano, car.preco, car.categoria, pt.quantidade AS portas, l.quantidade AS lugares, c.nome AS carroceria, com.nome AS combustivel, cb.nome AS cambio, d.nome AS direcao, m.potencia, m.valvulas, m.cilindros, m.cilindradas, m.alinhamento\n" +
+                    "FROM carro AS car\n" +
+                    "LEFT JOIN fabricante AS f\n" +
+                    "ON car.fabricante_id = f.id\n" +
+                    "LEFT JOIN portas AS pt\n" +
+                    "ON car.portas_id = pt.id\n" +
+                    "LEFT JOIN lugares AS l\n" +
+                    "ON car.lugares_id = l.id\n" +
+                    "LEFT JOIN motor AS m\n" +
+                    "ON car.motor_id = m.id\n" +
+                    "LEFT JOIN carroceria AS c\n" +
+                    "ON car.carroceria_id = c.id\n" +
+                    "LEFT JOIN combustivel AS com\n" +
+                    "ON car.combustivel_id = com.id\n" +
+                    "LEFT JOIN cambio AS cb\n" +
+                    "ON car.cambio_id = cb.id\n" +
+                    "LEFT JOIN direcao AS d\n" +
+                    "ON car.direcao_id = d.id"
+                    + " WHERE (car.modelo LIKE '%" + modelo +"%' "
+                    + "AND car.ano LIKE '%" + ano + "%' "
+                    + "AND cb.nome LIKE '%" + cambio + "%' "
+                    + "AND pt.quantidade LIKE '%" + portas + "%' "
+                    + "AND l.quantidade LIKE '%" + lugares + "%' "
+                    + "AND c.nome LIKE '%" + carroceria + "%' "
+                    + "AND d.nome LIKE '%" + direcao + "%' "
+                    + "AND com.nome LIKE '%" + combustivel + "%' "
+                    + "AND f.nome LIKE '%" + fabricante + "%' "
+                    + "AND car.categoria LIKE '%" + categoria + "%' "
+                    + "AND car.placa LIKE '%" + placa + "%' "
+                    + "AND (m.potencia LIKE '%" + motor + "%' "
+                    + "OR m.valvulas LIKE '%" + motor + "%' "
+                    + "OR m.cilindros LIKE '%" + motor + "%' "
+                    + "OR m.cilindradas LIKE '%" + motor + "%' "
+                    + "OR m.alinhamento LIKE '%" + motor + "%'))");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado;
+    }
+    
 }
