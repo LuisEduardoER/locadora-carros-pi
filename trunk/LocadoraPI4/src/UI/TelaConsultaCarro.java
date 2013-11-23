@@ -4,9 +4,15 @@
  */
 package UI;
 
+import Controles.Conexao;
 import Globais.Geral;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,6 +25,8 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
      */
     public TelaConsultaCarro() {
         initComponents();        
+        
+        carregaTabela();
         
         myInitComponents();
         
@@ -73,7 +81,7 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbCarro = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,7 +127,7 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
 
         lblMotor.setText("Motor:");
 
-        lblFabricante.setText("Fabticante:");
+        lblFabricante.setText("Fabricante:");
 
         txtDirecao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,12 +146,22 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
         lblPlaca.setText("Placa:");
 
         btnFiltrar.setText("Filtrar");
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("Visualizar / Editar");
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbCarro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -154,7 +172,8 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tbCarro.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane1.setViewportView(tbCarro);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,8 +181,7 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -209,8 +227,9 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblPlaca)
-                                    .addComponent(txtMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                                    .addComponent(txtMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,6 +311,62 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCategoriaActionPerformed
 
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        // TODO add your handling code here:
+        carregaTabela();
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        int row = tbCarro.getSelectedRow();
+        int id = Integer.parseInt(tbCarro.getValueAt(row, 0).toString());
+        
+        Conexao.excluirRegistro("carro", id);
+        
+        carregaTabela();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    void carregaTabela(){
+        String[] colunasTabela = new String[]{"Código", "Modelo", "Placa", "Fabricante", "Ano", "Preco", "Categoria", "Portas", "Lugares", "Carroceria", "Combustivel", "Cambio", "Direcao", "Potencia", "Valvulas", "Cilindros", "Cilindradas", "Alinhamento"};  
+        DefaultTableModel modeloTabela = new DefaultTableModel(null,colunasTabela){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            //all cells false
+                return false;
+            }
+        };
+        
+        ResultSet resultado = Conexao.buscaCarro(txtModelo.getText(), txtAno.getText(), txtCambio.getText(), txtPortas.getText(), txtLugares.getText(), txtCarroceria.getText(), txtDirecao.getText(), txtCombustivel.getText(), txtMotor.getText(), txtFabricante.getText(), txtCategoria.getText(), txtPlaca.getText());
+        try {
+            while(resultado.next()){
+                modeloTabela.addRow(new String[] {
+                    resultado.getString("id"),
+                    resultado.getString("modelo"),
+                    resultado.getString("placa"),
+                    resultado.getString("fabricante"),
+                    resultado.getString("ano"),
+                    resultado.getString("preco"),
+                    resultado.getString("categoria"),
+                    resultado.getString("portas"),
+                    resultado.getString("lugares"),
+                    resultado.getString("carroceria"),
+                    resultado.getString("combustivel"),
+                    resultado.getString("cambio"),
+                    resultado.getString("direcao"),
+                    resultado.getString("potencia"),
+                    resultado.getString("valvulas"),
+                    resultado.getString("cilindros"),
+                    resultado.getString("cilindradas"),
+                    resultado.getString("alinhamento")
+                });
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaConsultaFabricante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        tbCarro.setModel(modeloTabela);
+    }
+    
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         
         TelaConsultas tela = new TelaConsultas();
@@ -589,7 +664,6 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFiltrar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAno;
     private javax.swing.JLabel lblCambio;
     private javax.swing.JLabel lblCarroceria;
@@ -602,6 +676,7 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
     private javax.swing.JLabel lblMotor;
     private javax.swing.JLabel lblPlaca;
     private javax.swing.JLabel lblPortas;
+    private javax.swing.JTable tbCarro;
     private javax.swing.JTextField txtAno;
     private javax.swing.JTextField txtCambio;
     private javax.swing.JTextField txtCarroceria;

@@ -4,9 +4,15 @@
  */
 package UI;
 
+import Controles.Conexao;
 import Globais.Geral;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +26,8 @@ public class TelaConsultaCambio extends javax.swing.JFrame {
     public TelaConsultaCambio() {
         initComponents();
                
+        carregaTabela();
+        
         myInitComponents();
         
         this.setTitle(Geral.getEmpresa() + " - CÂMBIO");
@@ -34,6 +42,31 @@ public class TelaConsultaCambio extends javax.swing.JFrame {
         
         //Nome do usuario
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
+    }
+    
+    void carregaTabela(){
+        String[] colunasTabela = new String[]{"Código", "Nome"};  
+        DefaultTableModel modeloTabela = new DefaultTableModel(null,colunasTabela){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            //all cells false
+                return false;
+            }
+        };
+        
+        ResultSet resultado = Conexao.buscaOutros(txtNome.getText(), "cambio", "nome");
+        try {
+            while(resultado.next()){
+                modeloTabela.addRow(new String[] {
+                    resultado.getString("id"),
+                    resultado.getString("nome")
+                });
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaConsultaFabricante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        tbCambio.setModel(modeloTabela);
     }
     
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
@@ -101,10 +134,20 @@ public class TelaConsultaCambio extends javax.swing.JFrame {
         lblNome.setText("Nome:");
 
         btnFiltrar.setText("Filtrar");
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("Visualizar / Editar");
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         tbCambio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -161,6 +204,21 @@ public class TelaConsultaCambio extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        // TODO add your handling code here:
+        carregaTabela();
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        int row = tbCambio.getSelectedRow();
+        int id = Integer.parseInt(tbCambio.getValueAt(row, 0).toString());
+        
+        Conexao.excluirRegistro("cambio", id);
+        
+        carregaTabela();
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments

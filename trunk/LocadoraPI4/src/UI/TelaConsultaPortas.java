@@ -4,9 +4,15 @@
  */
 package UI;
 
+import Controles.Conexao;
 import Globais.Geral;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,6 +25,8 @@ public class TelaConsultaPortas extends javax.swing.JFrame {
      */
     public TelaConsultaPortas() {
         initComponents();
+        
+        carregaTabela();
         
         myInitComponents();
         
@@ -58,10 +66,20 @@ public class TelaConsultaPortas extends javax.swing.JFrame {
         lblQtd.setText("Quantidade:");
 
         btnFiltrar.setText("Filtrar");
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("Visualizar / Editar");
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         tbPortas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,7 +101,6 @@ public class TelaConsultaPortas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblQtd)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -92,8 +109,9 @@ public class TelaConsultaPortas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnFiltrar)
-                            .addComponent(btnExcluir))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnExcluir)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,6 +133,21 @@ public class TelaConsultaPortas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        // TODO add your handling code here:
+        carregaTabela();
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        int row = tbPortas.getSelectedRow();
+        int id = Integer.parseInt(tbPortas.getValueAt(row, 0).toString());
+        
+        Conexao.excluirRegistro("portas", id);
+        
+        carregaTabela();
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,6 +182,31 @@ public class TelaConsultaPortas extends javax.swing.JFrame {
                 new TelaConsultaPortas().setVisible(true);
             }
         });
+    }
+    
+    void carregaTabela(){
+        String[] colunasTabela = new String[]{"Código", "Quantidade"};  
+        DefaultTableModel modeloTabela = new DefaultTableModel(null,colunasTabela){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            //all cells false
+                return false;
+            }
+        };
+        
+        ResultSet resultado = Conexao.buscaOutros(txtQtd.getText(), "portas", "quantidade");
+        try {
+            while(resultado.next()){
+                modeloTabela.addRow(new String[] {
+                    resultado.getString("id"),
+                    resultado.getString("quantidade")
+                });
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaConsultaFabricante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        tbPortas.setModel(modeloTabela);
     }
     
     public void myInitComponents(){
