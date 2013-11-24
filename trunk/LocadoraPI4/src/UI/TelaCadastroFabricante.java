@@ -18,6 +18,9 @@ import javax.swing.JOptionPane;
  */
 public class TelaCadastroFabricante extends javax.swing.JFrame {
 
+    boolean editar;
+    Fabricante fabri;
+    
     /**
      * Creates new form TelaCadastroFabricante
      */
@@ -37,6 +40,47 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
         
         //Nome do usuario
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
+        
+        editar = false;
+        fabri = null;
+    }
+    
+    public TelaCadastroFabricante(Fabricante fab) {
+        initComponents();
+        myInitComponents();
+        
+        this.setTitle(Geral.getEmpresa() + " - CADASTRO FABRICANTE");
+        this.setSize(Geral.width, 650);
+        this.setLocationRelativeTo(null);
+        
+        //Não deixa maximizar
+        this.setResizable(false);
+        
+        //Não deixa Fechar
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
+        //Nome do usuario
+        lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
+        
+        btnInserir.setText("Alterar");
+        
+        editar = true;
+        this.fabri = fab;
+        
+        txtNome.setText(fab.getNome());
+        txtEmail.setText(fab.getEmail());
+        txtOrigem.setText(fab.getOrigem());
+        txtDDI.setText("" + fab.getTelefone().getDdi());
+        txtDDD.setText("" + fab.getTelefone().getDdd());
+        txtNumero.setText("" + fab.getTelefone().getNumero());
+        txtTipo.setText(fab.getTelefone().getTipo());
+        txtCEP.setText(fab.getEndereco().getCep());
+        txtLogradouro.setText(fab.getEndereco().getLogradouro());
+        txtNumeroRes.setText("" + fab.getEndereco().getNumero());
+        txtComplemento.setText(fab.getEndereco().getComplemento());
+        txtBairro.setText(fab.getEndereco().getBairro());
+        txtCidade.setText(fab.getEndereco().getCidade());
+        txtEstado.setText(fab.getEndereco().getEstado());
     }
     
     public void myInitComponents(){
@@ -491,17 +535,18 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
     
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         // TODO add your handling code here:
-        Telefone tel = new Telefone();
         
+        Telefone tel = new Telefone();
+
+        tel.setId(fabri.getTelefone().getId());
         tel.setDdi(Integer.parseInt(txtDDI.getText()));
         tel.setDdd(Integer.parseInt(txtDDD.getText()));
         tel.setNumero(Integer.parseInt(txtNumero.getText()));
         tel.setTipo(txtTipo.getText());
         
-        Conexao.inserirTelefone(tel);
-        
         Endereco end = new Endereco();
         
+        end.setId(fabri.getEndereco().getId());
         end.setCep(txtCEP.getText());
         end.setLogradouro(txtLogradouro.getText());
         end.setNumero(Integer.parseInt(txtNumeroRes.getText()));
@@ -510,19 +555,34 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
         end.setCidade(txtCidade.getText());
         end.setEstado(txtEstado.getText());
         
-        Conexao.inserirEndereco(end);
-        
         Fabricante fab = new Fabricante();
-        
+
+        fab.setId(fabri.getId());
         fab.setNome(txtNome.getText());
         fab.setEmail(txtEmail.getText());
         fab.setOrigem(txtOrigem.getText());
-        int idTel = Conexao.buscaIdTel(tel.getDdi(), tel.getDdd(), tel.getNumero());
-        int idEnd = Conexao.buscaIdEnd(end.getLogradouro(), end.getNumero(), end.getComplemento());
-        fab.setId_endereco(idEnd);
-        fab.setId_telefone(idTel);
         
-        Conexao.inserirFabricante(fab);
+        if(editar){
+            fab.setId_telefone(tel.getId());
+            fab.setId_endereco(end.getId());
+            
+            fab.setTelefone(tel);
+            fab.setEndereco(end);
+            
+            Conexao.alterarFabricante(fab);
+        }
+        else{
+            Conexao.inserirTelefone(tel);
+
+            Conexao.inserirEndereco(end);
+
+            int idTel = Conexao.buscaIdTel(tel.getDdi(), tel.getDdd(), tel.getNumero());
+            int idEnd = Conexao.buscaIdEnd(end.getLogradouro(), end.getNumero(), end.getComplemento());
+            fab.setId_endereco(idEnd);
+            fab.setId_telefone(idTel);
+
+            Conexao.inserirFabricante(fab);
+        }
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void txtComplementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtComplementoActionPerformed
