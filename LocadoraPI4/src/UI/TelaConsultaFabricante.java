@@ -368,6 +368,11 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
         });
 
         btnEditar.setText("Visualizar/ Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -432,6 +437,17 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
         
         carregaTabela();
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        int row = tbFabricantes.getSelectedRow();
+        int id = Integer.parseInt(tbFabricantes.getValueAt(row, 0).toString());
+        
+        TelaCadastroFabricante tela = new TelaCadastroFabricante(Conexao.buscaFabricante(id));
+        tela.setVisible(true);
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments

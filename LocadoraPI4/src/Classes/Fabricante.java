@@ -15,6 +15,8 @@ public class Fabricante {
     private String origem;
     private int id_telefone;
     private int id_endereco;
+    private Telefone telefone;
+    private Endereco endereco;
 
     public int getId() {
         return id;
@@ -68,5 +70,21 @@ public class Fabricante {
     @Override
     public String toString(){
         return this.getNome();
+    }
+
+    public Telefone getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(Telefone telefone) {
+        this.telefone = telefone;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }

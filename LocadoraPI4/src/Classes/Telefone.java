@@ -46,5 +46,13 @@ public class Telefone {
     private int ddd;
     private int numero;
     private String tipo;
-    
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

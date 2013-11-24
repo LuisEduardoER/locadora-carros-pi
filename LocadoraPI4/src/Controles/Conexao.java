@@ -405,4 +405,82 @@ public static Connection connect = null;
         return resultado;
     }
     
+    public static Fabricante buscaFabricante(int id){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT f.id, f.nome, f.email, f.origem, f.id_telefone, f.id_endereco, \n" +
+                    "t.ddi, t.ddd, t.numero, t.tipo, \n" +
+                    "e.cep, e.logradouro, e.numero AS numerores, e.complemento, e.bairro, e.cidade, e.estado \n" +
+                    "FROM fabricante AS f\n" +
+                    "LEFT JOIN telefone AS t \n" +
+                    "ON f.id_telefone = t.id \n" +
+                    "LEFT JOIN endereco AS e \n" +
+                    "ON f.id_endereco = e.id\n" +
+                    "WHERE f.id = " + id);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Fabricante fab = new Fabricante();
+        try {
+//            user.setId(Integer.parseInt(resultado.getString("id")));
+            if(!resultado.next()){
+                return null;
+            }
+            else{
+                fab.setId(Integer.parseInt(resultado.getString("id")));
+                fab.setNome(resultado.getString("nome"));
+                fab.setEmail(resultado.getString("email"));
+                fab.setOrigem(resultado.getString("origem"));
+                fab.setId_telefone(Integer.parseInt(resultado.getString("id_telefone")));
+                fab.setId_endereco(Integer.parseInt(resultado.getString("id_endereco")));
+                Telefone t = new Telefone();
+                Endereco e = new Endereco();
+                t.setId(Integer.parseInt(resultado.getString("id_telefone")));
+                e.setId(Integer.parseInt(resultado.getString("id_endereco")));
+                t.setDdd(Integer.parseInt(resultado.getString("ddi")));
+                t.setDdi(Integer.parseInt(resultado.getString("ddd")));
+                t.setNumero(Integer.parseInt(resultado.getString("numero")));
+                t.setTipo(resultado.getString("tipo"));
+                e.setCep(resultado.getString("cep"));
+                e.setLogradouro(resultado.getString("logradouro"));
+                e.setNumero(Integer.parseInt(resultado.getString("numerores")));
+                e.setComplemento(resultado.getString("complemento"));
+                e.setBairro(resultado.getString("bairro"));
+                e.setCidade(resultado.getString("cidade"));
+                e.setEstado(resultado.getString("estado"));
+                fab.setTelefone(t);
+                fab.setEndereco(e);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return fab;
+    }
+    
+    public static void alterarFabricante(Fabricante fab){
+        String query = "UPDATE fabricante SET nome = '" + fab.getNome() + "', email = '" + fab.getEmail() + "', origem = '" + fab.getOrigem() + "' WHERE (id = " + fab.getId() + ")";  
+        String query2 = "UPDATE telefone SET ddi = " + fab.getTelefone().getDdi()+ ", ddd = " + fab.getTelefone().getDdd()+ ", numero = " + fab.getTelefone().getNumero() + ", tipo = '" + fab.getTelefone().getTipo() + "' WHERE (id = " + fab.getId_telefone()+ ")";
+        String query3 = "UPDATE endereco SET cep = '" + fab.getEndereco().getCep()+ "', logradouro = '" + fab.getEndereco().getLogradouro()+ "', numero = " + fab.getEndereco().getNumero() + ", complemento = '" + fab.getEndereco().getComplemento() + "', bairro = '" + fab.getEndereco().getBairro() + "', cidade = '" + fab.getEndereco().getCidade() + "', estado = '" + fab.getEndereco().getEstado() + "' WHERE (id = " + fab.getId_endereco()+ ")";
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            statement.executeUpdate(query);
+            statement.executeUpdate(query2);
+            statement.executeUpdate(query3);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
