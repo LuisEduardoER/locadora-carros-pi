@@ -98,6 +98,8 @@ public class TelaConsultaCarroceria extends javax.swing.JFrame {
             }
         ));
         tbCarroceria.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbCarroceria.getTableHeader().setResizingAllowed(false);
+        tbCarroceria.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbCarroceria);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

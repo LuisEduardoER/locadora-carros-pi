@@ -231,8 +231,15 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                 options, options[0]);
         
         if(ret == JOptionPane.YES_NO_OPTION){
-            TelaCadastros tela = new TelaCadastros();
-            tela.setVisible(true);
+            if(editar){
+                TelaConsultaCliente tela = new TelaConsultaCliente();       
+                tela.setVisible(true);
+            }
+            else{
+                TelaCadastros tela = new TelaCadastros();
+                tela.setVisible(true);
+            }
+
             this.setVisible(false);
         }
     } 

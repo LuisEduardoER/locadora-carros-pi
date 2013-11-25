@@ -26,6 +26,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -855,4 +856,44 @@ public static Connection connect = null;
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public static void verificaCadastroOutros(String tabela, String campo,  String valor, String acao, int id){
+        
+        
+        if(valor.equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Digite um valor");        
+            return;
+        }
+        
+        ResultSet resultado = null;
+        Statement statement = null;
+        
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            resultado = statement.executeQuery("SELECT * FROM "+tabela+" WHERE "+campo+" = '"+valor+"'");
+            if(resultado.next()){
+                
+                JOptionPane.showMessageDialog(null, "Já existe um cadastro com esse nome!");       
+            }
+            else{
+                if(acao.equalsIgnoreCase("inserir")){
+                    inserirOutros(tabela, campo, valor);
+                    JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");            
+                }
+                else{
+                    Conexao.alterarOutros(tabela, campo, "'" + valor + "'", id);
+                    JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!");            
+                }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

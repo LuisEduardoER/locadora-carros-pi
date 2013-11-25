@@ -380,6 +380,8 @@ public class TelaConsultaDirecao extends javax.swing.JFrame {
             }
         ));
         tbDirecao.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbDirecao.getTableHeader().setResizingAllowed(false);
+        tbDirecao.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tbDirecao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

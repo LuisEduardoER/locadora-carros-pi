@@ -121,8 +121,36 @@ public class TelaCadastroOutros extends javax.swing.JFrame {
                 options, options[0]);
         
         if(ret == JOptionPane.YES_NO_OPTION){        
-            TelaCadastros tela = new TelaCadastros();
-            tela.setVisible(true);
+             switch (campo){
+                case "combustivel":
+                    TelaConsultaCombustivel telaCombustivel = new TelaConsultaCombustivel();       
+                    telaCombustivel.setVisible(true);
+                    break;
+                case "cambio":
+                    TelaConsultaCambio telaCambio = new TelaConsultaCambio();       
+                    telaCambio.setVisible(true);
+                    break;
+                case "carroceria":
+                    TelaConsultaCarroceria telaCarroceria = new TelaConsultaCarroceria();       
+                    telaCarroceria.setVisible(true);
+                    break;
+                case "direcao":
+                    TelaConsultaDirecao telaDirecao = new TelaConsultaDirecao();       
+                    telaDirecao.setVisible(true);
+                    break;
+                case "lugares":
+                    TelaConsultaLugares telaLugares = new TelaConsultaLugares();       
+                    telaLugares.setVisible(true);
+                    break;
+                case "portas":
+                    TelaConsultaPortas telaPortas = new TelaConsultaPortas();       
+                    telaPortas.setVisible(true);
+                    break;
+                default:
+                    TelaCadastros telaCadastros = new TelaCadastros();
+                    telaCadastros.setVisible(true);
+                    break;
+            }
             this.setVisible(false);
         }
     } 
@@ -326,60 +354,71 @@ public class TelaCadastroOutros extends javax.swing.JFrame {
     private void btnCombustivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCombustivelActionPerformed
         // TODO add your handling code here:
         if(campo.equalsIgnoreCase("nenhum")){
-            Conexao.inserirOutros("combustivel", "nome", txtCombustivel.getText());
+            Conexao.verificaCadastroOutros("combustivel", "nome" ,txtCombustivel.getText(), "inserir", 0);
         }
         else if(campo.equalsIgnoreCase("combustivel")){
-            Conexao.alterarOutros("combustivel", "nome", "'" + txtCombustivel.getText() + "'", ((Combustivel)o).getId());
+            //Conexao.alterarOutros("combustivel", "nome", "'" + txtCombustivel.getText() + "'", ((Combustivel)o).getId());
+            Conexao.verificaCadastroOutros("combustivel", "nome" ,txtCombustivel.getText(), "alterar", ((Combustivel)o).getId());
         }
     }//GEN-LAST:event_btnCombustivelActionPerformed
 
     private void btnCarroceriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarroceriaActionPerformed
         // TODO add your handling code here:
         if(campo.equalsIgnoreCase("nenhum")){
-            Conexao.inserirOutros("carroceria", "nome", txtCarroceria.getText());
+            //Conexao.inserirOutros("carroceria", "nome", txtCarroceria.getText());
+            Conexao.verificaCadastroOutros("carroceria", "nome", txtCarroceria.getText(), "inserir", 0);
         }
         else if(campo.equalsIgnoreCase("carroceria")){
-            Conexao.alterarOutros("carroceria", "nome", "'" + txtCarroceria.getText() + "'", ((Carroceria)o).getId());
+            //Conexao.alterarOutros("carroceria", "nome", "'" + txtCarroceria.getText() + "'", ((Carroceria)o).getId());
+            Conexao.verificaCadastroOutros("carroceria", "nome" ,txtCarroceria.getText(), "alterar", ((Carroceria)o).getId());
         }
     }//GEN-LAST:event_btnCarroceriaActionPerformed
 
     private void btnLugaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLugaresActionPerformed
         // TODO add your handling code here:
         if(campo.equalsIgnoreCase("nenhum")){
-            Conexao.inserirOutros("lugares", "quantidade", txtLugares.getText());
+            //Conexao.inserirOutros("lugares", "quantidade", txtLugares.getText());
+            Conexao.verificaCadastroOutros("lugares", "quantidade", txtLugares.getText(), "inserir", 0);
         }
         else if(campo.equalsIgnoreCase("lugares")){
-            Conexao.alterarOutros("lugares", "quantidade", txtLugares.getText(), ((Lugares)o).getId());
+            //Conexao.alterarOutros("lugares", "quantidade", txtLugares.getText(), ((Lugares)o).getId());
+            Conexao.verificaCadastroOutros("lugares", "quantidade" ,txtLugares.getText(), "alterar", ((Lugares)o).getId());
         }
     }//GEN-LAST:event_btnLugaresActionPerformed
 
     private void btnCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambioActionPerformed
         // TODO add your handling code here:
         if(campo.equalsIgnoreCase("nenhum")){
-            Conexao.inserirOutros("cambio", "nome", txtCambio.getText());
+           // Conexao.inserirOutros("cambio", "nome", txtCambio.getText());
+            Conexao.verificaCadastroOutros("cambio", "nome", txtCambio.getText(), "inserir", 0);
         }
         else if(campo.equalsIgnoreCase("cambio")){
-            Conexao.alterarOutros("cambio", "nome", "'" + txtCambio.getText() + "'", ((Cambio)o).getId());
+            //Conexao.alterarOutros("cambio", "nome", "'" + txtCambio.getText() + "'", ((Cambio)o).getId());
+            Conexao.verificaCadastroOutros("cambio", "quantidade" ,txtCambio.getText(), "alterar", ((Cambio)o).getId());
         }
     }//GEN-LAST:event_btnCambioActionPerformed
 
     private void btnPortasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPortasActionPerformed
         // TODO add your handling code here:
         if(campo.equalsIgnoreCase("nenhum")){
-            Conexao.inserirOutros("portas", "quantidade", txtPortas.getText());
+            //Conexao.inserirOutros("portas", "quantidade", txtPortas.getText());
+            Conexao.verificaCadastroOutros("portas", "quantidade" ,txtPortas.getText(), "inserir", 0);
         }
         else if(campo.equalsIgnoreCase("portas")){
-            Conexao.alterarOutros("portas", "quantidade", txtPortas.getText(), ((Portas)o).getId());
+            //Conexao.alterarOutros("portas", "quantidade", txtPortas.getText(), ((Portas)o).getId());
+            Conexao.verificaCadastroOutros("portas", "quantidade" ,txtPortas.getText(), "alterar", ((Portas)o).getId());
         }
     }//GEN-LAST:event_btnPortasActionPerformed
 
     private void btnDirecaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirecaoActionPerformed
         // TODO add your handling code here:
         if(campo.equalsIgnoreCase("nenhum")){
-            Conexao.inserirOutros("direcao", "nome", txtDirecao.getText());
+            //Conexao.inserirOutros("direcao", "nome", txtDirecao.getText());
+            Conexao.verificaCadastroOutros("direcao", "nome" ,txtDirecao.getText(), "inserir", 0);
         }
         else if(campo.equalsIgnoreCase("direcao")){
-            Conexao.alterarOutros("direcao", "nome", "'" + txtDirecao.getText() + "'", ((Direcao)o).getId());
+            //Conexao.alterarOutros("direcao", "nome", "'" + txtDirecao.getText() + "'", ((Direcao)o).getId());
+            Conexao.verificaCadastroOutros("direcao", "nome" ,txtDirecao.getText(), "alterar", ((Direcao)o).getId());
         }
     }//GEN-LAST:event_btnDirecaoActionPerformed
 

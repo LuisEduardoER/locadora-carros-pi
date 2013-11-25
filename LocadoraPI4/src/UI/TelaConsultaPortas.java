@@ -98,6 +98,8 @@ public class TelaConsultaPortas extends javax.swing.JFrame {
             }
         ));
         tbPortas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbPortas.getTableHeader().setResizingAllowed(false);
+        tbPortas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbPortas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -166,6 +166,8 @@ public class TelaConsultaCambio extends javax.swing.JFrame {
             }
         ));
         tbCambio.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbCambio.getTableHeader().setResizingAllowed(false);
+        tbCambio.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbCambio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
