@@ -4,6 +4,7 @@
  */
 package UI;
 
+import Classes.Carro;
 import Controles.Conexao;
 import Globais.Geral;
 import java.sql.ResultSet;
@@ -19,7 +20,6 @@ import javax.swing.table.DefaultTableModel;
  * @author Rafael
  */
 public class TelaConsultaCarro extends javax.swing.JFrame {
-
     /**
      * Creates new form TelaConsultaCarro
      */
@@ -43,7 +43,7 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
         //Nome do usuario
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -153,6 +153,11 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
         });
 
         btnEditar.setText("Visualizar / Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -325,6 +330,17 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
         
         carregaTabela();
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        int row = tbCarro.getSelectedRow();
+        int id = Integer.parseInt(tbCarro.getValueAt(row, 0).toString());
+        
+        TelaCadastroCarro tela = new TelaCadastroCarro(Conexao.buscaCarro(id));
+        tela.setVisible(true);
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     void carregaTabela(){
         String[] colunasTabela = new String[]{"Código", "Modelo", "Placa", "Fabricante", "Ano", "Preco", "Categoria", "Portas", "Lugares", "Carroceria", "Combustivel", "Cambio", "Direcao", "Potencia", "Valvulas", "Cilindros", "Cilindradas", "Alinhamento"};  
