@@ -18,6 +18,9 @@ import javax.swing.JOptionPane;
  */
 public class TelaCadastroUsuario extends javax.swing.JFrame {
 
+    boolean editar;
+    Usuario user;
+    
     /**
      * Creates new form TelaCadastroUsuario
      */
@@ -37,6 +40,53 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         
         //Nome do usuario
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
+        
+        editar = false;
+        user = null;
+    }
+    
+    public TelaCadastroUsuario(Usuario u) {
+        initComponents();
+        myInitComponents();
+        
+        this.setTitle(Geral.getEmpresa() + " - CADASTRO USUÁRIO");
+        this.setSize(Geral.width, 715);
+        this.setLocationRelativeTo(null);
+        
+        //Não deixa maximizar
+        this.setResizable(false);
+        
+        //Não deixa Fechar
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
+        //Nome do usuario
+        lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
+        
+        editar = true;
+        user = u;
+        
+        btnInserir.setText("Alterar");
+        
+        txtNome.setText(u.getNome());
+        txtEmail.setText(u.getEmail());
+        txtCpf.setText(u.getCpf());
+        txtRg.setText(u.getRg());
+        txtCnh.setText(u.getCnh());
+//        txtDataNasc.setText(u.getData_nascimento().toString());
+        cboxCategoria.setSelectedItem(u.getCategoria_carta());
+        cboxTipo.setSelectedIndex(u.getPermissao() - 1);
+        txtDDI.setText("" + u.getTelefone().getDdi());
+        txtDDD.setText("" + u.getTelefone().getDdd());
+        txtNumero.setText("" + u.getTelefone().getNumero());
+        txtTipo.setText(u.getTelefone().getTipo());
+        txtCEP.setText(u.getEndereco().getCep());
+        txtLogradouro.setText(u.getEndereco().getLogradouro());
+        txtNumerores.setText("" + u.getEndereco().getNumero());
+        txtComplemento.setText(u.getEndereco().getComplemento());
+        txtBairro.setText(u.getEndereco().getBairro());
+        txtCidade.setText(u.getEndereco().getCidade());
+        txtEstado.setText(u.getEndereco().getEstado());
+        txtSenha.setText(u.getSenha());
     }
     
         /**
@@ -604,7 +654,8 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         // TODO add your handling code here:
         Usuario novo = new Usuario();
-        
+
+        novo.setId(user.getId());
         novo.setNome(txtNome.getText());
         novo.setEmail(txtEmail.getText());
         novo.setRg(txtRg.getText());
@@ -612,18 +663,18 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         novo.setCnh(txtCnh.getText());
         //novo.setData_nascimento(Date.parse(txtDataNasc.getText()));
         novo.setCategoria_carta(cboxCategoria.getSelectedItem().toString());
-        
+
         Telefone tel = new Telefone();
-        
+
+        tel.setId(user.getId_telefone());
         tel.setDdi(Integer.parseInt(txtDDI.getText()));
         tel.setDdd(Integer.parseInt(txtDDD.getText()));
         tel.setNumero(Integer.parseInt(txtNumero.getText()));
         tel.setTipo(txtTipo.getText());
         
-        Conexao.inserirTelefone(tel);
-        
         Endereco end = new Endereco();
-        
+
+        end.setId(user.getId_endereco());
         end.setLogradouro(txtLogradouro.getText());
         end.setNumero(Integer.parseInt(txtNumerores.getText()));
         end.setComplemento(txtComplemento.getText());
@@ -633,20 +684,35 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         end.setCidade(txtCidade.getText());
         end.setEstado(txtEstado.getText());
         
-        Conexao.inserirEndereco(end);
-        
-        novo.setId_telefone(Conexao.buscaIdTel(tel.getDdi(), tel.getDdd(), tel.getNumero()));
-        novo.setId_endereco(Conexao.buscaIdEnd(end.getLogradouro(), end.getNumero(), end.getComplemento()));
-        
         novo.setSenha(new String(txtSenha.getPassword()));
+        
         if(cboxTipo.getSelectedItem().toString().equalsIgnoreCase("administrador")){
             novo.setPermissao(1);
         }
         if(cboxTipo.getSelectedItem().toString().equalsIgnoreCase("vendedor")){
             novo.setPermissao(2);
         }
-                
-        Conexao.inserirUsuario(novo);
+        
+        if(editar){
+            novo.setId_telefone(user.getId_telefone());
+            novo.setId_endereco(user.getId_endereco());
+        
+            novo.setTelefone(tel);
+            novo.setEndereco(end);
+            
+            Conexao.alterarUsuario(novo);
+        }
+        else{
+            
+            Conexao.inserirTelefone(tel);
+
+            Conexao.inserirEndereco(end);
+
+            novo.setId_telefone(Conexao.buscaIdTel(tel.getDdi(), tel.getDdd(), tel.getNumero()));
+            novo.setId_endereco(Conexao.buscaIdEnd(end.getLogradouro(), end.getNumero(), end.getComplemento()));
+
+            Conexao.inserirUsuario(novo);
+        }
     }//GEN-LAST:event_btnInserirActionPerformed
 
     

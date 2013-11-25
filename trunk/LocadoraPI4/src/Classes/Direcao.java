@@ -8,7 +8,7 @@ package Classes;
  *
  * @author Rafael
  */
-public class Direcao {
+public class Direcao extends Outros{
     private int id;
     private String nome;
 

@@ -119,6 +119,24 @@ public class Usuario {
     private String categoria_carta;
     private int id_endereco;
     private int id_telefone;
+    private Telefone telefone;
+    private Endereco endereco;
+
+    public Telefone getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(Telefone telefone) {
+        this.telefone = telefone;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
     
     
 }

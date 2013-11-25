@@ -8,7 +8,7 @@ package Classes;
  *
  * @author Rafael
  */
-public class Cambio {
+public class Cambio extends Outros{
     private int id;
     private String nome;
 
