@@ -283,7 +283,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         txtEstado = new javax.swing.JTextField();
         lblSenha = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
+        lblTipoUsuario = new javax.swing.JLabel();
         cboxTipo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -363,7 +363,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
 
         lblSenha.setText("Senha:");
 
-        jLabel1.setText("Tipo de Usuário:");
+        lblTipoUsuario.setText("Tipo de Usuário:");
 
         cboxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Vendedor" }));
         cboxTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -405,7 +405,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(lblTipoUsuario)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cboxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -472,7 +472,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(131, 131, 131)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(lblTipoUsuario)
                     .addComponent(cboxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -668,7 +668,6 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnInserir;
     private javax.swing.JComboBox cboxCategoria;
     private javax.swing.JComboBox cboxTipo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCEP;
     private javax.swing.JLabel lblCategoria;
@@ -690,6 +689,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblTelefone;
     private javax.swing.JLabel lblTipo;
+    private javax.swing.JLabel lblTipoUsuario;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCEP;
     private javax.swing.JTextField txtCidade;

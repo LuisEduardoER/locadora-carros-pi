@@ -495,6 +495,9 @@ public class TelaConsultas extends javax.swing.JFrame {
         // TODO add your handling code here:
         TelaConsultaUsuario tela = new TelaConsultaUsuario();
         tela.setVisible(true);
+        
+
+        
         this.setVisible(false);
     }//GEN-LAST:event_btnUsuarioActionPerformed
 
