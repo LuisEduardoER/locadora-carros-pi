@@ -103,6 +103,8 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
             }
         ));
         tbUsuario.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbUsuario.getTableHeader().setResizingAllowed(false);
+        tbUsuario.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbUsuario);
 
         lblTipoUsuario.setText("Tipo de Usuário:");
@@ -116,7 +118,7 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
             }
         });
 
-        btnEditar.setText("Visualuzar/Editar");
+        btnEditar.setText("Visualizar/Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);

@@ -711,9 +711,17 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                 options, options[0]);
         
+        
         if(ret == JOptionPane.YES_NO_OPTION){
-            TelaCadastros tela = new TelaCadastros();
-            tela.setVisible(true);
+            if(editar){
+                TelaConsultaCarro tela = new TelaConsultaCarro();       
+                tela.setVisible(true);
+            }
+            else{
+                TelaCadastros tela = new TelaCadastros();
+                tela.setVisible(true);
+            }
+
             this.setVisible(false);
         }
     } 
@@ -763,8 +771,6 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
     
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         // TODO add your handling code here:
-        
-        
         Motor novoMotor = new Motor();
         novoMotor.setId(c.getMotor().getId());
         novoMotor.setAlinhamento(txtAlinhamento.getText());

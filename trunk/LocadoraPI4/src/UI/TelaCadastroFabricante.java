@@ -41,10 +41,12 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
         //Nome do usuario
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
         
+        //Vem do inserir
         editar = false;
         fabri = null;
     }
     
+    //Editar
     public TelaCadastroFabricante(Fabricante fab) {
         initComponents();
         myInitComponents();
@@ -64,6 +66,7 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
         
         btnInserir.setText("Alterar");
             
+        //Vem do Editar
         editar = true;
         this.fabri = fab;
         
@@ -485,8 +488,16 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
                 options, options[0]);
         
         if(ret == JOptionPane.YES_NO_OPTION){
-            TelaCadastros tela = new TelaCadastros();
-            tela.setVisible(true);
+            
+            if(editar){
+                TelaConsultaFabricante tela = new TelaConsultaFabricante();       
+                tela.setVisible(true);
+            }
+            else{
+                TelaCadastros tela = new TelaCadastros();
+                tela.setVisible(true);
+            }
+
             this.setVisible(false);
         }
     } 

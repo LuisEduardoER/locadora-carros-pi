@@ -98,6 +98,8 @@ public class TelaConsultaLugares extends javax.swing.JFrame {
             }
         ));
         tbLugares.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbLugares.getTableHeader().setResizingAllowed(false);
+        tbLugares.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbLugares);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

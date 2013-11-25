@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.6" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JProgressBar" name="jProgressBar2">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -24,69 +28,59 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="btnEditar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="txtFabricante" min="-2" pref="115" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txtCategoria" min="-2" pref="115" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txtPlaca" min="-2" pref="115" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnFiltrar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblMotor" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jScrollPane1" alignment="0" min="-2" pref="575" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lblModelo" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtModelo" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                              <Component id="lblPortas" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblDirecao" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtPortas" min="-2" pref="115" max="-2" attributes="0"/>
-                              <Component id="txtDirecao" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
+                              <Component id="txtModelo" alignment="0" pref="128" max="32767" attributes="0"/>
+                              <Component id="lblLugare" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtLugares" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtMotor" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="lblFabricante" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtAno" pref="128" max="32767" attributes="0"/>
+                              <Component id="lblAno" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblCarroceria" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblFabricante" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCarroceria" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtFabricante" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="lblCambio" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCambio" pref="128" max="32767" attributes="0"/>
+                              <Component id="lblDirecao" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblCategoria" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtDirecao" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtCategoria" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="txtPlaca" min="-2" pref="128" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtLugares" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                                  <Component id="txtAno" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                                  <Component id="lblAno" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblLugare" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblCombustivel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblMotor" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblCarroceria" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblCambio" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtCambio" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                                  <Component id="txtCarroceria" min="-2" pref="115" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtCombustivel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                                  <Component id="lblCategoria" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btnEditar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="lblPlaca" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtMotor" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="lblCombustivel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPortas" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtPortas" pref="128" max="32767" attributes="0"/>
+                                  <Component id="txtCombustivel" alignment="0" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="btnFiltrar" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <Component id="jScrollPane1" alignment="0" pref="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="66" max="32767" attributes="0"/>
+              <EmptySpace pref="32" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -98,58 +92,52 @@
                   <Component id="lblModelo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblAno" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblCambio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPortas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtModelo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtAno" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtCambio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPortas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblPortas" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblLugare" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblCarroceria" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDirecao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCombustivel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtLugares" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtPortas" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtCarroceria" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblDirecao" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblCombustivel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblMotor" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtCombustivel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtMotor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtDirecao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCombustivel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMotor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblFabricante" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblPlaca" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtMotor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtFabricante" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtPlaca" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnFiltrar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnFiltrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEditar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="94" max="-2" attributes="0"/>
-              <EmptySpace pref="28" max="32767" attributes="0"/>
+              <EmptySpace pref="63" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -301,6 +289,9 @@
             <Property name="autoResizeMode" type="int" value="0"/>
             <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
               <JTableSelectionModel selectionMode="0"/>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
             </Property>
           </Properties>
         </Component>

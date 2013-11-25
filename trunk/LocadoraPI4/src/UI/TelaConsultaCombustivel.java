@@ -182,6 +182,8 @@ public class TelaConsultaCombustivel extends javax.swing.JFrame {
             }
         ));
         tbCombustivel.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbCombustivel.getTableHeader().setResizingAllowed(false);
+        tbCombustivel.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tbCombustivel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

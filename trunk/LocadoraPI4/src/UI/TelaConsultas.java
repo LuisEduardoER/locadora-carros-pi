@@ -6,6 +6,7 @@ package UI;
 
 import Globais.Geral;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -496,8 +497,11 @@ public class TelaConsultas extends javax.swing.JFrame {
         TelaConsultaUsuario tela = new TelaConsultaUsuario();
         tela.setVisible(true);
         
-
+        // cria uma nova janela  
+        //JLabel label = new JLabel("Você abriu uma janela nova!"); 
         
+        //tela.add(label);
+
         this.setVisible(false);
     }//GEN-LAST:event_btnUsuarioActionPerformed
 

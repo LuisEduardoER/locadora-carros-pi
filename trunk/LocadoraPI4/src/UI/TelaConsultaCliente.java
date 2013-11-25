@@ -328,6 +328,8 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
             }
         ));
         tbCliente.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbCliente.getTableHeader().setResizingAllowed(false);
+        tbCliente.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbCliente);
 
         btnExlcuir.setText("Excluir");

@@ -19,8 +19,8 @@ import javax.swing.JOptionPane;
 public class Geral extends javax.swing.JFrame {
     
     private static String empresa = "LOCADORA S.I.";
-    public static final int width = 520;  
-    public static final int height = 500;  
+    public static final int width = 580;  
+    public static final int height = 550;  
     private static Usuario user = null;
     
     public static String getEmpresa() {

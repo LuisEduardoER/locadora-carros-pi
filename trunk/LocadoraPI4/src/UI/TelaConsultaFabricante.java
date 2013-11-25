@@ -355,8 +355,9 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbFabricantes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tbFabricantes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbFabricantes.getTableHeader().setResizingAllowed(false);
+        tbFabricantes.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbFabricantes);
         tbFabricantes.getAccessibleContext().setAccessibleName("");
 
@@ -416,8 +417,8 @@ public class TelaConsultaFabricante extends javax.swing.JFrame {
                     .addComponent(btnEditar)
                     .addComponent(btnExcluir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73))
         );
 
         pack();
