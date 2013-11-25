@@ -157,6 +157,11 @@ public class TelaConsultaCombustivel extends javax.swing.JFrame {
         });
 
         btnEditar.setText("Visualizar / Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -232,6 +237,17 @@ public class TelaConsultaCombustivel extends javax.swing.JFrame {
         
         carregaTabela();
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        int row = tbCombustivel.getSelectedRow();
+        int id = Integer.parseInt(tbCombustivel.getValueAt(row, 0).toString());
+        
+        TelaCadastroOutros tela = new TelaCadastroOutros(Conexao.buscaOutros(id, "combustivel"), "combustivel");
+        tela.setVisible(true);
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments

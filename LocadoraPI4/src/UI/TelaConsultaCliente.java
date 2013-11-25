@@ -4,9 +4,15 @@
  */
 package UI;
 
+import Controles.Conexao;
 import Globais.Geral;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +26,8 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
     public TelaConsultaCliente() {
 
         initComponents();
+        
+        carregaTabela();
         
         myInitComponents();
         
@@ -36,6 +44,34 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
         //Nome do usuario
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
     }
+    
+    void carregaTabela(){
+        String[] colunasTabela = new String[]{"Código", "Nome", "Email", "CPF" };  
+        DefaultTableModel modeloTabela = new DefaultTableModel(null,colunasTabela){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            //all cells false
+                return false;
+            }
+        };
+        
+        ResultSet resultado = Conexao.buscaUsuario(txtNome.getText(), txtEmail.getText(), txtCPF.getText(), txtRG.getText(), " AND permissao_id = 3");
+        try {
+            while(resultado.next()){
+                modeloTabela.addRow(new String[] {
+                    resultado.getString("id"),
+                    resultado.getString("nome"),
+                    resultado.getString("email"),
+                    resultado.getString("cpf")
+                });
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaConsultaFabricante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        tbCliente.setModel(modeloTabela);
+    }
+
     
     public void myInitComponents(){
         
@@ -258,6 +294,8 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
         btnFiltrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbCliente = new javax.swing.JTable();
+        btnExlcuir = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -272,6 +310,11 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
         lblDataNasc.setText("Data de nascimento:");
 
         btnFiltrar.setText("Filtrar");
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
 
         tbCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -286,6 +329,20 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbCliente);
 
+        btnExlcuir.setText("Excluir");
+        btnExlcuir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExlcuirActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Visualizar/Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -299,12 +356,6 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
                         .addGap(98, 98, 98)
                         .addComponent(lblEmail))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnFiltrar))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblCPF))
@@ -316,7 +367,18 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblDataNasc)
-                                    .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnEditar))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnExlcuir)
+                            .addComponent(btnFiltrar))))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -345,12 +407,43 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFiltrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnExlcuir)
+                    .addComponent(btnEditar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        // TODO add your handling code here:
+        carregaTabela();
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void btnExlcuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExlcuirActionPerformed
+        // TODO add your handling code here:
+        int row = tbCliente.getSelectedRow();
+        int id = Integer.parseInt(tbCliente.getValueAt(row, 0).toString());
+        
+        Conexao.excluirRegistro("usuario", id);
+        
+        carregaTabela();
+    }//GEN-LAST:event_btnExlcuirActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        int row = tbCliente.getSelectedRow();
+        int id = Integer.parseInt(tbCliente.getValueAt(row, 0).toString());
+        
+        TelaCadastroCliente tela = new TelaCadastroCliente(Conexao.buscaUsuario(id));
+        tela.setVisible(true);
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -448,6 +541,8 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
     // End of variables declaration    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExlcuir;
     private javax.swing.JButton btnFiltrar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCPF;

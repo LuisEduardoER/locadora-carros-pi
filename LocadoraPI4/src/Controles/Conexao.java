@@ -5,14 +5,20 @@
 package Controles;
 
 
+import Classes.Cambio;
 import Classes.Carro;
+import Classes.Carroceria;
+import Classes.Combustivel;
+import Classes.Direcao;
 import Classes.Endereco;
 import Classes.Fabricante;
+import Classes.Lugares;
 import Classes.Motor;
+import Classes.Outros;
+import Classes.Portas;
 import Classes.Telefone;
 import Classes.Usuario;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -555,5 +561,195 @@ public static Connection connect = null;
         } catch (SQLException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public static ResultSet buscaUsuario(String nome, String email, String cpf, String rg, String where){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT * FROM usuario WHERE (nome LIKE '%" + nome + "%' AND email LIKE '%" + email + "%' AND cpf LIKE '%" + cpf + "%' AND rg LIKE '%" + rg + "%'" + where + ")");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado;
+    }
+    
+    public static void alterarOutros(String tabela, String campo, String valor, int id){ 
+        String query = "UPDATE " + tabela + " SET " + campo + " = " + valor + " WHERE (id = " + id + ")";
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            statement.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static Outros buscaOutros(int id, String tabela){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT * "+
+                    "FROM " + tabela + " " +
+                    "WHERE id = " + id);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Outros out = null;
+        try {
+//            user.setId(Integer.parseInt(resultado.getString("id")));
+            if(!resultado.next()){
+                return null;
+            }
+            else{
+                switch (tabela){
+                    case "cambio":
+                        Cambio c = new Cambio();
+                        c.setId(resultado.getInt("id"));
+                        c.setNome(resultado.getString("nome"));
+                        out = c;
+                        break;
+                        
+                    case "combustivel":
+                        Combustivel co = new Combustivel();
+                        co.setId(resultado.getInt("id"));
+                        co.setNome(resultado.getString("nome"));
+                        out = co;
+                        break;
+                        
+                    case "carroceria":
+                        Carroceria ca = new Carroceria();
+                        ca.setId(resultado.getInt("id"));
+                        ca.setNome(resultado.getString("nome"));
+                        out = ca;
+                        break;
+                        
+                    case "direcao":
+                        Direcao d = new Direcao();
+                        d.setId(resultado.getInt("id"));
+                        d.setNome(resultado.getString("nome"));
+                        out = d;
+                        break;
+                        
+                    case "portas":
+                        Portas p = new Portas();
+                        p.setId(resultado.getInt("id"));
+                        p.setQuantidade(resultado.getInt("quantidade"));
+                        out = p;
+                        break;
+                        
+                    case "lugares":
+                        Lugares l = new Lugares();
+                        l.setId(resultado.getInt("id"));
+                        l.setQuantidade(resultado.getInt("quantidade"));
+                        out = l;
+                        break;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return out;
+    }
+    
+    public static void alterarUsuario(Usuario fab){
+        String query = "UPDATE usuario SET nome = '" + fab.getNome() + "', email = '" + fab.getEmail() + "', senha = '" + fab.getSenha() + "', cpf = '" + fab.getCpf() + "', rg = '" + fab.getRg() + "', permissao_id = " + fab.getPermissao() + ", cnh = '" + fab.getCnh() + "', categoria_carta = '" + fab.getCategoria_carta() + "' WHERE (id = " + fab.getId() + ")";  
+        String query2 = "UPDATE telefone SET ddi = " + fab.getTelefone().getDdi()+ ", ddd = " + fab.getTelefone().getDdd()+ ", numero = " + fab.getTelefone().getNumero() + ", tipo = '" + fab.getTelefone().getTipo() + "' WHERE (id = " + fab.getId_telefone()+ ")";
+        String query3 = "UPDATE endereco SET cep = '" + fab.getEndereco().getCep()+ "', logradouro = '" + fab.getEndereco().getLogradouro()+ "', numero = " + fab.getEndereco().getNumero() + ", complemento = '" + fab.getEndereco().getComplemento() + "', bairro = '" + fab.getEndereco().getBairro() + "', cidade = '" + fab.getEndereco().getCidade() + "', estado = '" + fab.getEndereco().getEstado() + "' WHERE (id = " + fab.getId_endereco()+ ")";
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            statement.executeUpdate(query);
+            statement.executeUpdate(query2);
+            statement.executeUpdate(query3);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static Usuario buscaUsuario(int id){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT f.id, f.nome, f.email, f.senha, f.id_telefone, f.id_endereco, f.cpf, f.rg, f.cnh, f.permissao_id, f.categoria_carta, \n" +
+                    "t.ddi, t.ddd, t.numero, t.tipo, \n" +
+                    "e.cep, e.logradouro, e.numero AS numerores, e.complemento, e.bairro, e.cidade, e.estado \n" +
+                    "FROM usuario AS f\n" +
+                    "LEFT JOIN telefone AS t \n" +
+                    "ON f.id_telefone = t.id \n" +
+                    "LEFT JOIN endereco AS e \n" +
+                    "ON f.id_endereco = e.id\n" +
+                    "WHERE f.id = " + id);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Usuario fab = new Usuario();
+        try {
+//            user.setId(Integer.parseInt(resultado.getString("id")));
+            if(!resultado.next()){
+                return null;
+            }
+            else{
+                fab.setId(Integer.parseInt(resultado.getString("id")));
+                fab.setNome(resultado.getString("nome"));
+                fab.setEmail(resultado.getString("email"));
+                fab.setSenha(resultado.getString("senha"));
+                fab.setCpf(resultado.getString("cpf"));
+                fab.setRg(resultado.getString("rg"));
+                fab.setCnh(resultado.getString("cnh"));
+                fab.setCategoria_carta(resultado.getString("categoria_carta"));
+                fab.setPermissao(resultado.getInt("permissao_id"));
+                fab.setId_telefone(Integer.parseInt(resultado.getString("id_telefone")));
+                fab.setId_endereco(Integer.parseInt(resultado.getString("id_endereco")));
+                Telefone t = new Telefone();
+                Endereco e = new Endereco();
+                t.setId(Integer.parseInt(resultado.getString("id_telefone")));
+                e.setId(Integer.parseInt(resultado.getString("id_endereco")));
+                t.setDdd(Integer.parseInt(resultado.getString("ddi")));
+                t.setDdi(Integer.parseInt(resultado.getString("ddd")));
+                t.setNumero(Integer.parseInt(resultado.getString("numero")));
+                t.setTipo(resultado.getString("tipo"));
+                e.setCep(resultado.getString("cep"));
+                e.setLogradouro(resultado.getString("logradouro"));
+                e.setNumero(Integer.parseInt(resultado.getString("numerores")));
+                e.setComplemento(resultado.getString("complemento"));
+                e.setBairro(resultado.getString("bairro"));
+                e.setCidade(resultado.getString("cidade"));
+                e.setEstado(resultado.getString("estado"));
+                fab.setTelefone(t);
+                fab.setEndereco(e);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return fab;
     }
 }

@@ -141,6 +141,11 @@ public class TelaConsultaCambio extends javax.swing.JFrame {
         });
 
         btnEditar.setText("Visualizar / Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -219,6 +224,17 @@ public class TelaConsultaCambio extends javax.swing.JFrame {
         
         carregaTabela();
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        int row = tbCambio.getSelectedRow();
+        int id = Integer.parseInt(tbCambio.getValueAt(row, 0).toString());
+        
+        TelaCadastroOutros tela = new TelaCadastroOutros(Conexao.buscaOutros(id, "cambio"), "cambio");
+        tela.setVisible(true);
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments

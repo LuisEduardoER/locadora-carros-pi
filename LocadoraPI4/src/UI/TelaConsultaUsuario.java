@@ -4,9 +4,15 @@
  */
 package UI;
 
+import Controles.Conexao;
 import Globais.Geral;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +26,8 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
     public TelaConsultaUsuario() {
 
         initComponents();
+        
+        carregaTabela();
         
         myInitComponents();
         
@@ -58,9 +66,11 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
         txtCPF = new javax.swing.JTextField();
         btnFiltrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbUsuario = new javax.swing.JTable();
         lblTipoUsuario = new javax.swing.JLabel();
         cboxTipo = new javax.swing.JComboBox();
+        btnExcluir = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,8 +85,13 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
         lblCPF.setText("CPF:");
 
         btnFiltrar.setText("Filtrar");
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -87,11 +102,25 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbUsuario);
 
         lblTipoUsuario.setText("Tipo de Usuário:");
 
-        cboxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Vendedor" }));
+        cboxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador ou Vendedor", "Vendedor", "Administrador" }));
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Visualuzar/Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,7 +144,8 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
                                     .addComponent(lblCPF)
                                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblEmail)
-                                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnEditar)))
                             .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,14 +154,14 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cboxTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cboxTipo, 0, 140, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblDataNasc))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(btnFiltrar)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(lblDataNasc)))))
+                                        .addComponent(btnExcluir)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnFiltrar)))
                                 .addGap(35, 35, 35))))))
         );
         layout.setVerticalGroup(
@@ -158,7 +188,10 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnFiltrar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFiltrar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnEditar))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -166,6 +199,32 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        int row = tbUsuario.getSelectedRow();
+        int id = Integer.parseInt(tbUsuario.getValueAt(row, 0).toString());
+
+        Conexao.excluirRegistro("usuario", id);
+
+        carregaTabela();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        // TODO add your handling code here:
+        carregaTabela();
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        int row = tbUsuario.getSelectedRow();
+        int id = Integer.parseInt(tbUsuario.getValueAt(row, 0).toString());
+        
+        TelaCadastroUsuario tela = new TelaCadastroUsuario(Conexao.buscaUsuario(id));
+        tela.setVisible(true);
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,6 +259,45 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
                 new TelaConsultaUsuario().setVisible(true);
             }
         });
+    }
+    
+    void carregaTabela(){
+        String[] colunasTabela = new String[]{"Código", "Nome", "Email", "CPF" };  
+        DefaultTableModel modeloTabela = new DefaultTableModel(null,colunasTabela){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            //all cells false
+                return false;
+            }
+        };
+        
+        String where = "";
+        
+        if(cboxTipo.getSelectedItem().toString().equalsIgnoreCase("Administrador")){
+            where = " AND permissao_id = 1";
+        }
+        else if(cboxTipo.getSelectedItem().toString().equalsIgnoreCase("Vendedor")){
+            where = " AND permissao_id = 2";
+        }
+        else{
+            where = " AND permissao_id != 3";
+        }
+        
+        ResultSet resultado = Conexao.buscaUsuario(txtNome.getText(), txtEmail.getText(), txtCPF.getText(), txtRG.getText(), where);
+        try {
+            while(resultado.next()){
+                modeloTabela.addRow(new String[] {
+                    resultado.getString("id"),
+                    resultado.getString("nome"),
+                    resultado.getString("email"),
+                    resultado.getString("cpf")
+                });
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaConsultaFabricante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        tbUsuario.setModel(modeloTabela);
     }
     
     public void myInitComponents(){
@@ -460,16 +558,18 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
     // End of variables declaration    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFiltrar;
     private javax.swing.JComboBox cboxTipo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblDataNasc;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblRG;
     private javax.swing.JLabel lblTipoUsuario;
+    private javax.swing.JTable tbUsuario;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtDataNasc;
     private javax.swing.JTextField txtEmail;

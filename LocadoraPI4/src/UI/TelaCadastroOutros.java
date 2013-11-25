@@ -5,6 +5,13 @@
  */
 package UI;
 
+import Classes.Cambio;
+import Classes.Carroceria;
+import Classes.Combustivel;
+import Classes.Direcao;
+import Classes.Lugares;
+import Classes.Outros;
+import Classes.Portas;
 import Controles.Conexao;
 import Globais.Geral;
 import javax.swing.JFrame;
@@ -16,6 +23,9 @@ import javax.swing.JOptionPane;
  */
 public class TelaCadastroOutros extends javax.swing.JFrame {
 
+    String campo;
+    Outros o;
+    
     /**
      * Creates new form Outros
      */
@@ -35,6 +45,71 @@ public class TelaCadastroOutros extends javax.swing.JFrame {
         
         //Nome do usuario
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
+        
+        campo = "nenhum";
+        o = null;
+    }
+    
+    public TelaCadastroOutros(Outros out, String cp) {
+        initComponents();
+        myInitComponents();
+        
+        this.setTitle(Geral.getEmpresa() + " - CADASTRO OUTROS");
+        this.setSize(Geral.width, Geral.height);
+        this.setLocationRelativeTo(null);
+        
+        //Não deixa maximizar
+        this.setResizable(false);
+        
+        //Não deixa Fechar
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
+        //Nome do usuario
+        lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
+        
+        campo = cp;
+        o = out;
+        
+        btnCambio.setEnabled(false);
+        btnCarroceria.setEnabled(false);
+        btnDirecao.setEnabled(false);
+        btnLugares.setEnabled(false);
+        btnPortas.setEnabled(false);
+        btnCombustivel.setEnabled(false);
+            
+        btnCambio.setText("Alterar");    
+        btnCombustivel.setText("Alterar");    
+        btnCarroceria.setText("Alterar");    
+        btnDirecao.setText("Alterar");    
+        btnLugares.setText("Alterar");    
+        btnPortas.setText("Alterar");
+        
+        switch (cp){
+            case "combustivel":
+                btnCombustivel.setEnabled(true);
+                txtCombustivel.setText(((Combustivel)out).getNome());                        
+                break;
+            case "cambio":
+                btnCambio.setEnabled(true);
+                txtCambio.setText(((Cambio)out).getNome()); 
+                break;
+            case "carroceria":
+                btnCarroceria.setEnabled(true);
+                txtCarroceria.setText(((Carroceria)out).getNome()); 
+                break;
+            case "direcao":
+                btnDirecao.setEnabled(true);
+                txtDirecao.setText(((Direcao)out).getNome()); 
+                break;
+            case "lugares":
+                btnLugares.setEnabled(true);
+                txtLugares.setText("" + ((Lugares)out).getQuantidade()); 
+                break;
+            case "portas":
+                btnPortas.setEnabled(true);
+                txtPortas.setText("" + ((Portas)out).getQuantidade()); 
+                break;
+        }
     }
     
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
@@ -250,32 +325,62 @@ public class TelaCadastroOutros extends javax.swing.JFrame {
 
     private void btnCombustivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCombustivelActionPerformed
         // TODO add your handling code here:
-        Conexao.inserirOutros("combustivel", "nome", txtCombustivel.getText());
+        if(campo.equalsIgnoreCase("nenhum")){
+            Conexao.inserirOutros("combustivel", "nome", txtCombustivel.getText());
+        }
+        else if(campo.equalsIgnoreCase("combustivel")){
+            Conexao.alterarOutros("combustivel", "nome", "'" + txtCombustivel.getText() + "'", ((Combustivel)o).getId());
+        }
     }//GEN-LAST:event_btnCombustivelActionPerformed
 
     private void btnCarroceriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarroceriaActionPerformed
         // TODO add your handling code here:
-        Conexao.inserirOutros("carroceria", "nome", txtCarroceria.getText());
+        if(campo.equalsIgnoreCase("nenhum")){
+            Conexao.inserirOutros("carroceria", "nome", txtCarroceria.getText());
+        }
+        else if(campo.equalsIgnoreCase("carroceria")){
+            Conexao.alterarOutros("carroceria", "nome", "'" + txtCarroceria.getText() + "'", ((Carroceria)o).getId());
+        }
     }//GEN-LAST:event_btnCarroceriaActionPerformed
 
     private void btnLugaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLugaresActionPerformed
         // TODO add your handling code here:
-        Conexao.inserirOutros("lugares", "quantidade", txtLugares.getText());
+        if(campo.equalsIgnoreCase("nenhum")){
+            Conexao.inserirOutros("lugares", "quantidade", txtLugares.getText());
+        }
+        else if(campo.equalsIgnoreCase("lugares")){
+            Conexao.alterarOutros("lugares", "quantidade", txtLugares.getText(), ((Lugares)o).getId());
+        }
     }//GEN-LAST:event_btnLugaresActionPerformed
 
     private void btnCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambioActionPerformed
         // TODO add your handling code here:
-        Conexao.inserirOutros("cambio", "nome", txtCambio.getText());
+        if(campo.equalsIgnoreCase("nenhum")){
+            Conexao.inserirOutros("cambio", "nome", txtCambio.getText());
+        }
+        else if(campo.equalsIgnoreCase("cambio")){
+            Conexao.alterarOutros("cambio", "nome", "'" + txtCambio.getText() + "'", ((Cambio)o).getId());
+        }
     }//GEN-LAST:event_btnCambioActionPerformed
 
     private void btnPortasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPortasActionPerformed
         // TODO add your handling code here:
-        Conexao.inserirOutros("portas", "quantidade", txtPortas.getText());
+        if(campo.equalsIgnoreCase("nenhum")){
+            Conexao.inserirOutros("portas", "quantidade", txtPortas.getText());
+        }
+        else if(campo.equalsIgnoreCase("portas")){
+            Conexao.alterarOutros("portas", "quantidade", txtPortas.getText(), ((Portas)o).getId());
+        }
     }//GEN-LAST:event_btnPortasActionPerformed
 
     private void btnDirecaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirecaoActionPerformed
         // TODO add your handling code here:
-        Conexao.inserirOutros("direcao", "nome", txtDirecao.getText());
+        if(campo.equalsIgnoreCase("nenhum")){
+            Conexao.inserirOutros("direcao", "nome", txtDirecao.getText());
+        }
+        else if(campo.equalsIgnoreCase("direcao")){
+            Conexao.alterarOutros("direcao", "nome", "'" + txtDirecao.getText() + "'", ((Direcao)o).getId());
+        }
     }//GEN-LAST:event_btnDirecaoActionPerformed
 
     /**

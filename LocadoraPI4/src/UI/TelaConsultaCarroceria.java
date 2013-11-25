@@ -73,6 +73,11 @@ public class TelaConsultaCarroceria extends javax.swing.JFrame {
         });
 
         jButton2.setText("Visualizar / Editar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Excluir");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -148,6 +153,17 @@ public class TelaConsultaCarroceria extends javax.swing.JFrame {
         // TODO add your handling code here:
         carregaTabela();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int row = tbCarroceria.getSelectedRow();
+        int id = Integer.parseInt(tbCarroceria.getValueAt(row, 0).toString());
+        
+        TelaCadastroOutros tela = new TelaCadastroOutros(Conexao.buscaOutros(id, "carroceria"), "carroceria");
+        tela.setVisible(true);
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

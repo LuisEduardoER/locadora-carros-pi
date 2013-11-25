@@ -8,7 +8,7 @@ package Classes;
  *
  * @author Rafael
  */
-public class Combustivel {
+public class Combustivel extends Outros{
     private int id;
     private String nome;
 

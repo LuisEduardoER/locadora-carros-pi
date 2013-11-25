@@ -8,7 +8,7 @@ package Classes;
  *
  * @author Rafael
  */
-public class Portas {
+public class Portas extends Outros{
     private int id;
     private int quantidade;
 
