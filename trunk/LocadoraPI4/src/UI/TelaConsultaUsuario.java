@@ -102,6 +102,7 @@ public class TelaConsultaUsuario extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbUsuario.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbUsuario);
 
         lblTipoUsuario.setText("Tipo de Usuário:");

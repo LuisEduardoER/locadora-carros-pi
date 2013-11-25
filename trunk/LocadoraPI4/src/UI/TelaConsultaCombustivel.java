@@ -181,6 +181,7 @@ public class TelaConsultaCombustivel extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbCombustivel.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tbCombustivel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

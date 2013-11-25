@@ -97,6 +97,7 @@ public class TelaConsultaLugares extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbLugares.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbLugares);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -5,6 +5,7 @@
 package Controles;
 
 
+import Classes.Aluguel;
 import Classes.Cambio;
 import Classes.Carro;
 import Classes.Carroceria;
@@ -751,5 +752,107 @@ public static Connection connect = null;
         }
         
         return fab;
+    }
+    
+    public static void inserirAluguel(Aluguel al){
+        String query = "INSERT INTO aluguel (data_retirada, data_entrega, prazo, atraso, valor_parcial, valor_atraso, status_id, carro_id, assegurado, cliente_id) VALUES ('" + al.getData_retirada() + "', '" + al.getDate_entrega() + "', " + al.getPrazo() + ", " + al.getAtraso() + ", " + al.getValor_parcial() + ", " + al.getValor_atraso() + ", " + al.getStatus_id() + ", " + al.getCarro_id() + ", " + al.isAssegurado() + ", " + al.getCliente_id() + ")";
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            statement.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static ResultSet buscaAluguel(String cliente, String carro){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT * FROM aluguel LEFT JOIN usuario ON cliente_id = usuario.id LEFT JOIN carro ON carro_id = carro.id LEFT JOIN status_aluguel ON status_id = status_aluguel.id WHERE (nome LIKE '%" + cliente + "%' AND modelo LIKE '%" + carro + "%')");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado;
+    }
+    
+    public static void finalizarAluguel(int id){
+        String query = "UPDATE aluguel SET status_id = 3 WHERE (id = " + id + ")";
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            statement.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static Aluguel buscaAluguel(int id){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT * FROM aluguel where id = " + id);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Aluguel al = new Aluguel();
+        try {
+//            user.setId(Integer.parseInt(resultado.getString("id")));
+            if(!resultado.next()){
+                return null;
+            }
+            else{
+                al.setId(resultado.getInt("id"));
+                al.setPrazo(resultado.getInt("prazo"));
+                al.setAtraso(resultado.getInt("atraso"));
+                al.setStatus_id(resultado.getInt("status_id"));
+                al.setCarro_id(resultado.getInt("carro_id"));
+                al.setCliente_id(resultado.getInt("cliente_id"));
+                al.setValor_parcial(resultado.getDouble("valor_parcial"));
+                al.setValor_atraso(resultado.getDouble("valor_atraso"));
+                al.setAssegurado(resultado.getBoolean("assegurado"));
+//                al.setData_retirada(resultado.getDate("data_retirada"));
+//                al.setDate_entrega(resultado.getDate("data_entrega"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return al;
+    }
+    
+    public static void alterarAluguel(Aluguel al){ 
+        String query = "UPDATE aluguel SET data_entrega = '" + al.getDate_entrega() + "', prazo = " + al.getPrazo() + ", valor_parcial = " + al.getValor_parcial() + ", valor_atraso = " + al.getValor_atraso() + ", carro_id = " + al.getCarro_id() + ", assegurado = " + al.isAssegurado() + ", cliente_id = " + al.getCliente_id() + " WHERE (id = " + al.getId() + ")";
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            statement.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
