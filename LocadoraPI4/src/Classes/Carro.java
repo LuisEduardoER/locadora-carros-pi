@@ -24,7 +24,8 @@ public class Carro {
     private int direcao_id;
     private String categoria;   
     private String placa;
-
+    private Motor motor;
+    
     public int getId() {
         return id;
     }
@@ -135,6 +136,14 @@ public class Carro {
 
     public void setPlaca(String placa) {
         this.placa = placa;
+    }
+
+    public Motor getMotor() {
+        return motor;
+    }
+
+    public void setMotor(Motor motor) {
+        this.motor = motor;
     }
     
     

@@ -29,6 +29,9 @@ import javax.swing.JOptionPane;
  */
 public class TelaCadastroCarro extends javax.swing.JFrame {
 
+    boolean editar;
+    Carro c;
+    
     /**
      * Creates new form Motor
      */
@@ -122,8 +125,140 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(TelaCadastroCarro.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        editar = false;
+        c = null;
     }
 
+    public TelaCadastroCarro(Carro car) {
+        initComponents();
+        myInitComponents();
+        
+        this.setTitle(Geral.getEmpresa() + " - CADASTROS");
+        this.setSize(555, 625);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setTitle(Geral.getEmpresa()+" - MOTOR");
+        
+        //Não deixa maximizar
+        this.setResizable(false);
+        
+        //Não deixa Fechar
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        cboxFabricante.removeAllItems();
+        cboxCambio.removeAllItems();
+        cboxCarroceria.removeAllItems();
+        cboxCombustivel.removeAllItems();
+        cboxDirecao.removeAllItems();
+        cboxLugares.removeAllItems();
+        cboxPortas.removeAllItems();
+        
+        try {         
+            ResultSet resultado = Conexao.buscaTodoConteudo("fabricante");
+            
+            while(resultado.next()){
+                Fabricante f = new Fabricante();
+                f.setNome(resultado.getString("nome"));
+                f.setId(resultado.getInt("id"));
+                cboxFabricante.addItem(f);
+                if(f.getId() == car.getFabricante_id()){
+                    cboxFabricante.setSelectedItem(f);
+                }
+            }
+            
+            resultado = Conexao.buscaTodoConteudo("cambio");
+            
+            while(resultado.next()){
+                Cambio f = new Cambio();
+                f.setNome(resultado.getString("nome"));
+                f.setId(resultado.getInt("id"));
+                cboxCambio.addItem(f);
+                if(f.getId() == car.getCambio_id()){
+                    cboxCambio.setSelectedItem(f);
+                }
+            }
+            
+            resultado = Conexao.buscaTodoConteudo("carroceria");
+            
+            while(resultado.next()){
+                Carroceria f = new Carroceria();
+                f.setNome(resultado.getString("nome"));
+                f.setId(resultado.getInt("id"));
+                cboxCarroceria.addItem(f);
+                if(f.getId() == car.getCarroceria_id()){
+                    cboxCarroceria.setSelectedItem(f);
+                }
+            }
+            
+            resultado = Conexao.buscaTodoConteudo("combustivel");
+            
+            while(resultado.next()){
+                Combustivel f = new Combustivel();
+                f.setNome(resultado.getString("nome"));
+                f.setId(resultado.getInt("id"));
+                cboxCombustivel.addItem(f);
+                if(f.getId() == car.getCombustivel_id()){
+                    cboxCombustivel.setSelectedItem(f);
+                }
+            }
+            
+            resultado = Conexao.buscaTodoConteudo("direcao");
+            
+            while(resultado.next()){
+                Direcao f = new Direcao();
+                f.setNome(resultado.getString("nome"));
+                f.setId(resultado.getInt("id"));
+                cboxDirecao.addItem(f);
+                if(f.getId() == car.getDirecao_id()){
+                    cboxDirecao.setSelectedItem(f);
+                }
+            }
+            
+            resultado = Conexao.buscaTodoConteudo("lugares");
+            
+            while(resultado.next()){
+                Lugares f = new Lugares();
+                f.setQuantidade(resultado.getInt("quantidade"));
+                f.setId(resultado.getInt("id"));
+                cboxLugares.addItem(f);
+                if(f.getId() == car.getLugares_id()){
+                    cboxLugares.setSelectedItem(f);
+                }
+            }
+            
+            resultado = Conexao.buscaTodoConteudo("portas");
+            
+            while(resultado.next()){
+                Portas f = new Portas();
+                f.setQuantidade(resultado.getInt("quantidade"));
+                f.setId(resultado.getInt("id"));
+                cboxPortas.addItem(f);
+                if(f.getId() == car.getPortas_id()){
+                    cboxPortas.setSelectedItem(f);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCadastroCarro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        txtModelo.setText(car.getModelo());
+        txtAlinhamento.setText(car.getMotor().getAlinhamento());
+        txtAno.setText("" + car.getAno());
+        txtCategoria.setText(car.getCategoria());
+        txtCilindradas.setText("" + car.getMotor().getCilindradas());
+        txtCilindros.setText("" + car.getMotor().getCilindros());
+        txtPlaca.setText(car.getPlaca());
+        txtPotencia.setText("" + car.getMotor().getPotencia());
+        txtPreco.setText("" + car.getPreco());
+        txtValvulas.setText("" + car.getMotor().getValvulas());
+      
+        editar = true;
+        c = car;
+        
+        btnInserir.setText("Alterar");
+    }
+    
     public void myInitComponents(){
         
         btnAluguel = new javax.swing.JButton();
@@ -629,31 +764,43 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         // TODO add your handling code here:
         
+        
         Motor novoMotor = new Motor();
+        novoMotor.setId(c.getMotor().getId());
         novoMotor.setAlinhamento(txtAlinhamento.getText());
         novoMotor.setCilindradas(Integer.parseInt(txtCilindradas.getText()));
         novoMotor.setCilindros(Integer.parseInt(txtCilindros.getText()));
         novoMotor.setValvulas(Integer.parseInt(txtValvulas.getText()));
         novoMotor.setPotencia(Integer.parseInt(txtPotencia.getText()));
         
-        Conexao.inserirMotor(novoMotor);
-        
         Carro novoCarro = new Carro();
+        novoCarro.setId(c.getId());
         novoCarro.setModelo(txtModelo.getText());
         novoCarro.setFabricante_id(((Fabricante)cboxFabricante.getSelectedItem()).getId());
         novoCarro.setAno(Integer.parseInt(txtAno.getText()));
         novoCarro.setPreco(Double.parseDouble(txtPreco.getText()));
+        novoCarro.setCategoria(txtCategoria.getText());
+        novoCarro.setPlaca(txtPlaca.getText());            
         novoCarro.setPortas_id(((Portas)cboxPortas.getSelectedItem()).getId());
         novoCarro.setLugares_id(((Lugares)cboxLugares.getSelectedItem()).getId());
-        novoCarro.setMotor_id(Conexao.buscaIdMotor(novoMotor));
         novoCarro.setCarroceria_id(((Carroceria)cboxCarroceria.getSelectedItem()).getId());
         novoCarro.setCombustivel_id(((Combustivel)cboxCombustivel.getSelectedItem()).getId());
         novoCarro.setCambio_id(((Cambio)cboxCambio.getSelectedItem()).getId());
         novoCarro.setDirecao_id(((Direcao)cboxDirecao.getSelectedItem()).getId());
-        novoCarro.setCategoria(txtCategoria.getText());
-        novoCarro.setPlaca(txtPlaca.getText());
         
-        Conexao.inserirCarro(novoCarro);
+        if(editar){            
+            novoCarro.setMotor_id(novoMotor.getId());
+            novoCarro.setMotor(novoMotor);
+            
+            Conexao.alterarCarro(novoCarro);
+        }
+        else{        
+            Conexao.inserirMotor(novoMotor);
+
+            novoCarro.setMotor_id(Conexao.buscaIdMotor(novoMotor));
+            
+            Conexao.inserirCarro(novoCarro);
+        }
     }//GEN-LAST:event_btnInserirActionPerformed
 
     /**

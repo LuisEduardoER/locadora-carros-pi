@@ -63,7 +63,7 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
         
         btnInserir.setText("Alterar");
-        
+            
         editar = true;
         this.fabri = fab;
         

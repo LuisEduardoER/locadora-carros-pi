@@ -483,4 +483,77 @@ public static Connection connect = null;
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public static Carro buscaCarro(int id){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT c.id, c.modelo, c.fabricante_id, c.ano, c.preco, c.portas_id, c.lugares_id, c.motor_id, c.carroceria_id, c.combustivel_id, c.cambio_id, c.direcao_id, c.categoria, c.placa, m.potencia, m.valvulas, m.cilindros, m.cilindradas, m.alinhamento \n" +
+                    "FROM carro AS c \n" +
+                    "LEFT JOIN motor AS m \n" +
+                    "ON c.motor_id = m.id\n" +
+                    "WHERE c.id = " + id);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Carro car = new Carro();
+        try {
+//            user.setId(Integer.parseInt(resultado.getString("id")));
+            if(!resultado.next()){
+                return null;
+            }
+            else{
+                car.setId(Integer.parseInt(resultado.getString("id")));
+                car.setModelo(resultado.getString("modelo"));
+                car.setFabricante_id(Integer.parseInt(resultado.getString("fabricante_id")));
+                car.setAno(Integer.parseInt(resultado.getString("ano")));
+                car.setPreco(Double.parseDouble(resultado.getString("preco")));
+                car.setPortas_id(Integer.parseInt(resultado.getString("portas_id")));
+                car.setLugares_id(Integer.parseInt(resultado.getString("lugares_id")));
+                car.setFabricante_id(Integer.parseInt(resultado.getString("fabricante_id")));
+                car.setMotor_id(Integer.parseInt(resultado.getString("motor_id")));
+                car.setCarroceria_id(Integer.parseInt(resultado.getString("carroceria_id")));
+                car.setCombustivel_id(Integer.parseInt(resultado.getString("combustivel_id")));
+                car.setCambio_id(Integer.parseInt(resultado.getString("cambio_id")));
+                car.setDirecao_id(Integer.parseInt(resultado.getString("direcao_id")));
+                car.setCategoria(resultado.getString("categoria"));
+                car.setPlaca(resultado.getString("placa"));
+                Motor mot = new Motor();
+                mot.setId(resultado.getInt("motor_id"));
+                mot.setPotencia(resultado.getInt("potencia"));
+                mot.setValvulas(resultado.getInt("valvulas"));
+                mot.setCilindros(resultado.getInt("cilindros"));
+                mot.setCilindradas(resultado.getInt("cilindradas"));
+                mot.setAlinhamento(resultado.getString("alinhamento"));
+                car.setMotor(mot);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return car;
+    }
+    
+    public static void alterarCarro(Carro car){
+        String query = "UPDATE carro SET modelo = '" + car.getModelo() + "', fabricante_id = " + car.getFabricante_id() + ", ano = " + car.getAno() + ", preco = " + car.getPreco() + ", portas_id = " + car.getPortas_id() + ", lugares_id = " + car.getLugares_id() + ", motor_id = " + car.getMotor_id() + ", carroceria_id = " + car.getCarroceria_id() + ", combustivel_id = " + car.getCombustivel_id() + ", cambio_id = " + car.getCambio_id() + ", direcao_id = " + car.getDirecao_id() + ", categoria = '" + car.getCategoria() + "', placa = '" + car.getPlaca() + "' WHERE (id = " + car.getId() + ")";  
+        String query2 = "UPDATE motor SET potencia = " + car.getMotor().getPotencia()+ ", valvulas = " + car.getMotor().getValvulas()+ ", cilindros = " + car.getMotor().getCilindros() + ", cilindradas = " + car.getMotor().getCilindradas() + ", alinhamento = '" + car.getMotor().getAlinhamento() + "' WHERE (id = " + car.getMotor_id()+ ")";
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            statement.executeUpdate(query);
+            statement.executeUpdate(query2);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
