@@ -327,6 +327,7 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbCliente.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbCliente);
 
         btnExlcuir.setText("Excluir");

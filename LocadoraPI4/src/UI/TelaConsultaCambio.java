@@ -165,6 +165,7 @@ public class TelaConsultaCambio extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbCambio.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbCambio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

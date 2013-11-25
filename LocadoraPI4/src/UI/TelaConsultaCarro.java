@@ -178,6 +178,7 @@ public class TelaConsultaCarro extends javax.swing.JFrame {
             }
         ));
         tbCarro.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tbCarro.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbCarro);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

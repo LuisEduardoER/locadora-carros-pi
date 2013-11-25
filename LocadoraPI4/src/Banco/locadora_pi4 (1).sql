@@ -12,18 +12,24 @@ CREATE TABLE `aluguel` (
   `data_entrega` datetime DEFAULT NULL,
   `prazo` int(11) DEFAULT NULL,
   `atraso` int(11) DEFAULT NULL,
-  `valor_parcial` decimal(10,0) NOT NULL,
+  `valor_parcial` decimal(10,0) DEFAULT NULL,
   `valor_atraso` decimal(10,0) DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
   `carro_id` int(11) DEFAULT NULL,
-  `assegurado` bit(1) NOT NULL,
+  `assegurado` bit(1) DEFAULT NULL,
+  `cliente_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `carro_id` (`carro_id`),
   KEY `status_id` (`status_id`),
+  KEY `cliente_id` (`cliente_id`),
+  CONSTRAINT `aluguel_ibfk_4` FOREIGN KEY (`cliente_id`) REFERENCES `usuario` (`id`),
   CONSTRAINT `aluguel_ibfk_1` FOREIGN KEY (`carro_id`) REFERENCES `carro` (`id`),
   CONSTRAINT `aluguel_ibfk_3` FOREIGN KEY (`status_id`) REFERENCES `status_aluguel` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `aluguel` (`id`, `data_retirada`, `data_entrega`, `prazo`, `atraso`, `valor_parcial`, `valor_atraso`, `status_id`, `carro_id`, `assegurado`, `cliente_id`) VALUES
+(1,	'0000-00-00 00:00:00',	'0000-00-00 00:00:00',	10,	2,	1000,	1300,	1,	2,	CONV('1', 2, 10) + 0,	5),
+(2,	'2013-11-25 00:00:00',	'2013-11-28 00:00:00',	3,	0,	300,	300,	3,	2,	CONV('1', 2, 10) + 0,	4);
 
 DROP TABLE IF EXISTS `cambio`;
 CREATE TABLE `cambio` (
@@ -71,7 +77,7 @@ CREATE TABLE `carro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `carro` (`id`, `modelo`, `fabricante_id`, `ano`, `preco`, `portas_id`, `lugares_id`, `motor_id`, `carroceria_id`, `combustivel_id`, `cambio_id`, `direcao_id`, `categoria`, `placa`) VALUES
-(1,	'gol 1.8',	2,	1994,	100,	1,	1,	2,	1,	1,	1,	1,	'B',	NULL);
+(2,	'gol 1.6',	2,	1994,	100,	1,	1,	2,	1,	1,	1,	1,	'B',	'cda-1394');
 
 DROP TABLE IF EXISTS `carroceria`;
 CREATE TABLE `carroceria` (
@@ -81,7 +87,7 @@ CREATE TABLE `carroceria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `carroceria` (`id`, `nome`) VALUES
-(1,	'hatch');
+(1,	'hatch2');
 
 DROP TABLE IF EXISTS `combustivel`;
 CREATE TABLE `combustivel` (
@@ -91,8 +97,7 @@ CREATE TABLE `combustivel` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `combustivel` (`id`, `nome`) VALUES
-(1,	'etanol'),
-(2,	'gasolina');
+(1,	'etanol');
 
 DROP TABLE IF EXISTS `direcao`;
 CREATE TABLE `direcao` (
@@ -118,10 +123,14 @@ CREATE TABLE `endereco` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `endereco` (`id`, `cep`, `logradouro`, `numero`, `complemento`, `bairro`, `cidade`, `estado`) VALUES
-(1,	'04673948',	'rua avenida endereco',	189,	NULL,	'jd bairro',	'sp',	'sp'),
+(1,	'04673948',	'rua avenida endereco',	1891,	'null',	'jd bairro',	'sp',	'sp'),
 (2,	'9484746',	'rua vw',	108,	'ccs',	'bai',	'sp',	'sp'),
-(3,	'98376476',	'rua vw cs',	198,	'concess',	'oic',	'rj',	'rj'),
-(4,	'9734739',	'rua fiat',	139,	'ccs',	'bai',	'it',	'it');
+(3,	'98376476',	'rua vw cs',	1981,	'concess',	'oic',	'rj',	'rj'),
+(4,	'9734739',	'rua fiat',	139,	'ccs',	'bai',	'it',	'it'),
+(5,	'028y38',	'rua rua ',	189,	'ap',	'jd',	'sp',	'sp'),
+(6,	'fsioh090',	'bjbj',	9334,	' fkj',	'jgbljb',	'so',	'os'),
+(7,	'92j',	'9n9in',	10,	' on',	'nsi',	'os',	'is'),
+(8,	'onwd0n',	'dwnu',	29,	'd wno',	'nu',	'un',	'un');
 
 DROP TABLE IF EXISTS `fabricante`;
 CREATE TABLE `fabricante` (
@@ -139,8 +148,7 @@ CREATE TABLE `fabricante` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `fabricante` (`id`, `nome`, `email`, `origem`, `id_telefone`, `id_endereco`) VALUES
-(2,	'vw',	'vw@vw.vw',	'Alemanha',	1,	3),
-(3,	'fiat',	'fiat',	'italia',	1,	4);
+(2,	'vwe',	'vw@vw.vw',	'ger',	1,	3);
 
 DROP TABLE IF EXISTS `lugares`;
 CREATE TABLE `lugares` (
@@ -164,7 +172,8 @@ CREATE TABLE `motor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `motor` (`id`, `potencia`, `valvulas`, `cilindros`, `cilindradas`, `alinhamento`) VALUES
-(2,	90,	16,	4,	1800,	'em linha');
+(2,	90,	16,	4,	1600,	'em linha'),
+(3,	90,	16,	4,	1800,	'em linha');
 
 DROP TABLE IF EXISTS `permissao`;
 CREATE TABLE `permissao` (
@@ -174,7 +183,9 @@ CREATE TABLE `permissao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `permissao` (`id`, `descricao`) VALUES
-(1,	'administrador');
+(1,	'administrador'),
+(2,	'vendedor'),
+(3,	'cliente');
 
 DROP TABLE IF EXISTS `portas`;
 CREATE TABLE `portas` (
@@ -184,7 +195,7 @@ CREATE TABLE `portas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `portas` (`id`, `quantidade`) VALUES
-(1,	3);
+(1,	4);
 
 DROP TABLE IF EXISTS `status_aluguel`;
 CREATE TABLE `status_aluguel` (
@@ -193,6 +204,10 @@ CREATE TABLE `status_aluguel` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `status_aluguel` (`id`, `descricao`) VALUES
+(1,	'em curso'),
+(2,	'atrasado'),
+(3,	'finalizado');
 
 DROP TABLE IF EXISTS `telefone`;
 CREATE TABLE `telefone` (
@@ -205,10 +220,13 @@ CREATE TABLE `telefone` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `telefone` (`id`, `ddi`, `ddd`, `numero`, `tipo`) VALUES
-(1,	55,	11,	55555555,	'residencial'),
+(1,	55,	11,	33333333,	'residencial'),
 (2,	55,	11,	66666666,	'comercial'),
 (3,	55,	11,	88888888,	'comercial'),
-(4,	55,	11,	88888888,	'come');
+(5,	55,	11,	7287278,	'comercial'),
+(6,	88,	11,	513151315,	'nijjj'),
+(7,	99,	99,	131,	'niw'),
+(8,	92,	2,	31039,	' jwndj');
 
 DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
@@ -234,6 +252,8 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `cpf`, `rg`, `data_nascimento`, `permissao_id`, `cnh`, `categoria_carta`, `id_endereco`, `id_telefone`) VALUES
-(3,	'Rafael Baraldi',	'adm',	'123',	'11111111111',	'498785987',	'0000-00-00',	1,	'1111111111111',	'b',	1,	1);
+(3,	'Rafael Baraldi',	'adm',	'123',	'11111111111',	'498785987',	'0000-00-00',	1,	'1111111111111',	'B',	1,	1),
+(4,	'jose2',	'mfoa',	'cliente',	'fm',	'pon',	NULL,	3,	'on',	'AD',	6,	6),
+(5,	'knaddns',	'jnldw',	'[C@4d3eb23c',	'wdnlj',	'ljnj',	NULL,	2,	'wl',	'C',	7,	7);
 
--- 2013-11-11 20:44:15
+-- 2013-11-25 06:22:53

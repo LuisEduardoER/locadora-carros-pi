@@ -97,6 +97,7 @@ public class TelaConsultaCarroceria extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbCarroceria.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbCarroceria);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
