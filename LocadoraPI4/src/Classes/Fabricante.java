@@ -17,6 +17,10 @@ public class Fabricante {
     private int id_endereco;
     private Telefone telefone;
     private Endereco endereco;
+    
+    public Fabricante(){
+        
+    }
 
     public int getId() {
         return id;

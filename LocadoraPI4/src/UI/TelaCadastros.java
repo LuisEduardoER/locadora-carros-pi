@@ -23,6 +23,10 @@ public class TelaCadastros extends javax.swing.JFrame {
         initComponents();
         myInitComponents();
         
+        if(Geral.getUser().getPermissao() != 1){
+            btnUsuario.setEnabled(false);
+        }
+        
         this.setTitle(Geral.getEmpresa() + " - CADASTROS");
         this.setSize(Geral.width, Geral.height);
         this.setLocationRelativeTo(null);

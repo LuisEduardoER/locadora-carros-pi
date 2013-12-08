@@ -11,6 +11,10 @@ package Classes;
 public class Combustivel extends Outros{
     private int id;
     private String nome;
+    
+    public Combustivel(){
+        
+    }
 
     public int getId() {
         return id;

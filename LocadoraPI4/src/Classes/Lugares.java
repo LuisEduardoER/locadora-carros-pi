@@ -11,6 +11,10 @@ package Classes;
 public class Lugares extends Outros{
     private int id;
     private int quantidade;
+    
+    public Lugares(){
+        
+    }
 
     public int getId() {
         return id;

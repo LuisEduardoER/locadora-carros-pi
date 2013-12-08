@@ -761,16 +761,18 @@ public static Connection connect = null;
         try {
             statement = connect.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             statement.executeUpdate(query);
+            JOptionPane.showMessageDialog(null,"Aluguel cadastrado com sucesso!");
         } catch (SQLException ex) {
-            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Erro no cadastro do aluguel!");
         }
     }
     
-    public static ResultSet buscaAluguel(String cliente, String carro){
+    public static ResultSet buscaAluguel(String cliente, String carro, String where){
         Statement statement = null;
         try {
             statement = connect.createStatement();
@@ -779,7 +781,7 @@ public static Connection connect = null;
         }
             ResultSet resultado = null;
         try {
-            resultado = statement.executeQuery("SELECT * FROM aluguel LEFT JOIN usuario ON cliente_id = usuario.id LEFT JOIN carro ON carro_id = carro.id LEFT JOIN status_aluguel ON status_id = status_aluguel.id WHERE (nome LIKE '%" + cliente + "%' AND modelo LIKE '%" + carro + "%')");
+            resultado = statement.executeQuery("SELECT * FROM aluguel LEFT JOIN usuario ON cliente_id = usuario.id LEFT JOIN carro ON carro_id = carro.id LEFT JOIN status_aluguel ON status_id = status_aluguel.id WHERE (nome LIKE '%" + cliente + "%' AND modelo LIKE '%" + carro + "%'" + where + ")");
         } catch (SQLException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -896,4 +898,54 @@ public static Connection connect = null;
         }
     }
     
+    public static ResultSet buscaCarrosAluguel(String where){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("SELECT C.* FROM carro AS C LEFT JOIN aluguel AS A ON A.carro_id = C.id WHERE (" + where + ") group by C.id");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado;
+    }
+    
+    public static ResultSet buscaClientesAtrasados(String where){
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            ResultSet resultado = null;
+        try {
+            resultado = statement.executeQuery("select * from usuario left join telefone on usuario.id_telefone = telefone.id left join aluguel on aluguel.cliente_id = usuario.id\n" +
+                        "where (aluguel.status_id = 2 and usuario.nome like '%" + where + "%')\n" +
+                        "group by usuario.id");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado;
+    }
+    
+    public static void atualizarAlugueis(){ 
+        String query = "UPDATE aluguel SET status_id = 2 WHERE (data_entrega < CURDATE())";
+        Statement statement = null;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            statement.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

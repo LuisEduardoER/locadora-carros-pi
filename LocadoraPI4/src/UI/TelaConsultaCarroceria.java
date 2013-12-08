@@ -30,7 +30,7 @@ public class TelaConsultaCarroceria extends javax.swing.JFrame {
         
         myInitComponents();
         
-        this.setTitle(Geral.getEmpresa() + " - CARROCERIA");
+        this.setTitle(Geral.getEmpresa() + " - CONSULTAR CARROCERIA");
         this.setSize(Geral.width, Geral.height);
         this.setLocationRelativeTo(null);
         

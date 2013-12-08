@@ -11,6 +11,10 @@ package Classes;
 public class Direcao extends Outros{
     private int id;
     private String nome;
+    
+    public Direcao(){
+        
+    }
 
     public int getId() {
         return id;

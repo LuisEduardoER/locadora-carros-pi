@@ -22,7 +22,7 @@ public class TelaConsultas extends javax.swing.JFrame {
         initComponents();
         myInitComponents();
                 
-        this.setTitle(Geral.getEmpresa() + " - VISUALIZAR CADASTROS");
+        this.setTitle(Geral.getEmpresa() + " - CONSULTAR CADASTROS");
         this.setSize(Geral.width, Geral.height);
         this.setLocationRelativeTo(null);
         

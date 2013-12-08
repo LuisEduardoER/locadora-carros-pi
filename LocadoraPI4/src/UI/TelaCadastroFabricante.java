@@ -51,7 +51,7 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
         initComponents();
         myInitComponents();
         
-        this.setTitle(Geral.getEmpresa() + " - CADASTRO FABRICANTE");
+        this.setTitle(Geral.getEmpresa() + " - EDITAR FABRICANTE");
         this.setSize(Geral.width, 650);
         this.setLocationRelativeTo(null);
         
@@ -549,7 +549,6 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
         
         Telefone tel = new Telefone();
 
-        tel.setId(fabri.getTelefone().getId());
         tel.setDdi(Integer.parseInt(txtDDI.getText()));
         tel.setDdd(Integer.parseInt(txtDDD.getText()));
         tel.setNumero(Integer.parseInt(txtNumero.getText()));
@@ -557,7 +556,6 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
         
         Endereco end = new Endereco();
         
-        end.setId(fabri.getEndereco().getId());
         end.setCep(txtCEP.getText());
         end.setLogradouro(txtLogradouro.getText());
         end.setNumero(Integer.parseInt(txtNumeroRes.getText()));
@@ -568,12 +566,15 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
         
         Fabricante fab = new Fabricante();
 
-        fab.setId(fabri.getId());
         fab.setNome(txtNome.getText());
         fab.setEmail(txtEmail.getText());
         fab.setOrigem(txtOrigem.getText());
         
-        if(editar){
+        if(editar){            
+            tel.setId(fabri.getTelefone().getId());
+            end.setId(fabri.getEndereco().getId());
+            fab.setId(fabri.getId());
+        
             fab.setId_telefone(tel.getId());
             fab.setId_endereco(end.getId());
             
@@ -581,6 +582,8 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
             fab.setEndereco(end);
             
             Conexao.alterarFabricante(fab);
+            
+            JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!");
         }
         else{
             Conexao.inserirTelefone(tel);
@@ -593,6 +596,8 @@ public class TelaCadastroFabricante extends javax.swing.JFrame {
             fab.setId_telefone(idTel);
 
             Conexao.inserirFabricante(fab);
+            
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
         }
     }//GEN-LAST:event_btnInserirActionPerformed
 

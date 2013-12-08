@@ -20,11 +20,40 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TelaConsultaCliente extends javax.swing.JFrame {
 
+    boolean aluguel;
+    
+    
     /**
      * Creates new form TelaConsultaCliente
      */
     public TelaConsultaCliente() {
 
+        initComponents();
+        
+        carregaTabela();
+        
+        this.aluguel = false;
+        
+        myInitComponents();
+        
+        this.setTitle(Geral.getEmpresa() + " - CONSULTAR CLIENTE");
+        this.setSize(Geral.width, Geral.height);
+        this.setLocationRelativeTo(null);
+        
+        //Não deixa maximizar
+        this.setResizable(false);
+        
+        //Não deixa Fechar
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
+        //Nome do usuario
+        lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
+    }
+    
+    public TelaConsultaCliente(boolean aluguel) {
+
+        this.aluguel = true;
+        
         initComponents();
         
         carregaTabela();
@@ -44,6 +73,7 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
         //Nome do usuario
         lblBemVindo.setText("Bem Vindo, Sr.(a) " + Geral.getUser().getNome());
     }
+    
     
     void carregaTabela(){
         String[] colunasTabela = new String[]{"Código", "Nome", "Email", "CPF" };  
@@ -415,8 +445,8 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
                     .addComponent(btnExlcuir)
                     .addComponent(btnEditar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -484,10 +514,17 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
     }
     
     
-        private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
+   private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {                                           
+  
+       if(this.aluguel){
+           TelaNovoAluguel tela = new TelaNovoAluguel();
+           tela.setVisible(true);
+       }
+       else{
+          TelaConsultas tela = new TelaConsultas(); 
+          tela.setVisible(true);
+       }
         
-        TelaConsultas tela = new TelaConsultas();
-        tela.setVisible(true);
         this.setVisible(false);
     } 
     

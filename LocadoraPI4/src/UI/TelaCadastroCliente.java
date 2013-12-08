@@ -27,7 +27,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         initComponents();
         myInitComponents();
         
-        this.setTitle(Geral.getEmpresa() + " - CADASTRO USUÁRIO");
+        this.setTitle(Geral.getEmpresa() + " - CADASTRO CLIENTE");
         this.setSize(Geral.width, 690);
         this.setLocationRelativeTo(null);
         
@@ -45,7 +45,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         initComponents();
         myInitComponents();
         
-        this.setTitle(Geral.getEmpresa() + " - CADASTRO USUÁRIO");
+        this.setTitle(Geral.getEmpresa() + " - EDITAR CLIENTE");
         this.setSize(Geral.width, 690);
         this.setLocationRelativeTo(null);
         
@@ -561,7 +561,6 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         Usuario novo = new Usuario();
 
-        novo.setId(user.getId());
         novo.setNome(txtNome.getText());
         novo.setEmail(txtEmail.getText());
         novo.setRg(txtRG.getText());
@@ -572,7 +571,6 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
 
         Telefone tel = new Telefone();
 
-        tel.setId(user.getId_telefone());
         tel.setDdi(Integer.parseInt(txtDDI.getText()));
         tel.setDdd(Integer.parseInt(txtDDD.getText()));
         tel.setNumero(Integer.parseInt(txtNumero.getText()));
@@ -580,7 +578,6 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         
         Endereco end = new Endereco();
 
-        end.setId(user.getId_endereco());
         end.setLogradouro(txtLogradouro.getText());
         end.setNumero(Integer.parseInt(txtNumeroRes.getText()));
         end.setComplemento(txtComplemento.getText());
@@ -590,11 +587,14 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
         end.setCidade(txtCidade.getText());
         end.setEstado(txtEstado.getText());
         
-        novo.setSenha(user.getSenha());
-        novo.setPermissao(user.getPermissao());
         
-        
-        if(editar){
+        if(editar){            
+            novo.setId(user.getId());
+            tel.setId(user.getId_telefone());
+            end.setId(user.getId_endereco());
+            novo.setSenha(user.getSenha());
+            novo.setPermissao(user.getPermissao());
+            
             novo.setId_telefone(user.getId_telefone());
             novo.setId_endereco(user.getId_endereco());
         
@@ -602,6 +602,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
             novo.setEndereco(end);
             
             Conexao.alterarUsuario(novo);
+            JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!");
         }
         else{
             
@@ -611,8 +612,12 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
 
             novo.setId_telefone(Conexao.buscaIdTel(tel.getDdi(), tel.getDdd(), tel.getNumero()));
             novo.setId_endereco(Conexao.buscaIdEnd(end.getLogradouro(), end.getNumero(), end.getComplemento()));
+            
+            novo.setSenha("cliente");
+            novo.setPermissao(3);
 
             Conexao.inserirUsuario(novo);
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
         }
     }//GEN-LAST:event_btnInserirActionPerformed
 

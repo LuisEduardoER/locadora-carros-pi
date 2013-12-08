@@ -24,6 +24,10 @@ public class Aluguel {
     private int cliente_id;
     private Carro carro;
     private Usuario cliente;
+    
+    public Aluguel(){
+        
+    }
 
     public int getId() {
         return id;

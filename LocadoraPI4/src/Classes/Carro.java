@@ -26,6 +26,10 @@ public class Carro {
     private String placa;
     private Motor motor;
     
+    public Carro(){
+        
+    }
+    
     public int getId() {
         return id;
     }
