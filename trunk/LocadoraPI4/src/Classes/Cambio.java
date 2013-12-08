@@ -11,6 +11,10 @@ package Classes;
 public class Cambio extends Outros{
     private int id;
     private String nome;
+    
+    public Cambio(){
+        
+    }
 
     public int getId() {
         return id;

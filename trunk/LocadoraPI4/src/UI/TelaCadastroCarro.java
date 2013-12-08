@@ -39,11 +39,10 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
         initComponents();
         myInitComponents();
         
-        this.setTitle(Geral.getEmpresa() + " - CADASTROS");
+        this.setTitle(Geral.getEmpresa() + " - CADASTRO CARRO");
         this.setSize(555, 625);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.setTitle(Geral.getEmpresa()+" - MOTOR");
         
         //Não deixa maximizar
         this.setResizable(false);
@@ -134,11 +133,10 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
         initComponents();
         myInitComponents();
         
-        this.setTitle(Geral.getEmpresa() + " - CADASTROS");
+        this.setTitle(Geral.getEmpresa() + " - EDITAR CARRO");
         this.setSize(555, 625);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.setTitle(Geral.getEmpresa()+" - MOTOR");
         
         //Não deixa maximizar
         this.setResizable(false);
@@ -772,7 +770,6 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         // TODO add your handling code here:
         Motor novoMotor = new Motor();
-        novoMotor.setId(c.getMotor().getId());
         novoMotor.setAlinhamento(txtAlinhamento.getText());
         novoMotor.setCilindradas(Integer.parseInt(txtCilindradas.getText()));
         novoMotor.setCilindros(Integer.parseInt(txtCilindros.getText()));
@@ -780,7 +777,6 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
         novoMotor.setPotencia(Integer.parseInt(txtPotencia.getText()));
         
         Carro novoCarro = new Carro();
-        novoCarro.setId(c.getId());
         novoCarro.setModelo(txtModelo.getText());
         novoCarro.setFabricante_id(((Fabricante)cboxFabricante.getSelectedItem()).getId());
         novoCarro.setAno(Integer.parseInt(txtAno.getText()));
@@ -795,10 +791,15 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
         novoCarro.setDirecao_id(((Direcao)cboxDirecao.getSelectedItem()).getId());
         
         if(editar){            
+            novoMotor.setId(c.getMotor().getId());
+            novoCarro.setId(c.getId());
+            
             novoCarro.setMotor_id(novoMotor.getId());
             novoCarro.setMotor(novoMotor);
             
             Conexao.alterarCarro(novoCarro);
+            
+            JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!");
         }
         else{        
             Conexao.inserirMotor(novoMotor);
@@ -806,7 +807,11 @@ public class TelaCadastroCarro extends javax.swing.JFrame {
             novoCarro.setMotor_id(Conexao.buscaIdMotor(novoMotor));
             
             Conexao.inserirCarro(novoCarro);
+            
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+                    
         }
+                
     }//GEN-LAST:event_btnInserirActionPerformed
 
     /**

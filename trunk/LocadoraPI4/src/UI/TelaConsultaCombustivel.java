@@ -30,7 +30,7 @@ public class TelaConsultaCombustivel extends javax.swing.JFrame {
         
         myInitComponents();
         
-        this.setTitle(Geral.getEmpresa() + " - COMBUSTÍVEL");
+        this.setTitle(Geral.getEmpresa() + " - CONSULTAR COMBUSTÍVEL");
         this.setSize(Geral.width, Geral.height);
         this.setLocationRelativeTo(null);
         
@@ -219,7 +219,7 @@ public class TelaConsultaCombustivel extends javax.swing.JFrame {
                     .addComponent(btnEditar)
                     .addComponent(btnExcluir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

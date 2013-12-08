@@ -12,6 +12,10 @@ public class Carroceria extends Outros{
     private int id;
     private String nome;
     
+    public Carroceria(){
+        
+    }
+    
     @Override
     public String toString(){
         return this.getNome();

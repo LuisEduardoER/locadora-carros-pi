@@ -54,7 +54,7 @@ public class TelaCadastroOutros extends javax.swing.JFrame {
         initComponents();
         myInitComponents();
         
-        this.setTitle(Geral.getEmpresa() + " - CADASTRO OUTROS");
+        this.setTitle(Geral.getEmpresa() + " - EDITAR" + cp);
         this.setSize(Geral.width, Geral.height);
         this.setLocationRelativeTo(null);
         

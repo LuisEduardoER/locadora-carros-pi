@@ -12,6 +12,10 @@ import java.sql.Date;
  */
 public class Usuario {
     private int id;
+    
+    public Usuario(){
+        
+    }
 
     public int getId() {
         return id;

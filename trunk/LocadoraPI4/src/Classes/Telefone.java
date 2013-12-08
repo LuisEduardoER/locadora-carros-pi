@@ -11,6 +11,10 @@ package Classes;
 public class Telefone {
     
     private int ddi;
+    
+    public Telefone(){
+        
+    }
 
     public int getDdi() {
         return ddi;

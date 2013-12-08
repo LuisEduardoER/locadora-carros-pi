@@ -10,4 +10,8 @@ package Classes;
  */
 public class Outros {
     
+    public Outros(){
+        
+    }
+    
 }

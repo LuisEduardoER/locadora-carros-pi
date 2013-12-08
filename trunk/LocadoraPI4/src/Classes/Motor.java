@@ -15,6 +15,10 @@ public class Motor {
     private int cilindros;
     private int cilindradas;
     private String alinhamento;
+    
+    public Motor(){
+        
+    }
 
     public int getId() {
         return id;

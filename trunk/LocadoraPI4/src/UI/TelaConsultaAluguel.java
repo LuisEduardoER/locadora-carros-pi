@@ -35,7 +35,7 @@ public class TelaConsultaAluguel extends javax.swing.JFrame {
         
         myInitComponents();
         
-        this.setTitle(Geral.getEmpresa() + " - CADASTROS");
+        this.setTitle(Geral.getEmpresa() + " - CONSULTAR ALUGUEL");
         this.setSize(635, Geral.height);
         this.setLocationRelativeTo(null);
         
@@ -51,6 +51,8 @@ public class TelaConsultaAluguel extends javax.swing.JFrame {
     }
 
     void carregaTabela(){
+        Conexao.atualizarAlugueis();
+        
         String[] colunasTabela = new String[]{"Código", "Cliente", "Carro", "Placa", "Retirada", "Entrega Prevista", "Status" };  
         DefaultTableModel modeloTabela = new DefaultTableModel(null,colunasTabela){
             @Override
@@ -60,8 +62,13 @@ public class TelaConsultaAluguel extends javax.swing.JFrame {
             }
         };
         
+        String where = "";
+        if(cboxStatus.getSelectedIndex() != 0){
+            where = " AND status_id = " + cboxStatus.getSelectedIndex();
+        }
+        
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); 
-        ResultSet resultado = Conexao.buscaAluguel(txtCliente.getText(), txtCarro.getText());
+        ResultSet resultado = Conexao.buscaAluguel(txtCliente.getText(), txtCarro.getText(), where);
         try {
             while(resultado.next()){
                 modeloTabela.addRow(new String[] {
@@ -100,6 +107,7 @@ public class TelaConsultaAluguel extends javax.swing.JFrame {
         tbAluguel = new javax.swing.JTable();
         btnFinalizar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
+        cboxStatus = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,6 +152,8 @@ public class TelaConsultaAluguel extends javax.swing.JFrame {
             }
         });
 
+        cboxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "Em Curso", "Atrasado", "Finalizado" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,6 +177,8 @@ public class TelaConsultaAluguel extends javax.swing.JFrame {
                             .addComponent(btnFiltrar)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnEditar)
+                                .addGap(52, 52, 52)
+                                .addComponent(cboxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnFinalizar)))))
                 .addContainerGap(32, Short.MAX_VALUE))
@@ -184,7 +196,8 @@ public class TelaConsultaAluguel extends javax.swing.JFrame {
                     .addComponent(lblCarro)
                     .addComponent(txtCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditar)
-                    .addComponent(btnFinalizar))
+                    .addComponent(btnFinalizar)
+                    .addComponent(cboxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(66, Short.MAX_VALUE))
@@ -546,6 +559,7 @@ public class TelaConsultaAluguel extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnFiltrar;
     private javax.swing.JButton btnFinalizar;
+    private javax.swing.JComboBox cboxStatus;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCarro;
     private javax.swing.JLabel lblCliente;
